@@ -1,0 +1,22 @@
+<div class="row border-bottom">
+    <nav class="navbar navbar-fixed-top bg-domigo" role="navigation" style="margin-bottom: 0;background-color:#e30613">
+        <div class="navbar-header animated bounceIn">
+            <img src="../../assets/images/logo_completo.png" style="width:170px;">
+        </div>
+        <ul class="nav navbar-top-links navbar-right">
+            <li>
+                <a href="">
+                    <i class="fa fa-calendar"></i> {{vm.hoy | esdate: 'full'}}
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;" ng-click="vm.cerrarSesion()">
+                    <i class="fa fa-sign-out"></i> Cerrar sesion
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<br><br><br>
+<div ui-view class="wrapper wrapper-content animated fadeIn gray-bg">
+</div>

@@ -1,0 +1,448 @@
+<div>
+    <div class="col-lg-4">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-success pull-right">Activas</span>
+                        <h5>Empresas</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins">8</h1>
+                        <div class="stat-percent font-bold text-success">80%</div>
+                        <small></small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-info pull-right">Inacti</span>
+                        <h5>Empresas</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins">2</h1>
+                        <div class="stat-percent font-bold text-info">20%</div>
+                        <small></small>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-success pull-right">Acti</span>
+                        <h5>Mensajeros</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins">80</h1>
+                        <div class="stat-percent font-bold text-success">90%</div>
+                        <small></small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-info pull-right">Inacti</span>
+                        <h5>Mensajeros</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins">10</h1>
+                        <div class="stat-percent font-bold text-info">10%</div>
+                        <small></small>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-lg-8">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h2>Listado de Empresas</h2>
+                    </div>
+                    <div class="col-lg-4">
+                        <!--<div class="input-group">-->
+                            <!--<input type="text" placeholder="Buscador" class="input-sm form-control" ng-model="filtro">-->
+                                <!--<span class="input-group-btn">-->
+                                    <!--<button type="button" class="btn btn-sm btn-primary">-->
+                                        <!--<i class="fa fa-search"></i>-->
+                                    <!--</button> -->
+                                <!--</span>-->
+                        <!--</div>-->
+                    </div>
+                    <div class="col-lg-2" style="text-align: right">
+                        <button type="button" class="btn btn-sm btn-primary" ng-click="vm.nuevaEmpresa()">
+                            <i class="fa fa-plus"></i> Empresa
+                        </button>
+                    </div>
+                </div>
+                <hr>
+                <!--<div class="hr-line-dashed"></div>-->
+            </div>
+            <div class="ibox-content" style="border-top:0 ">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <table class="table table-striped" datatable="" dt-options="vm.dtOptions">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nombre</th>
+                                <th>Telefono</th>
+                                <th>Ciudad</th>
+                                <th>Direccion</th>
+                                <th>No de Mensajeros</th>
+                                <th>Opciones</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Empresa 1</td>
+                                <td>5889896</td>
+                                <td>Valledupar</td>
+                                <td>Calle 16D #20-26</td>
+                                <td style="text-align: center"><span class="label label-warning" style="font-size:12px">57</span>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-success" title="Ver y Editar"><i
+                                            class="fa fa-eye"></i></button>
+                                    <a class="btn btn-sm btn-danger" title="Ver Mensajeros" ui-sref="app.admin-centrales-mensajeros"><i
+                                            class="fa fa-group"></i></a>
+                                    <button type="button" class="btn btn-sm btn-primary" title="Desactivar"><i
+                                            class="fa fa-thumbs-down"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Empresa 2</td>
+                                <td>5889896</td>
+                                <td>Valledupar</td>
+                                <td>Calle 16D #20-26</td>
+                                <td style="text-align: center"><span class="label label-warning" style="font-size:12px">24</span>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-success" title="Ver y Editar"><i
+                                            class="fa fa-eye"></i></button>
+                                    <a class="btn btn-sm btn-danger" title="Ver Mensajeros" href="#/mensajeros"><i
+                                            class="fa fa-group"></i></a>
+                                    <button type="button" class="btn btn-sm btn-primary" title="Desactivar"><i
+                                            class="fa fa-thumbs-down"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Empresa 3</td>
+                                <td>5889896</td>
+                                <td>Valledupar</td>
+                                <td>Calle 16D #20-26</td>
+                                <td style="text-align: center"><span class="label label-warning" style="font-size:12px">42</span>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-success" title="Ver y Editar"><i
+                                            class="fa fa-eye"></i></button>
+                                    <a class="btn btn-sm btn-danger" title="Ver Mensajeros" href="#/mensajeros"><i
+                                            class="fa fa-group"></i></a>
+                                    <button type="button" class="btn btn-sm btn-warning" title="Activar"><i
+                                            class="fa fa-thumbs-up"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Empresa 4</td>
+                                <td>5889896</td>
+                                <td>Valledupar</td>
+                                <td>Calle 16D #20-26</td>
+                                <td style="text-align: center"><span class="label label-warning" style="font-size:12px">18</span>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-success" title="Ver y Editar"><i
+                                            class="fa fa-eye"></i></button>
+                                    <a class="btn btn-sm btn-danger" title="Ver Mensajeros" href="#/mensajeros"><i
+                                            class="fa fa-group"></i></a>
+                                    <button type="button" class="btn btn-sm btn-warning" title="Activar"><i
+                                            class="fa fa-thumbs-up"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>Empresa 5</td>
+                                <td>5889896</td>
+                                <td>Valledupar</td>
+                                <td>Calle 16D #20-26</td>
+                                <td style="text-align: center"><span class="label label-warning" style="font-size:12px">10</span>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-success" title="Ver y Editar"><i
+                                            class="fa fa-eye"></i></button>
+                                    <a class="btn btn-sm btn-danger" title="Ver Mensajeros" href="#/mensajeros"><i
+                                            class="fa fa-group"></i></a>
+                                    <button type="button" class="btn btn-sm btn-primary" title="Desactivar"><i
+                                            class="fa fa-thumbs-down"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>Empresa 6</td>
+                                <td>5889896</td>
+                                <td>Valledupar</td>
+                                <td>Calle 16D #20-26</td>
+                                <td style="text-align: center"><span class="label label-warning" style="font-size:12px">25</span>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-success" title="Ver y Editar"><i
+                                            class="fa fa-eye"></i></button>
+                                    <a class="btn btn-sm btn-danger" title="Ver Mensajeros" href="#/mensajeros"><i
+                                            class="fa fa-group"></i></a>
+                                    <button type="button" class="btn btn-sm btn-primary" title="Desactivar"><i
+                                            class="fa fa-thumbs-down"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>Empresa 7</td>
+                                <td>5889896</td>
+                                <td>Valledupar</td>
+                                <td>Calle 16D #20-26</td>
+                                <td style="text-align: center"><span class="label label-warning" style="font-size:12px">16</span>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-success" title="Ver y Editar"><i
+                                            class="fa fa-eye"></i></button>
+                                    <a class="btn btn-sm btn-danger" title="Ver Mensajeros" href="#/mensajeros"><i
+                                            class="fa fa-group"></i></a>
+                                    <button type="button" class="btn btn-sm btn-primary" title="Desactivar"><i
+                                            class="fa fa-thumbs-down"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>Empresa 8</td>
+                                <td>5889896</td>
+                                <td>Valledupar</td>
+                                <td>Calle 16D #20-26</td>
+                                <td style="text-align: center"><span class="label label-warning" style="font-size:12px">42</span>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-success" title="Ver y Editar"><i
+                                            class="fa fa-eye"></i></button>
+                                    <a class="btn btn-sm btn-danger" title="Ver Mensajeros" href="#/mensajeros"><i
+                                            class="fa fa-group"></i></a>
+                                    <button type="button" class="btn btn-sm btn-primary" title="Desactivar"><i
+                                            class="fa fa-thumbs-down"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Empresa 1</td>
+                                <td>5889896</td>
+                                <td>Valledupar</td>
+                                <td>Calle 16D #20-26</td>
+                                <td style="text-align: center"><span class="label label-warning" style="font-size:12px">57</span>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-success" title="Ver y Editar"><i
+                                            class="fa fa-eye"></i></button>
+                                    <a class="btn btn-sm btn-danger" title="Ver Mensajeros" href="#/mensajeros"><i
+                                            class="fa fa-group"></i></a>
+                                    <button type="button" class="btn btn-sm btn-primary" title="Desactivar"><i
+                                            class="fa fa-thumbs-down"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Empresa 2</td>
+                                <td>5889896</td>
+                                <td>Valledupar</td>
+                                <td>Calle 16D #20-26</td>
+                                <td style="text-align: center"><span class="label label-warning" style="font-size:12px">24</span>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-success" title="Ver y Editar"><i
+                                            class="fa fa-eye"></i></button>
+                                    <a class="btn btn-sm btn-danger" title="Ver Mensajeros" href="#/mensajeros"><i
+                                            class="fa fa-group"></i></a>
+                                    <button type="button" class="btn btn-sm btn-primary" title="Desactivar"><i
+                                            class="fa fa-thumbs-down"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Empresa 3</td>
+                                <td>5889896</td>
+                                <td>Valledupar</td>
+                                <td>Calle 16D #20-26</td>
+                                <td style="text-align: center"><span class="label label-warning" style="font-size:12px">42</span>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-success" title="Ver y Editar"><i
+                                            class="fa fa-eye"></i></button>
+                                    <a class="btn btn-sm btn-danger" title="Ver Mensajeros" href="#/mensajeros"><i
+                                            class="fa fa-group"></i></a>
+                                    <button type="button" class="btn btn-sm btn-warning" title="Activar"><i
+                                            class="fa fa-thumbs-up"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Empresa 4</td>
+                                <td>5889896</td>
+                                <td>Valledupar</td>
+                                <td>Calle 16D #20-26</td>
+                                <td style="text-align: center"><span class="label label-warning" style="font-size:12px">18</span>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-success" title="Ver y Editar"><i
+                                            class="fa fa-eye"></i></button>
+                                    <a class="btn btn-sm btn-danger" title="Ver Mensajeros" href="#/mensajeros"><i
+                                            class="fa fa-group"></i></a>
+                                    <button type="button" class="btn btn-sm btn-warning" title="Activar"><i
+                                            class="fa fa-thumbs-up"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>Empresa 5</td>
+                                <td>5889896</td>
+                                <td>Valledupar</td>
+                                <td>Calle 16D #20-26</td>
+                                <td style="text-align: center"><span class="label label-warning" style="font-size:12px">10</span>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-success" title="Ver y Editar"><i
+                                            class="fa fa-eye"></i></button>
+                                    <a class="btn btn-sm btn-danger" title="Ver Mensajeros" href="#/mensajeros"><i
+                                            class="fa fa-group"></i></a>
+                                    <button type="button" class="btn btn-sm btn-primary" title="Desactivar"><i
+                                            class="fa fa-thumbs-down"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>Empresa 6</td>
+                                <td>5889896</td>
+                                <td>Valledupar</td>
+                                <td>Calle 16D #20-26</td>
+                                <td style="text-align: center"><span class="label label-warning" style="font-size:12px">25</span>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-success" title="Ver y Editar"><i
+                                            class="fa fa-eye"></i></button>
+                                    <a class="btn btn-sm btn-danger" title="Ver Mensajeros" href="#/mensajeros"><i
+                                            class="fa fa-group"></i></a>
+                                    <button type="button" class="btn btn-sm btn-primary" title="Desactivar"><i
+                                            class="fa fa-thumbs-down"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>Empresa 7</td>
+                                <td>5889896</td>
+                                <td>Valledupar</td>
+                                <td>Calle 16D #20-26</td>
+                                <td style="text-align: center"><span class="label label-warning" style="font-size:12px">16</span>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-success" title="Ver y Editar"><i
+                                            class="fa fa-eye"></i></button>
+                                    <a class="btn btn-sm btn-danger" title="Ver Mensajeros" href="#/mensajeros"><i
+                                            class="fa fa-group"></i></a>
+                                    <button type="button" class="btn btn-sm btn-primary" title="Desactivar"><i
+                                            class="fa fa-thumbs-down"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>Empresa 8</td>
+                                <td>5889896</td>
+                                <td>Valledupar</td>
+                                <td>Calle 16D #20-26</td>
+                                <td style="text-align: center"><span class="label label-warning" style="font-size:12px">42</span>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-success" title="Ver y Editar"><i
+                                            class="fa fa-eye"></i></button>
+                                    <a class="btn btn-sm btn-danger" title="Ver Mensajeros" href="#/mensajeros"><i
+                                            class="fa fa-group"></i></a>
+                                    <button type="button" class="btn btn-sm btn-primary" title="Desactivar"><i
+                                            class="fa fa-thumbs-down"></i></button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="newEmpresa" class="modal inmodal in fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <i class="fa fa-home modal-icon"></i>
+                    <h4 class="modal-title">Registro de Empresas</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-4">
+
+                            <div class="input-group">
+                                <label>Nombre :</label>
+                                <input type="text" ng-model="cliente.nombres" class="input-sm form-control">
+                            </div>
+                            <div class="input-group">
+                                <label>Telefono:</label>
+                                <input type="text" ng-model="cliente.apellidos" class="input-sm form-control">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="input-group">
+                                <label>Direccion:</label>
+                                <input type="text" ng-model="cliente.direccion" class="input-sm form-control">
+                            </div>
+                            <div class="input-group">
+                                <label>Ciudad:</label>
+                                <select ng-model="cliente.ciudad" class="input-sm form-control">
+                                    <option></option>
+                                    <option>CODAZZI</option>
+                                    <option>SAN DIEGO</option>
+                                    <option>BECERRIL</option>
+                                    <option>LA VICTORIA</option>
+                                    <option>LA JAGUA</option>
+                                    <option>EL DESASTRE</option>
+                                    <option>LOS BRASILES</option>
+                                    <option>LLERASCA</option>
+                                    <option>PAILITAS</option>
+                                    <option>RINCO HONDO</option>
+                                    <option>LA LOMA</option>
+                                    <option>CHIRIGUANA</option>
+                                    <option>LA GLORIA</option>
+                                    <option>VALLEDUPAR</option>
+                                    <option>LA PAZ</option>
+                                    <option>CURUMANI</option>
+                                </select>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" ng-click="registrarEmpresa();">Registrar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

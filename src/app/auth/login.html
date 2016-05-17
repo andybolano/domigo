@@ -1,0 +1,21 @@
+<div class="middle-box text-center loginscreen  animated fadeInDown">
+    <div>
+        <div>
+            <h1 class="logo-name">DOMIGO</h1>
+        </div>
+        <h3>Bienvenido a DOMIGO</h3>
+        <p>Inicia sesion</p>
+        <form class="m-t" name="loginForm" novalidate>
+            <div class="form-group">
+                <input type="text" name="username" class="form-control" placeholder="Nombre de usuario" autofocus required>
+                <span ng-show="loginForm.username.$error.required">Este campo es requerido</span>
+            </div>
+            <div class="form-group">
+                <input type="password" name="pass" class="form-control" placeholder="Contrase&ntilde;a" required>
+                <span ng-show="loginForm.pass.$error.required">Este campo es requerido</span>
+            </div>
+            <button ng-click="vm.iniciarSesion()" type="submit" class="btn btn-primary block full-width m-b"
+                    ng-disabled="!loginForm.$valid ">Iniciar sesion</button>
+        </form>
+    </div>
+</div>
