@@ -16,8 +16,9 @@
         vm.cerrarSesion = cerrarSesion;
 
         function cerrarSesion() {
+            sessionStorage.clear();
             $state.go('login');
-        }
+        };
 
     }
 

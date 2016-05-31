@@ -6,20 +6,25 @@
         .controller('AdminCentralesController', AdminCentralesController)
 
 
-    function AdminCentralesController(DTOptionsBuilder) {
+    function AdminCentralesController(DTOptionsBuilder, Restangular) {
         var vm = this;
-        vm.centrales = [];
+        var empresas = Restangular.all('/empresas');
+        vm.empresas = [];
+        vm.empresa = {};
+        vm.empresasActivas = 0;
+        vm.empresasInactivas = 0;
+        vm.mensajerosActivos = 0;
+        vm.mensajerosInactivos = 0;
+        vm.editMode = true;
+
+        vm.verEmpresa = verEmpresa;
         vm.nuevaEmpresa = nuevaEmpresa;
-
-
-        function nuevaEmpresa() {
-            $('#newEmpresa').modal('show');
-        }
+        vm.registrarEmpresa = registrarEmpresa;
 
         vm.dtOptions = DTOptionsBuilder
             .fromSource()
             .withLanguage({
-                "sEmptyTable": "No hay datos disponibles en la tabla",
+                "sEmptyTable": "No hay empresas registradas",
                 "sInfo": "Mostrando _START_ a _END_ de _TOTAL_ registros",
                 "sInfoEmpty": "Mostrando 0 a 0 de 0 registros",
                 "sInfoFiltered": "(filtrado desde _MAX_ registros)",
@@ -43,5 +48,47 @@
             })
             // Add Bootstrap compatibility
             .withBootstrap();
+        cargarEmpresas();
+        function cargarEmpresas() {
+            limpiar();
+            var campos = 'nit,nombre,telefonos,direccion,ciudad,n_mensajeros_activos,n_mensajeros_inactivos,barrio,horario,activa'
+            Restangular.all('/empresas?fields='+campos).getList().then(function (empresas) {
+                vm.empresas = empresas;
+                angular.forEach(empresas, function (e) {
+                    if(e.activa == true){
+                        vm.empresasActivas++;
+                    }else{
+                        vm.empresasInactivas++;
+                    }
+                    vm.mensajerosActivos += e.n_mensajeros_activos;
+                    vm.mensajerosInactivos += e.n_mensajeros_inactivos;
+                })
+            })
+        }
+
+        function verEmpresa(empresa) {
+            vm.empresa = empresa;
+            vm.editMode = false;
+            $('#newEmpresa').modal('show');
+        }
+        function nuevaEmpresa() {
+            vm.editMode = true;
+            vm.empresa = {};
+            $('#newEmpresa').modal('show');
+        }
+
+        function registrarEmpresa() {
+            empresas.post(vm.empresa).then(function (d) {
+                cargarEmpresas();
+                $('#newEmpresa').modal('hide');
+            }, function (error) {
+                var mensajeError = error.status == 401 ? error.data.mensajeError : 'A ocurrido un error inesperado';
+            })
+        }
+
+        function limpiar() {
+            vm.empresas = [];
+            vm.empresa = {};
+        }
     }
 })();

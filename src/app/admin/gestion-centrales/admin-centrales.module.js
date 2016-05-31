@@ -15,15 +15,20 @@
                 url: '/admin/centrales',
                 templateUrl: 'app/admin/gestion-centrales/admin-centrales.html',
                 data: {
+                    // onlyAccess: 'SUPER_ADM' //['rol']
                     noRequiresLogin: true
                 },
                 controller: 'AdminCentralesController',
                 controllerAs: 'vm'
             })
             .state('app.admin-centrales-mensajeros', {
-               url: '/admin/centrales/mensajeros',
+                url: '/admin/centrales/mensajeros',
                 templateUrl: 'app/admin/gestion-centrales/admin-mensajeros.html',
-                data:{
+                params: {
+                    id: null,
+                    nombre: null
+                },
+                data: {
                     noRequiresLogin: true
                 },
                 controller: 'AdminMensajerosController',

@@ -4,10 +4,10 @@
     angular
         .module('domigo')
         .config(routerConfig)
-        .constant('API', '../api');
+        .constant('API', 'http://localhost:1337');
 
     /** @ngInject */
-    function routerConfig($stateProvider, $urlRouterProvider, jwtInterceptorProvider, $httpProvider) {
+    function routerConfig($stateProvider, $urlRouterProvider, RestangularProvider, jwtInterceptorProvider, $httpProvider) {
         jwtInterceptorProvider.tokenGetter = function (jwtHelper, $http, API) {
             var jwt = sessionStorage.getItem('jwt');
             if (jwt) {
