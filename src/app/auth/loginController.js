@@ -43,7 +43,7 @@
             if (rol.nombre == 'SUPER_ADM') {
                 $state.go('app.admin-centrales');
             } else if (rol.nombre == 'EMPRESA') {
-                $state.go('app.empresas');
+                $state.go('app.central-mensajeros');
             }
         }
     }
