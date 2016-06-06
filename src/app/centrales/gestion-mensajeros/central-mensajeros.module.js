@@ -15,7 +15,7 @@
                 url: '/central/mensajeros',
                 templateUrl: 'app/centrales/gestion-mensajeros/central-mensajeros.html',
                 data: {
-                    noRequiresLogin: true
+                    onlyAccess: ['EMPRESA']
                 },
                 controller: 'CentralMensajerosController',
                 controllerAs: 'vm'

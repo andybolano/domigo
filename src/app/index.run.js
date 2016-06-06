@@ -17,7 +17,7 @@
                 }else if(to.data && to.data.onlyAccess){
                     var user = authService.currentUser();
                     // console.log('o: '+window.location.hash+'|d: '+to.url+'user_rol: '+user.rol);
-                    if (!(!to.data.onlyAccess || to.data.onlyAccess == user.rol || to.data.onlyAccess == 'all')) {
+                    if (!(!to.data.onlyAccess || to.data.onlyAccess == user.rol.nombre || to.data.onlyAccess == 'all')) {
                         e.preventDefault();
                         // console.log('token expired');
                         $state.go('login');

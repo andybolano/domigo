@@ -15,8 +15,8 @@
                 url: '/admin/centrales',
                 templateUrl: 'app/admin/gestion-centrales/admin-centrales.html',
                 data: {
-                    // onlyAccess: 'SUPER_ADM' //['rol']
-                    noRequiresLogin: true
+                    onlyAccess: 'SUPER_ADM' //['rol']
+                    //noRequiresLogin: true
                 },
                 controller: 'AdminCentralesController',
                 controllerAs: 'vm'
@@ -29,7 +29,7 @@
                     nombre: null
                 },
                 data: {
-                    noRequiresLogin: true
+                    onlyAccess: 'SUPER_ADM'
                 },
                 controller: 'AdminMensajerosController',
                 controllerAs: 'vm'
