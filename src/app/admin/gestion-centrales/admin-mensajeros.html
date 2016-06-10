@@ -60,7 +60,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="mensajero in vm.mensajeros">
+                            <tr ng-repeat="mensajero in vm.mensajeros | filter: filtro">
                                 <td>{{$idenx+1}}</td>
                                 <td>{{mensajero.nombre}} {{mensajero.apellido}}</td>
                                 <td>{{mensajero.telefonos[0]}}</td>

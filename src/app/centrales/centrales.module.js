@@ -7,6 +7,7 @@
 
     angular
         .module('app.central', [
-            'app.central_mensajeros'
+            'app.central_mensajeros',
+            'app.central_pedidos'
         ]);
 })();

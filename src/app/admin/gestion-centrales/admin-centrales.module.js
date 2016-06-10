@@ -7,7 +7,8 @@
 
     angular
         .module('app.admin_centrales', [])
-        .config(config);
+        .config(config)
+        .run(run);
 
     function config($stateProvider) {
         $stateProvider
@@ -34,5 +35,11 @@
                 controller: 'AdminMensajerosController',
                 controllerAs: 'vm'
             });
+    }
+
+    function run(appMenu) {
+        appMenu.addTo([
+            {nombre: 'Centrales', link: 'app.admin-centrales', icon: 'fa fa-diamond'},
+        ], 'SUPER_ADM');
     }
 })();

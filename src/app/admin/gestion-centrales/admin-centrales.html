@@ -97,7 +97,7 @@
                                 <th>Opciones</th>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="empresa in vm.empresas">
+                            <tr ng-repeat="empresa in vm.empresas | filter : filtro" >
                                 <td>{{empresa.nit}}</td>
                                 <td>{{empresa.nombre}}</td>
                                 <td>{{empresa.telefonos[0]}}</td>
