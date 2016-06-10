@@ -1,22 +1,98 @@
-<div class="row border-bottom">
-    <nav class="navbar navbar-fixed-top bg-domigo" role="navigation" style="margin-bottom: 0;background-color:#e30613">
-        <div class="navbar-header animated bounceIn">
-            <img src="../../assets/images/logo_completo.png" style="width:170px;">
+
+
+    <nav class="navbar-default navbar-static-side" role="navigation" style="background-color:#FFFFFF;">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+            
+                <li>
+                 <img src="../../assets/images/logo_completo.png" style="width:100%;margin-top:9px;">
+                </li>
+                <li>
+                    <a href="javascript:;"><i class="fa fa-diamond"></i> <span class="nav-label">Centrales</span></a>
+                </li>
+                
+                
+                <li>
+                    <a href="metrics.html"><i class="fa fa-pie-chart"></i> <span class="nav-label">Reportes</span>  </a>
+                </li>
+               
+                
+             
+                
+            </ul>
+
         </div>
+    </nav>
+
+        <div id="page-wrapper" class="bg-domigo" style="min-height: 667px; border-left:3px solid #DF1008">
+        <div class="row border-bottom">
+        <nav class="navbar navbar-static-top navbar-domigo" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="javascript:;"><i class="fa fa-bars"></i> </a>
+        </div>
+            <ul class="nav navbar-top-links navbar-right">
+                <li>
+                    <span class="m-r-sm text-muted welcome-message">Bienvenido a Domigo</span>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                        <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
+                    </a>
+                    
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                        <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
+                    </a>
+                
+                </li>
+
+
+                <li>
+                    <a href="javascript:;">
+                        <i class="fa fa-sign-out" ng-click="vm.cerrarSesion()"></i> Cerrar Sesion
+                    </a>
+                </li>
+            </ul>
+
+        </nav>
+        </div>
+            <div ui-view class=" " class="row wrapper border-bottom  page-heading bg-domigo">
+               
+            </div>
+
+            </div>
+        <div class="footer">
+            <div class="pull-right">
+                10GB of <strong>250GB</strong> Free.
+            </div>
+            <div>
+                <strong>Copyright</strong> Example Company © 2014-2015
+            </div>
+        </div>
+
+    
+   
+
+<!--
+<div class="row border-bottom">
+    <nav class="navbar navbar-fixed-top navbar-domigo" role="navigation" style="margin-bottom: 0;background-color:#FFFFFF">
+         <li>
+            <div class="navbar-header animated bounceIn">
+            <img src="../../assets/images/logo_completo.png" style="width:170px;margin-top:5px;">
+        </li>
         <ul class="nav navbar-top-links navbar-right">
             <li>
                 <a href="">
                     <i class="fa fa-calendar"></i> {{vm.hoy | esdate: 'full'}}
                 </a>
             </li>
-            <li>
-                <a href="javascript:;" ng-click="vm.cerrarSesion()">
-                    <i class="fa fa-sign-out"></i> Cerrar sesion
-                </a>
-            </li>
         </ul>
     </nav>
 </div>
-<br><br><br>
-<div ui-view>
+<div ui-view class=" " style="margin-top:60px;">
+
 </div>
+       -->
+
+

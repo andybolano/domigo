@@ -28,7 +28,7 @@
                 // document.getElementById("loading").style.display = "none";
                 // document.getElementById("btn-inicio").disabled = false;
                 var usuario = authService.storeUser(p.token, p.user);
-                redirect(usuario.rol);
+            redirect(usuario.rol);
             }
 
             function error(error) {

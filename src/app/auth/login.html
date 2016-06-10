@@ -1,44 +1,69 @@
+<div class="full-width  bg-domigo bg-login" id="container-login">
 <div class="middle-box text-center loginscreen  animated fadeInDown">
     <div>
-        <div>
-            <h1 class="logo-name">DOMIGO</h1>
-        </div>
-        <h3>Bienvenido a DOMIGO</h3>
-        <p>Inicia sesion</p>
-        <form class="m-t" name="loginForm" novalidate>
-            <div class="row">
-                <div class="col s12" style="text-align: center;color:red;">
+        <div class="m-t" name="loginForm" novalidate>
+
+
+
+ <img src="../../assets/images/logo-login.png" style="width:70%;">
+<br><br>
+             <div class="row">
+                <div class="col s12" style="text-align: center;color:#FFF;">
                     {{vm.mensajeError}}
                 </div>
             </div>
+
+<form class="form-domigo" name="loginForm" novalidate>
             <div class="form-group">
-                <input class="form-control"
+                <input class="form-control form-control-domigo"
                        type="text"
                        ng-model="vm.usuario.username"
                        name="username"
-                       placeholder="Nombre de usuario"
+                       placeholder="Usuario"
                        required
                        autofocus>
-                <div ng-messages="!loginForm.$pristine && loginForm.username.$error">
-                    <div ng-message="required">Este campo es obligatorio.</div>
+
+                <div ng-messages="!loginForm.$pristine && loginForm.password.$error">
+                    <div ng-message="required" class="mensajes">Este campo es obligatorio.</div>
                 </div>
+
             </div>
+            <hr>
             <div class="form-group">
-                <input class="form-control"
+                <input class="form-control form-control-domigo"
                        type="password"
                        ng-model="vm.usuario.password"
                        name="password"
                        placeholder="Contrase&ntilde;a"
                        required
                        autofocus>
-                <div ng-messages="!loginForm.$pristine && loginForm.password.$error">
-                    <div ng-message="required">Este campo es obligatorio.</div>
+               
+                <div ng-messages="!loginForm.$pristine && loginForm.username.$error">
+                    <div ng-message="required" class="mensajes">Este campo es obligatorio.</div>
                 </div>
             </div>
+</form>
+
+             
+
+
+
+<br>
             <button id="btn-inicio" ng-click="vm.iniciarSesion()" type="submit"
-                    class="btn btn-primary block full-width m-b"
-                    ng-disabled="!loginForm.$valid">Iniciar sesion
+                    class="full-width m-b btn-domigo"  ng-disabled="!loginForm.$valid"
+                    >Iniciar Sesion
             </button>
-        </form>
+
+
+        </div>
     </div>
+
 </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function($){
+  var ventana_alto = $(window).height();
+   $('#container-login').css({'height':ventana_alto });
+});
+</script>
