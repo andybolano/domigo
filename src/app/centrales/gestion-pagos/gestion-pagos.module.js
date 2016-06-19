@@ -25,7 +25,7 @@
 
     function run(appMenu) {
         appMenu.addTo([
-            {nombre: 'Gestion pagos', link: 'app.gestion-pagos', icon: 'fa fa-diamond'},
+            {nombre: 'Gestion pagos', link: 'app.gestion-pagos', icon: 'fa fa-money'},
         ], 'EMPRESA');
     }
 })();

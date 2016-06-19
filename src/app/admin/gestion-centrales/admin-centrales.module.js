@@ -39,7 +39,7 @@
 
     function run(appMenu) {
         appMenu.addTo([
-            {nombre: 'Centrales', link: 'app.admin-centrales', icon: 'fa fa-diamond'},
+            {nombre: 'Empresas', link: 'app.admin-centrales', icon: 'fa fa-house'},
         ], 'SUPER_ADM');
     }
 })();

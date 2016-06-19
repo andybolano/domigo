@@ -11,5 +11,17 @@
 
     function CentralMensajerosController() {
 
+ 	var vm = this;
+ 	 vm.verMensajero = verMensajero;
+ 	 vm.addListaNegra = addListaNegra;
+
+    	function verMensajero(mensajero) {
+            $('#verMensajero').modal('show');
+        }
+
+        function addListaNegra() {
+            $('#addListaNegra').modal('show');
+        }
+
     }
 })();

@@ -9,6 +9,7 @@
         .module('domigo')
         .controller('LayoutController', LayoutController);
 
+
     function LayoutController($state) {
         var vm = this;
         vm.hoy = new Date;

@@ -25,7 +25,7 @@
 
     function run(appMenu) {
         appMenu.addTo([
-            {nombre: 'Gestion mensajeros', link: 'app.central-mensajeros', icon: 'fa fa-diamond'},
+            {nombre: 'Mensajeros', link: 'app.central-mensajeros', icon: 'fa fa-users'},
         ], 'EMPRESA');
     }
 })();

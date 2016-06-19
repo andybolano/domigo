@@ -1,12 +1,12 @@
-<nav class="navbar-default navbar-static-side" role="navigation" style="background-color:#FFFFFF;">
+<nav class="navbar-default navbar-static-side" role="navigation" style="background-color:#FFFFFF;min-height:100%">
     <div class="sidebar-collapse">
         <ul class="nav metismenu" id="side-menu" ng-controller="MenuCtrl as vm">
             <li>
                 <img src="../../assets/images/logo_completo.png" style="width:100%;margin-top:9px;">
             </li>
-            <li ng-repeat="op in vm.menu" ui-sref="{{op.link}}" id="{{op.id}}">
+            <li ng-repeat="op in vm.menu" ui-sref="{{op.link}}" id="{{op.id}}" style="border-bottom:1px solid #000">
                 <a href="javascript:;">
-                    <i class="{{op.icon}}"></i>
+                    <i class="{{op.icon}}" style="color:#DF1008;font-size:18px;"></i>
                     <span class="nav-label">{{op.nombre}}</span>
                 </a>
             </li>
@@ -50,18 +50,10 @@
         </nav>
     </div>
     <div ui-view class=" " class="row wrapper border-bottom  page-heading bg-domigo">
-
     </div>
 
 </div>
-<div class="footer">
-    <div class="pull-right">
-        10GB of <strong>250GB</strong> Free.
-    </div>
-    <div>
-        <strong>Copyright</strong> Example Company © 2014-2015
-    </div>
-</div>
+
 
 
 <!--
