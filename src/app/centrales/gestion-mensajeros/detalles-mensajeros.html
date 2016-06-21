@@ -1,0 +1,166 @@
+<div class="wrapper wrapper-content animated fadeIn">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title radio-title">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <a class="btn btn-xs btn-primary"
+                           style="text-transform:capitalize;"
+                           ui-sref="app.central-mensajeros">
+                             Regresar
+                        </a>
+                        <div class="widget-head-color-box bg-domigo p-lg text-center">
+                            <div class="m-b-md">
+                                <h2 class="font-bold no-margins text-white">
+                                    {{vm.mensajero.nombre}} {{vm.mensajero.apellidos}}
+                                </h2>
+                                <small class="text-white">Mensajero</small>
+                            </div>
+                            <img src="../../../assets/images/profile/a1.jpg" class="img-circle circle-border m-b-md"
+                                 alt="profile">
+                            <div class="text-white">
+                                <span>Calificacion</span>
+                                <span>80%</span><br>
+                                <div ng-if="vm.mensajero.activo == '0'" class="badge badge-danger">INACTIVO</div>
+                                <div ng-if="vm.mensajero.activo == '1'" class="badge badge-primary">ACTIVO</div>
+                                <div ng-if="vm.mensajero.activo == '2'" class="badge badge-warning">BLOQUEADO</div>
+                                <div ng-if="vm.mensajero.activo == '3'" class="badge badge-info">SANCIONADO</div>
+                            </div>
+                        </div>
+                        <div class="widget-text-box">
+                            <label style="color:#000">Cedula:</label> {{vm.mensajero.cedula}}<br>
+                            <label style="color:#000">Telefono:</label> {{vm.mensajero.telefonos[0]}}<br>
+                            <label style="color:#000">Email:</label> {{vm.mensajero.email}}<br>
+                            <label style="color:#000">Direccion:</label> {{vm.mensajero.direccion}}<br>
+                            <label style="color:#000">Placa:</label> {{vm.mensajero.vehiculo}}<br>
+                            <br>
+                            <div class="center">
+                                <a ng-if="vm.mensajero.activo == '2'" class="btn btn-xs btn-success"
+                                   style="text-transform:capitalize;"
+                                   ng-click="vm.desbloquearMensajero(vm.mensajero)">
+                                    <i class="fa fa-unlock"> Habilitar</i>
+                                </a>
+                                <a ng-if="vm.mensajero.activo != '2'" class="btn btn-xs btn-primary"
+                                   style="text-transform:capitalize;"
+                                   ng-click="vm.bloquearMensajero(vm.mensajero)">
+                                    <i class="fa fa-lock"> Bloquear</i>
+                                </a>
+                                <a class="btn btn-xs btn-warning" style="text-transform:capitalize;"><i
+                                        class="fa fa-legal"> Sancionar</i></a>
+                                <a class="btn btn-xs"
+                                   style="background-color:#00695c;color:#FFF;text-transform:capitalize;"
+                                   ng-click="vm.addListaNegra()"><i class="fa fa-trash"></i> Lista Negra</a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="widget yellow-bg p-lg text-center">
+                                    <div class="m-b-md">
+                                        <i class="fa fa-thumbs-up fa-4x"></i>
+                                        <h1 class="m-xs">30</h1>
+                                        <h3 class="font-bold no-margins">
+                                            Exitosos
+                                        </h3>
+                                        <small>Servicios</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="widget  p-lg text-center" style="background-color:#00695C">
+                                    <div class="m-b-md text-white">
+                                        <i class="fa fa-thumbs-down fa-4x"></i>
+                                        <h1 class="m-xs">6</h1>
+                                        <h3 class="font-bold no-margins">
+                                            RECHAZADOS
+                                        </h3>
+                                        <small>Servicios</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <h2>Historial de servicios</h2>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="input-group" style="margin-top:20px">
+                                    <input type="text" placeholder="Buscador"
+                                           class="input-sm form-control buscador-domigo" ng-model="filtro">
+                        <span class="input-group-btn">
+                        <button type="button" class="btn btn-sm btn-primary">
+                        <i class="fa fa-search"></i>
+                        </button>
+                        </span>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-2">
+                                <h2 class="badge badge-primary"
+                                    style="font-size:36px; margin-top:10px;background-color:#DF1008">36</h2>
+                            </div>
+                        </div>
+                        <table class="table table-striped">
+                            <thead>
+                            <td>Cliente</td>
+                            <th>fecha</th>
+                            <!--<th>Origen</th>-->
+                            <th>Destino</th>
+                            <th>Tipo Servicio</th>
+                            <td>estado</td>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Jose Luis Soto</td>
+                                <td>21-02-2016</td>
+                                <!--<td>calle 18 #20-40</td>-->
+                                <td>Banco Bogota</td>
+                                <td>Consignacion</td>
+                                <td><span class="badge badge-primary bg-domigo">terminado</span></td>
+                            </tr>
+                            <tr>
+                                <td>Jose Luis Soto</td>
+                                <td>21-02-2016</td>
+                                <!--<td>calle 18 #20-40</td>-->
+                                <td>Banco Bogota</td>
+                                <td>Consignacion</td>
+                                <td><span class="badge badge-primary bg-domigo">terminado</span></td>
+                            </tr>
+                            <tr>
+                                <td>Jose Luis Soto</td>
+                                <td>21-02-2016</td>
+                                <!--<td>calle 18 #20-40</td>-->
+                                <td>Banco Bogota</td>
+                                <td>Consignacion</td>
+                                <td><span class="badge badge-primary bg-domigo">terminado</span></td>
+                            </tr>
+                            <tr>
+                                <td>Jose Luis Soto</td>
+                                <td>21-02-2016</td>
+                                <!--<td>calle 18 #20-40</td>-->
+                                <td>Banco Bogota</td>
+                                <td>Consignacion</td>
+                                <td><span class="badge badge-primary bg-domigo">terminado</span></td>
+                            </tr>
+                            <tr>
+                                <td>Jose Luis Soto</td>
+                                <td>21-02-2016</td>
+                                <!--<td>calle 18 #20-40</td>-->
+                                <td>Banco Bogota</td>
+                                <td>Consignacion</td>
+                                <td><span class="badge badge-primary bg-domigo">terminado</span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

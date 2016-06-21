@@ -21,6 +21,18 @@
                 controller: 'CentralMensajerosController',
                 controllerAs: 'vm'
             })
+            .state('app.detalle-mensajero', {
+                url: '/central/detalle/mensajero',
+                templateUrl: 'app/centrales/gestion-mensajeros/detalles-mensajeros.html',
+                data: {
+                    onlyAccess: 'EMPRESA'
+                },
+                params: {
+                    id: null,
+                },
+                controller: 'CentralDetallesMensajerosController',
+                controllerAs: 'vm'
+            })
     }
 
     function run(appMenu) {

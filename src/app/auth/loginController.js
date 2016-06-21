@@ -34,7 +34,7 @@
             function error(error) {
                 // document.getElementById("loading").style.display = "none";
                 // document.getElementById("btn-inicio").disabled = false;
-                vm.mensajeError = error.status == 401 ? 'Uusuario y/o contraseña incorrectas, intentalo de nuevo' : 'Ha ocurrido un error inesperado';
+                vm.mensajeError = error.status == 401 ? 'Usuario y/o contraseña incorrectas, intentalo de nuevo' : 'Ha ocurrido un error inesperado';
             }
         }
 
