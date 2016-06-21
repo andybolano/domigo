@@ -106,6 +106,88 @@
         </div>
     </div>
 
+    <div id="newMensajero" class="modal inmodal in face" role="dialog">
+        <div class="modal-dialog modal-lg">
+             <div class="modal-content">
+             <div class="modal-header">
+                    <h2>Registro de Mensajero</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                            <label class=" control-label">Cedula:</label><br>
+                                   <input type="number" class="form-control">
+                                </div>
+                                <div class="form-group">
+                            <label class=" control-label">Nombres:</label><br>
+                                   <input type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                            <label class=" control-label">Apellidos:</label><br>
+                                   <input type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                            <label class=" control-label">Fecha de nacimiento:</label><br>
+                                   <input type="date" class="form-control">
+                                </div>
+                                 <div class="form-group">
+                            <label class=" control-label">Sexo:</label><br>
+                                   <select class="form-control">
+                                    <option value="M">M</option>
+                                    <option value= "F">F</option>
+                                   </select>
+                                </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                            <label class=" control-label">Direccion:</label><br>
+                                   <input type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                            <label class=" control-label">Barrio:</label><br>
+                                   <input type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                            <label class=" control-label">Ciudad:</label><br>
+                                   <input type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                            <label class=" control-label">Telefono:</label><br>
+                                   <input type="number" class="form-control">
+                                </div>
+                                 <div class="form-group">
+                            <label class=" control-label">Email:</label><br>
+                                   <input type="email" class="form-control">
+                                </div>
+                                 
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="ibox-content text-center">
+                                
+                                <div class="m-b-sm">
+                                        <img alt="image" class="img-circle" src="../../../assets/images/profile/a1.jpg">
+                                </div>
+                                      
+
+                                <div class="text-center">
+                                    <a class="btn btn-xs btn-primary">adjuntar imagen </a>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" ng-click="registrarMensajero();">Registrar</button>
+                </div>
+            </div>        
+        </div>
+    </div>
+
 
     <div id="verMensajero" class="modal inmodal in fade" role="dialog">
         <div class="modal-dialog modal-lg" style="min-width:100%;">

@@ -23,6 +23,7 @@
         vm.addListaNegra = addListaNegra;
         vm.bloquearMensajero = bloquearMensajero;
         vm.desbloquearMensajero = desbloquearMensajero;
+         vm.newMensajero = newMensajero;
 
         if(vm.variableActivos == true){
             cargarMensajerosActivos();
@@ -125,6 +126,11 @@
                     });
                 }, 200);
             })
+        }
+
+         function newMensajero() {
+           
+            $('#newMensajero').modal('show');
         }
 
         cargarMensajeros();

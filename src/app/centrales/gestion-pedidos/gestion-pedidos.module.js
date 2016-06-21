@@ -25,7 +25,7 @@
 
     function run(appMenu) {
         appMenu.addTo([
-            {nombre: 'Gestion pedidos', link: 'app.gestion-pedidos', icon: 'fa fa-gift'},
+            {nombre: 'Nuevos Pedidos', link: 'app.gestion-pedidos', icon: 'fa fa-gift'},
         ], 'EMPRESA');
     }
 })();
