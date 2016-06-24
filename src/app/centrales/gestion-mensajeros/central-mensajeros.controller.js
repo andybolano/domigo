@@ -9,9 +9,10 @@
         .module('app.central_mensajeros')
         .controller('CentralMensajerosController', CentralMensajerosController);
 
-    function CentralMensajerosController(Restangular, authService) {
+    function CentralMensajerosController(Restangular, authService, $filter) {
         // variables privadas
         var vm = this;
+        var gMensajero = Restangular.all('/empresas/'+authService.currentUser().id+'/mensajeros')
         vm.variableActivos = true;
         vm.variableBloqueados = false;
 
@@ -23,9 +24,10 @@
         vm.addListaNegra = addListaNegra;
         vm.bloquearMensajero = bloquearMensajero;
         vm.desbloquearMensajero = desbloquearMensajero;
-         vm.newMensajero = newMensajero;
+        vm.newMensajero = newMensajero;
+        vm.guardarMensajero = guardarMensajero;
 
-        if(vm.variableActivos == true){
+        if (vm.variableActivos == true) {
             cargarMensajerosActivos();
         }
 
@@ -51,7 +53,7 @@
             vm.texto = 'Mensajeros Activos';
             vm.mensajeros = [];
             var campos = 'activo,direccion,nombre,apellidos,telefonos,email,vehiculo,cedula,id';
-            Restangular.service('mensajeros?fields='+campos, Restangular.one('empresas', authService.currentUser().id)).getList({activo: 1}).then(function (response) {
+            Restangular.service('mensajeros?fields=' + campos, Restangular.one('empresas', authService.currentUser().id)).getList({activo: 1}).then(function (response) {
                 vm.mensajeros = response;
             });
         }
@@ -60,7 +62,7 @@
             vm.texto = 'Mensajeros Bloqueados';
             vm.mensajeros = [];
             var campos = 'activo,direccion,nombre,apellidos,telefonos,email,vehiculo,cedula,id';
-            Restangular.service('mensajeros?fields='+campos, Restangular.one('empresas', authService.currentUser().id)).getList({activo: 2}).then(function (response) {
+            Restangular.service('mensajeros?fields=' + campos, Restangular.one('empresas', authService.currentUser().id)).getList({activo: 2}).then(function (response) {
                 vm.mensajeros = response;
             });
         }
@@ -71,6 +73,8 @@
 
         function verMensajero(mensajero) {
             vm.mensajero = mensajero;
+            vm.mensajero.cedula = parseInt(vm.mensajero.cedula)
+            vm.mensajero.telefonos = parseInt(vm.mensajero.telefonos)
             $('#verMensajero').modal('show');
         }
 
@@ -128,9 +132,22 @@
             })
         }
 
-         function newMensajero() {
-           
+        function newMensajero() {
+            vm.mensajero = {};
             $('#newMensajero').modal('show');
+        }
+
+        function guardarMensajero(){
+            gMensajero.post(vm.mensajero).then(function (response) {
+                swal('Se guardo correctamente al mensajero '+ response.nombre + ' '+ response.apellidos);
+                $('#newMensajero').modal('toggle');
+                cargarMensajeros();
+                if(response.activo == 1){
+                    cargarMensajerosActivos();
+                }else{
+                    cargarMensajerosBloqueados();
+                }
+            })
         }
 
         cargarMensajeros();

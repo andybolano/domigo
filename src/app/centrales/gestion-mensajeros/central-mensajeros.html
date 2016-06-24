@@ -83,7 +83,8 @@
                                 <tr ng-repeat="mensajero in vm.mensajeros | filter: filtro">
                                     <td>{{$index+1}}</td>
                                     <td>
-                                        <img src="../../../assets/images/profile/a1.jpg" class="img-circle" width="40px;">
+                                        <img src="../../../assets/images/profile/a1.jpg" class="img-circle"
+                                             width="40px;">
                                     </td>
                                     <td>{{mensajero.cedula}}</td>
                                     <td>{{mensajero.nombre}} {{mensajero.apellidos}}</td>
@@ -92,7 +93,7 @@
                                     <td>{{mensajero.direccion}}</td>
                                     <td>{{mensajero.vehiculo}}</td>
                                     <td>
-                                        <button ui-sref="app.detalle-mensajero({id:mensajero.id})"
+                                        <button ng-click="vm.verMensajero(mensajero)"
                                                 class="btn btn-sm btn-outline btn-success  dim" type="button"><i
                                                 class="fa fa-eye"></i></button>
                                     </td>
@@ -108,83 +109,123 @@
 
     <div id="newMensajero" class="modal inmodal in face" role="dialog">
         <div class="modal-dialog modal-lg">
-             <div class="modal-content">
-             <div class="modal-header">
+            <div class="modal-content">
+                <div class="modal-header">
                     <h2>Registro de Mensajero</h2>
                 </div>
                 <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                            <label class=" control-label">Cedula:</label><br>
-                                   <input type="number" class="form-control">
+                    <form>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class=" control-label">Cedula:</label><br>
+                                    <input ng-model="vm.mensajero.cedula" type="number" min="0" class="form-control" required>
                                 </div>
                                 <div class="form-group">
-                            <label class=" control-label">Nombres:</label><br>
-                                   <input type="text" class="form-control">
+                                    <label class="control-label">Nombres:</label><br>
+                                    <input ng-model="vm.mensajero.nombre" type="text" class="form-control" required>
                                 </div>
                                 <div class="form-group">
-                            <label class=" control-label">Apellidos:</label><br>
-                                   <input type="text" class="form-control">
+                                    <label class=" control-label">Apellidos:</label><br>
+                                    <input ng-model="vm.mensajero.apellidos" type="text" class="form-control" required>
                                 </div>
                                 <div class="form-group">
-                            <label class=" control-label">Fecha de nacimiento:</label><br>
-                                   <input type="date" class="form-control">
+                                    <label class=" control-label">Fecha de nacimiento:</label><br>
+                                    <input ng-model="vm.mensajero.fecha_nacimiento" type="date" class="form-control" required>
                                 </div>
-                                 <div class="form-group">
-                            <label class=" control-label">Sexo:</label><br>
-                                   <select class="form-control">
-                                    <option value="M">M</option>
-                                    <option value= "F">F</option>
-                                   </select>
+                                <div class="form-group">
+                                    <label class=" control-label">Sexo:</label><br>
+                                    <select ng-model="vm.mensajero.sexo" class="form-control" required>
+                                        <option value="M">M</option>
+                                        <option value="F">F</option>
+                                    </select>
                                 </div>
-                        </div>
+                                <div class="form-group">
+                                    <label class=" control-label">Fecha de expedicion de la licencia de conduccion:</label><br>
+                                    <input ng-model="vm.mensajero.fecha_expedicion_licencia" type="date" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class=" control-label">Numero de licencia:</label><br>
+                                    <input ng-model="vm.mensajero.licencia_conducion" type="number" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class=" control-label">Placa del vehiculo:</label><br>
+                                    <input ng-model="vm.mensajero.vehiculo" type="text" class="form-control" required>
+                                </div>
+                            </div>
 
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                            <label class=" control-label">Direccion:</label><br>
-                                   <input type="text" class="form-control">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class=" control-label">Direccion:</label><br>
+                                    <input ng-model="vm.mensajero.direccion" type="text" class="form-control" required>
                                 </div>
                                 <div class="form-group">
-                            <label class=" control-label">Barrio:</label><br>
-                                   <input type="text" class="form-control">
+                                    <label class=" control-label">Barrio:</label><br>
+                                    <input ng-model="vm.mensajero.barrio" type="text" class="form-control" required>
                                 </div>
                                 <div class="form-group">
-                            <label class=" control-label">Ciudad:</label><br>
-                                   <input type="text" class="form-control">
+                                    <label class="control-label">Ciudad:</label><br>
+                                    <input ng-model="vm.mensajero.ciudad" type="text" class="form-control" required>
                                 </div>
                                 <div class="form-group">
-                            <label class=" control-label">Telefono:</label><br>
-                                   <input type="number" class="form-control">
+                                    <label class=" control-label">Telefono:</label><br>
+                                    <input ng-model="vm.mensajero.telefonos" type="number" class="form-control" required>
                                 </div>
-                                 <div class="form-group">
-                            <label class=" control-label">Email:</label><br>
-                                   <input type="email" class="form-control">
+                                <div class="form-group">
+                                    <label class=" control-label">Email:</label><br>
+                                    <input ng-model="vm.mensajero.email" type="email" class="form-control" required>
                                 </div>
-                                 
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="ibox-content text-center">
-                                
-                                <div class="m-b-sm">
+                                <div class="form-group">
+                                    <label class=" control-label">Fecha de vencimiento de la licencia de conduccion:</label><br>
+                                    <input ng-model="vm.mensajero.fecha_vencimiento_licencia" type="date" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class=" control-label">Categoria de licencia:</label><br>
+                                    <select ng-model="vm.mensajero.licencia_tipo" class="form-control" required>
+                                        <option value="A1" title="Motos con cilindrada hasta de 125 c.c.">A1</option>
+                                        <option value="A2" title="Motos, motociclos y mototriciclos con cilindrada mayor a 125 c.c.">A2</option>
+                                        <option value="B1" title="Automóviles, motocarros, cuatrimotos, camperos, camionetas y microbuses.">B1</option>
+                                        <option value="B2" title="Camiones rígidos, busetas y buses.">B2</option>
+                                        <option value="B3" title="Vehículos articulados.">B3</option>
+                                        <option value="C1" title="Para la conducción de automóviles, camperos, camionetas y microbuses.">C1</option>
+                                        <option value="C2" title="Para la conducción de camiones rígidos, busetas y buses.">C2</option>
+                                        <option value="C3" title="Para la conducción de vehículos articulados.">C3</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class=" control-label">Estado:</label><br>
+                                    <select ng-model="vm.mensajero.activo" class="form-control" required>
+                                        <option value="0">Inactivo</option>
+                                        <option value="1">Activo</option>
+                                        <option value="2">Bloqueado</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="ibox-content text-center">
+                                    <div class="m-b-sm">
                                         <img alt="image" class="img-circle" src="../../../assets/images/profile/a1.jpg">
-                                </div>
-                                      
-
-                                <div class="text-center">
-                                    <a class="btn btn-xs btn-primary">adjuntar imagen </a>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="si">
+                                            <label id="cabinet0" class="cabinet">
+                                                <input type="file" name="file" class="file"/>
+                                            </label>
+                                            <div class="uploadButton"></div>
+                                            <div></div>
+                                            <label class="selectedFile"/>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-
-                    </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" ng-click="registrarMensajero();">Registrar</button>
+                    <button type="button" class="btn btn-primary" ng-click="vm.guardarMensajero();">Registrar</button>
                 </div>
-            </div>        
+            </div>
         </div>
     </div>
 
@@ -217,7 +258,7 @@
                             </div>
                             <div class="widget-text-box">
                                 <label style="color:#000">Cedula:</label> {{vm.mensajero.cedula}}<br>
-                                <label style="color:#000">Telefono:</label> {{vm.mensajero.telefonos[0]}}<br>
+                                <label style="color:#000">Telefono:</label> {{vm.mensajero.telefonos}}<br>
                                 <label style="color:#000">Email:</label> {{vm.mensajero.email}}<br>
                                 <label style="color:#000">Direccion:</label> {{vm.mensajero.direccion}}<br>
                                 <label style="color:#000">Placa:</label> {{vm.mensajero.vehiculo}}<br>
