@@ -14,51 +14,50 @@
                     <label>Buscar Mensajero:</label>
                     <div class="input-group">
                         <input type="text" placeholder="Nº de Documento" class="input-sm form-control buscador-domigo"
-                               ng-model="filtro">
+                               ng-model="vm.buscar">
                         <span class="input-group-btn">
-                        <button type="button" class="btn btn-sm btn-primary">
+                        <button ng-click="vm.cargarMensajero()" type="button" class="btn btn-sm btn-primary">
                         <i class="fa fa-search"></i>
                         </button> 
                         </span>
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" ng-repeat="mensajero in vm.mensajero">
                 <div class="col-lg-4">
                     <div class="widget style1 bg-domigo text-white">
                         <div class="row">
                             <div class="col-xs-4">
-                                <img src="../../../assets/images/profile/a1.jpg" class="img-circle circle-border m-b-md"
+                                <img ng-src="http://localhost:1337/images/mensajeros/{{mensajero.fotografia}}" class="img-circle circle-border m-b-md"
                                      alt="profile" width="60px" height="60px" style="border:4px solid #FFF">
                             </div>
                             <div class="col-xs-8 text-right">
-                                <span> Jose Miguel soto </span>
-                                <h4>106565656</h4>
+                                <span> {{mensajero.nombre}} {{mensajero.apellidos}} </span>
+                                <h4>C.C: {{mensajero.cedula}}</h4>
                             </div>
                         </div>
                     </div>
                     <br>
                     <h3>Nuevo Ingreso</h3><br>
-                    <div class="form-group">
-                        <label class=" control-label">Fecha de pago</label><br>
-                        <input ng-model="assa" type="date" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label class=" control-label">Valor</label><br>
-                        <input ng-model="as" type="number" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label class=" control-label">Concepto:</label><br>
-                        <select ng-model="vm.mensajero.activo" class="form-control" required>
-                            <option value="0">Planilla</option>
-                            <option value="1">Ahorro</option>
-                            <option value="2">Prestamo</option>
-                        </select>
-                    </div>
-
-
-                    <button class="btn btn-primary">Guardar</button>
-
+                    <form name="pagosForm">
+                        <div class="form-group">
+                            <label class=" control-label">Fecha de pago</label><br>
+                            <input ng-model="vm.mensajero.fecha_pago" type="date" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label class=" control-label">Valor</label><br>
+                            <input ng-model="as" type="number" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label class=" control-label">Concepto:</label><br>
+                            <select ng-model="vm.mensajero.activo" class="form-control" required>
+                                <option value="0">Planilla</option>
+                                <option value="1">Ahorro</option>
+                                <option value="2">Prestamo</option>
+                            </select>
+                        </div>
+                        <input ng-click="vm.guardarPago()" type="submit" class="btn btn-primary" value="Guardar Pago" ng-disabled="pagosForm.$invalid"/>
+                    </form>
                 </div>
                 <div class="col-lg-8">
                     <h3>Historial de pagos</h3>

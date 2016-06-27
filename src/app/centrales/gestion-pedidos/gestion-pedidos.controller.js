@@ -80,8 +80,8 @@
                         'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
                     }
                 }, function (response) {
-                    swal('Aceptada la solicitud correctamente');
-                    console.log(response)
+                    swal(response.data);
+
                 });
             } else {
                 swal('No ha seleccionado ninguna solicitud/mensajero para registrar el pedido')
