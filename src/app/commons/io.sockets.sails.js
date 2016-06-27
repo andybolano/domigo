@@ -9,17 +9,19 @@
         .module('commons')
         .service('SocketcSailsService', SocketcSailsService);
 
-    function SocketcSailsService($scope) {
+    function SocketcSailsService() {
 
         this.pedidos = function () {
             io.socket.on('newCall', function (msg) {
-                $scope.$apply(function () {
-                    setItemPedido(msg)
-                });
+                console.log(msg)
+                setItemPedido(msg)
+                // $scope.$apply(function () {
+                //
+                // });
             });
         }
 
-        this.suscribe = function(empresa) {
+        this.suscribe = function (empresa) {
             io.socket.request({
                 method: 'get',
                 url: '/empresas/' + empresa + '/join_ws',
@@ -32,9 +34,26 @@
         }
 
         function setItemPedido(item) {
-            for(var i = 0; i < sessionStorage.getItem('pedidos').length; i++){
-                sessionStorage.setItem("pedidos"[i], JSON.stringify(item));
+            var i = 0;
+            var pedidos = [];
+            if(JSON.parse(sessionStorage.getItem('pedidos'))){
+                pedidos = JSON.parse(sessionStorage['pedidos']);
+                i = pedidos.length;
+                console.log(i)
+                pedidos.push(item);
+                sessionStorage['pedidos'[i]] = JSON.stringify(pedidos);
+            }else{
+                pedidos[0] = item;
+                sessionStorage['pedidos'] = JSON.stringify(pedidos);
             }
+
+            // if(sessionStorage.getItem('pedidos')){
+            //     for(var i = 0; i < sessionStorage.getItem('pedidos').length; i++){
+            //         sessionStorage.setItem("pedidos", JSON.stringify(item));
+            //     }
+            // }else{
+            //     sessionStorage.setItem("pedidos", JSON.stringify(item));
+            // }
         }
     }
 })();

@@ -84,8 +84,8 @@
                             <tr ng-repeat="mensajero in vm.mensajeros | filter: filtro | orderBy : 'nombre' ">
                                 <td>{{$index+1}}</td>
                                 <td>
-                                    <img src="../../../assets/images/profile/a1.jpg" class="img-circle"
-                                         width="40px;">
+                                    <img ng-src="http://localhost:1337/images/mensajeros/{{mensajero.fotografia}}" class="img-circle"
+                                         width="40px;" height="40px">
                                 </td>
                                 <td>{{mensajero.cedula}}</td>
                                 <td>{{mensajero.nombre}} {{mensajero.apellidos}}</td>
@@ -360,7 +360,7 @@
                                 </h2>
                                 <small class="text-white">Mensajero</small>
                             </div>
-                            <img src="../../../assets/images/profile/a1.jpg" class="img-circle circle-border m-b-md"
+                            <img  style="height: 140px; width: 140px" ng-src="http://localhost:1337/images/mensajeros/{{vm.mensajero.fotografia}}" class="img-circle circle-border m-b-md"
                                  alt="profile">
                             <div class="text-white">
                                 <span>Calificacion</span>

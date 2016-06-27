@@ -55,7 +55,7 @@
         function cargarMensajerosActivos() {
             vm.texto = 'Mensajeros Activos';
             vm.mensajeros = [];
-            var campos = 'condicion,direccion,nombre,apellidos,telefonos,email,vehiculo,cedula,id';
+            var campos = 'fotografia,condicion,direccion,nombre,apellidos,telefonos,email,vehiculo,cedula,id';
             Restangular.service('mensajeros?fields=' + campos, Restangular.one('empresas', authService.currentUser().id)).getList({condicion: 'activo'}).then(function (response) {
                 vm.mensajeros = response;
             });
@@ -64,7 +64,7 @@
         function cargarMensajerosBloqueados() {
             vm.texto = 'Mensajeros Sancionados';
             vm.mensajeros = [];
-            var campos = 'condicion,direccion,nombre,apellidos,telefonos,email,vehiculo,cedula,id';
+            var campos = 'fotografia,condicion,direccion,nombre,apellidos,telefonos,email,vehiculo,cedula,id';
             Restangular.service('mensajeros?fields=' + campos, Restangular.one('empresas', authService.currentUser().id)).getList({condicion: 'sancionado'}).then(function (response) {
                 vm.mensajeros = response;
             });
@@ -73,7 +73,7 @@
         function cargarMensajerosAusentes() {
             vm.texto = 'Mensajeros Ausentes';
             vm.mensajeros = [];
-            var campos = 'condicion,direccion,nombre,apellidos,telefonos,email,vehiculo,cedula,id';
+            var campos = 'fotografia,condicion,direccion,nombre,apellidos,telefonos,email,vehiculo,cedula,id';
             Restangular.service('mensajeros?fields=' + campos, Restangular.one('empresas', authService.currentUser().id)).getList({condicion: 'ausente' }).then(function (response) {
                 vm.mensajeros = response;
             });

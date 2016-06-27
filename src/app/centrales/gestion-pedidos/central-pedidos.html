@@ -12,129 +12,47 @@
             <div class="row">
                 <div class="col-lg-9">
                     <ul class="sortable-list connectList agile-list ui-sortable" id="inprogress">
-
-                        <li style="border:1px solid #DF1008;" class="col-lg-4">
-                            <h4>Solicitud # 1</h4>
+                        <li style="border:1px solid #DF1008;" class="col-lg-4" ng-repeat="pedido in vm.pedidos"
+                            ng-click="vm.selectPedido(pedido)">
+                            <h4>Solicitud # {{$index+1}}</h4>
                             <hr>
-                            <input type="number" placeholder="Telefono" id="exampleInputEmail2" class="form-control"
-                                   style="margin-top:3px;">
+                            <input value="{{pedido.telefono}}" type="number"
+                                   placeholder="Telefono" id="exampleInputEmail2" class="form-control"
+                                   style="margin-top:3px;" readonly>
 
-                            <input type="text" placeholder="Nombres" id="exampleInputEmail2" class="form-control"
-                                   style="margin-top:3px;">
-                            <div class="input-group"><input type="text" class="form-control" placeholder="Origen"
-                                                            style="margin-top:3px;">
+                            <input  value="{{pedido.nombre}}" type="text" placeholder="Nombres" id="exampleInputEmail2"
+                                   class="form-control"
+                                   style="margin-top:3px;" readonly>
+                            <div class="input-group">
+                                <input  value="{{pedido.direccion}}" type="text" class="form-control"
+                                       placeholder="Origen"
+                                       style="margin-top:3px;" ng-model="vm.pedido.direccion_origen" required>
 
                                 <div class="input-group-btn">
-                                    <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" type="button"
+                                    <button ng-click="vm.cargarDirecciones('origen')" data-toggle="dropdown"
+                                            class="btn btn-primary dropdown-toggle" type="button"
                                             aria-expanded="true"><i class="fa fa-star"></i> <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu pull-right">
-                                        <li style="padding:0;margin:0"><a href="#">Direccion 1</a></li>
-                                        <li style="padding:0; margin:0"><a href="#">Direccion 2</a></li>
-                                        <li style="padding:0;margin:0"><a href="#">Direccion 3</a></li>
-                                        <li style="padding:0;margin:0"><a href="#">Direccion 4</a></li>
+                                        <li style="padding:0;margin:0" ng-repeat="dorigen in vm.dorigens">{{dorigen}}
+                                        </li>
                                     </ul>
-                                </div style="margin-top: 3px
-                                ;">
+                                </div>
                             </div>
                             <input type="text" placeholder="Destino" id="exampleInputEmail2" class="form-control"
-                                   style="margin-top:3px;">
+                                   style="margin-top:3px;" ng-model="vm.pedido.direccion_destino">
                             <div style="margin-top:5px;">
                                 <small>Tipo de Servicio</small>
-                                <select class="form-control m-b" name="account">
-                                    <option>option 1</option>
-                                    <option>option 2</option>
-                                    <option>option 3</option>
-                                    <option>option 4</option>
+                                <select class="form-control m-b" name="account" ng-model="vm.pedido.tipo" required>
+                                    <option value="1">Comida rapida ida y vuelta</option>
+                                    <option value="2">Acompanamiento de consignacion bancaria</option>
+                                    <option value="3">Pago de factura en banco</option>
                                 </select>
                             </div>
-                            <button class="btn btn-danger  dim" style="margin-top:5px;margin-left:5px;" type="button"><i
+                            <button ng-click="vm.guardarPedido()" class="btn btn-danger  dim" style="margin-top:5px;margin-left:5px;" type="button"><i
                                     class="fa fa-check"></i>Registrar
                             </button>
-
                         </li>
-                        <li style="border:1px solid #DF1008;" class="col-lg-4">
-                            <h4>Solicitud # 2</h4>
-                            <hr>
-                            <input type="number" placeholder="Telefono" id="exampleInputEmail2" class="form-control"
-                                   style="margin-top:3px;">
-
-                            <input type="text" placeholder="Nombres" id="exampleInputEmail2" class="form-control"
-                                   style="margin-top:3px;">
-                            <div class="input-group"><input type="text" class="form-control" placeholder="Origen"
-                                                            style="margin-top:3px;">
-
-                                <div class="input-group-btn">
-                                    <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" type="button"
-                                            aria-expanded="true"><i class="fa fa-star"></i> <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li style="padding:0;margin:0"><a href="#">Direccion 1</a></li>
-                                        <li style="padding:0; margin:0"><a href="#">Direccion 2</a></li>
-                                        <li style="padding:0;margin:0"><a href="#">Direccion 3</a></li>
-                                        <li style="padding:0;margin:0"><a href="#">Direccion 4</a></li>
-                                    </ul>
-                                </div style="margin-top: 3px
-                                ;">
-                            </div>
-                            <input type="text" placeholder="Destino" id="exampleInputEmail2" class="form-control"
-                                   style="margin-top:3px;">
-                            <div style="margin-top:5px;">
-                                <small>Tipo de Servicio</small>
-                                <select class="form-control m-b" name="account">
-                                    <option>option 1</option>
-                                    <option>option 2</option>
-                                    <option>option 3</option>
-                                    <option>option 4</option>
-                                </select>
-                            </div>
-                            <button class="btn btn-danger  dim" style="margin-top:5px;margin-left:5px;" type="button"><i
-                                    class="fa fa-check"></i>Registrar
-                            </button>
-
-                        </li>
-                        <li style="border:1px solid #DF1008;" class="col-lg-4">
-                            <h4>Solicitud # 3</h4>
-                            <hr>
-                            <input type="number" placeholder="Telefono" id="exampleInputEmail2" class="form-control"
-                                   style="margin-top:3px;">
-
-                            <input type="text" placeholder="Nombres" id="exampleInputEmail2" class="form-control"
-                                   style="margin-top:3px;">
-                            <div class="input-group"><input type="text" class="form-control" placeholder="Origen"
-                                                            style="margin-top:3px;">
-
-                                <div class="input-group-btn">
-                                    <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" type="button"
-                                            aria-expanded="true"><i class="fa fa-star"></i> <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li style="padding:0;margin:0"><a href="#">Direccion 1</a></li>
-                                        <li style="padding:0; margin:0"><a href="#">Direccion 2</a></li>
-                                        <li style="padding:0;margin:0"><a href="#">Direccion 3</a></li>
-                                        <li style="padding:0;margin:0"><a href="#">Direccion 4</a></li>
-                                    </ul>
-                                </div style="margin-top: 3px
-                                ;">
-                            </div>
-                            <input type="text" placeholder="Destino" id="exampleInputEmail2" class="form-control"
-                                   style="margin-top:3px;">
-                            <div style="margin-top:5px;">
-                                <small>Tipo de Servicio</small>
-                                <select class="form-control m-b" name="account">
-                                    <option>option 1</option>
-                                    <option>option 2</option>
-                                    <option>option 3</option>
-                                    <option>option 4</option>
-                                </select>
-                            </div>
-                            <button class="btn btn-danger  dim" style="margin-top:5px;margin-left:5px;" type="button"><i
-                                    class="fa fa-check"></i>Registrar
-                            </button>
-
-                        </li>
-
-
                     </ul>
 
 
@@ -151,45 +69,12 @@
                         </tr>
                         </thead>
                         <tbody>
-
-                        <tr>
+                        <tr ng-repeat="mensajero in vm.mensajeros">
                             <td></td>
-                            <td>pedro</td>
-                            <td>3106440539</td>
-                            <th><a href="">add</a></th>
+                            <td>{{mensajero.nombre}}</td>
+                            <td>{{mensajero.telefonos[0]}}</td>
+                            <th><a href="javascript:;" ng-click="vm.selectMensajero(mensajero)">select</a></th>
                         </tr>
-                        <tr>
-                            <td></td>
-                            <td>Juan</td>
-                            <td>3106440539</td>
-                            <th><a href="">add</a></th>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>Jose</td>
-                            <td>3106440539</td>
-                            <th><a href="">add</a></th>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>Pablo</td>
-                            <td>3106440539</td>
-                            <th><a href="">add</a></th>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>Carlos</td>
-                            <td>3106440539</td>
-                            <th><a href="">add</a></th>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>Andres</td>
-                            <td>3106440539</td>
-                            <th><a href="">add</a></th>
-                        </tr>
-
-
                         </tbody>
                     </table>
                 </div>
