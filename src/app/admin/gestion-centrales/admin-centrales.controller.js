@@ -51,7 +51,7 @@
         cargarEmpresas();
         function cargarEmpresas() {
             limpiar();
-            var campos = 'nit,nombre,telefonos,direccion,ciudad,n_mensajeros_activos,n_mensajeros_inactivos,barrio,horario,activa'
+            var campos = 'nit,nombre,telefonos,direccion,ciudad,n_mensajeros,barrio,horario,activa'
             Restangular.all('/empresas?fields='+campos).getList().then(function (empresas) {
                 vm.empresas = empresas;
                 angular.forEach(empresas, function (e) {
@@ -60,8 +60,7 @@
                     }else{
                         vm.empresasInactivas++;
                     }
-                    vm.mensajerosActivos += e.n_mensajeros_activos;
-                    vm.mensajerosInactivos += e.n_mensajeros_inactivos;
+                    vm.mensajeros += e.n_mensajeros;
                 })
             })
         }

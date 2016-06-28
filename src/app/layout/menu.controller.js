@@ -9,7 +9,7 @@
         var vm = this;
         var user = authService.currentUser();
         if (user) {
-            vm.menu = appMenu.getOf(user.rol.nombre);
+            vm.menu = appMenu.getOf(user.rol);
         }
     }
 })();

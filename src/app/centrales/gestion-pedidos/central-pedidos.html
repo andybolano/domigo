@@ -6,8 +6,15 @@
                     	<h1>Nuevos Pedidos</h1>
                     </div>
                  </div>
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Nuevos Pedidos</h1>
+                </div>
             </div>
-            <div class="ibox-content" style="border-top:0 ">
+        </div>
+        <div class="ibox-content" style="border-top:0 ">
 
             	<div class="row">
               <div class="col-lg-9">
@@ -159,9 +166,122 @@
                                </li>
 
                      </ul>
+            <div class="row">
+                <div class="col-lg-9">
+                    <ul class="sortable-list connectList agile-list ui-sortable" id="inprogress">
+                        <li style="border:1px solid #DF1008;" class="col-lg-4" ng-repeat="pedido in vm.pedidos"
+                            ng-click="vm.selectPedido(pedido)">
+                            <h4>Solicitud # {{$index+1}}</h4>
+                            <hr>
+                            <input value="{{pedido.telefono}}" type="number"
+                                   placeholder="Telefono" id="exampleInputEmail2" class="form-control"
+                                   style="margin-top:3px;" readonly>
+
+                            <input  value="{{pedido.nombre}}" type="text" placeholder="Nombres" id="exampleInputEmail2"
+                                   class="form-control"
+                                   style="margin-top:3px;" readonly>
+                            <div class="input-group">
+                                <input  value="{{pedido.direccion}}" type="text" class="form-control"
+                                       placeholder="Origen"
+                                       style="margin-top:3px;" ng-model="vm.pedido.direccion_origen" required>
+
+                                <div class="input-group-btn">
+                                    <button ng-click="vm.cargarDirecciones('origen')" data-toggle="dropdown"
+                                            class="btn btn-primary dropdown-toggle" type="button"
+                                            aria-expanded="true"><i class="fa fa-star"></i> <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li style="padding:0;margin:0" ng-repeat="dorigen in vm.dorigens">{{dorigen}}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <input type="text" placeholder="Destino" id="exampleInputEmail2" class="form-control"
+                                   style="margin-top:3px;" ng-model="vm.pedido.direccion_destino">
+                            <div style="margin-top:5px;">
+                                <small>Tipo de Servicio</small>
+                                <select class="form-control m-b" name="account" ng-model="vm.pedido.tipo" required>
+                                    <option value="1">Comida rapida ida y vuelta</option>
+                                    <option value="2">Acompanamiento de consignacion bancaria</option>
+                                    <option value="3">Pago de factura en banco</option>
+                                </select>
+                            </div>
+                            <button ng-click="vm.guardarPedido()" class="btn btn-danger  dim" style="margin-top:5px;margin-left:5px;" type="button"><i
+                                    class="fa fa-check"></i>Registrar
+                            </button>
+                        </li>
+                    </ul>
 
 
+                </div>
+                <div class="col-lg-3">
+                    <h4>Mensajeros Disponibles</h4>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>Nombre</th>
+                            <th>telefono</th>
+                            <th>Opcion</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="mensajero in vm.mensajeros">
+                            <td></td>
+                            <td>{{mensajero.nombre}}</td>
+                            <td>{{mensajero.telefonos[0]}}</td>
+                            <th><a href="javascript:;" ng-click="vm.selectMensajero(mensajero)">select</a></th>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="col-lg-3">
+ <div class="ibox float-e-margins">
+         <div class="ibox-title radio-title">
+             <div class="row">
+                 <div class="col-lg-12">
+                     <h3>Mensajeros</h3>
+                 </div>
+              </div>
+         </div>
+         <div class="ibox-content radio-body" style="border-top:0 ">
+             <div class="row">
+                 <ul class="sortable-list connectList agile-list ui-sortable" id="inprogress">
+                             <li class="success-element">
+                                 Nombre Mensajero
+                                     <span class="label label-success pull-right">Estado</span>
 
+                             </li>
+                             <li class="success-element">
+                                 Nombre Mensajero
+                                     <span class="label label-success pull-right">Estado</span>
+
+                             </li>
+                             <li class="success-element">
+                                 Nombre Mensajero
+                                     <span class="label label-success pull-right">Estado</span>
+
+                             </li>
+                             <li class="success-element">
+                                 Nombre Mensajero
+                                     <span class="label label-success pull-right">Estado</span>
+>>>>>>> d96efd5888f06377b499c4b38d70432a5710b7a8
+
+                             </li>
+                             <li class="success-element">
+                                 Nombre Mensajero
+                                     <span class="label label-success pull-right">Estado</span>
+
+                             </li>
+                             <li class="success-element">
+                                 Nombre Mensajero
+                                     <span class="label label-success pull-right">Estado</span>
+
+<<<<<<< HEAD
             	</div>
               <div class="col-lg-3">
                  <table class="table table-striped">
@@ -243,4 +363,15 @@
             </div>
         </div>-->
     
+                             </li>
+                             <li class="success-element">
+                                 Nombre Mensajero
+                                     <span class="label label-success pull-right">Estado</span>
+
+                             </li>
+
+                         </ul>
+             </div>
+         </div>
+     </div>
 </div>                    

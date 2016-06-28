@@ -40,10 +40,12 @@
 
         function redirect(rol) {
 
-            if (rol.nombre == 'SUPER_ADM') {
+            if (rol == 'SUPER_ADM') {
                 $state.go('app.admin-centrales');
-            } else if (rol.nombre == 'EMPRESA') {
+            } else if (rol == 'EMPRESA') {
                 $state.go('app.central-mensajeros');
+            }else if(rol == 'MENSAJERO'){
+                vm.mensajeError = 'Este usuario no tiene autorizacion para acceder al sistema del administrador, por favor comuniquese con soporte';
             }
         }
     }

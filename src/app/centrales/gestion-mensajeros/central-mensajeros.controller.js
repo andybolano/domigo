@@ -9,17 +9,20 @@
         .module('app.central_mensajeros')
         .controller('CentralMensajerosController', CentralMensajerosController);
 
-    function CentralMensajerosController(Restangular, authService, $filter) {
+    function CentralMensajerosController(Restangular, authService, $http) {
         // variables privadas
         var vm = this;
         var gMensajero = Restangular.all('/empresas/'+authService.currentUser().id+'/mensajeros')
         vm.variableActivos = true;
         vm.variableBloqueados = false;
+        vm.fotografia = '';
 
         // funciones publicas
         vm.cargarMensajeros = cargarMensajeros;
         vm.cargarMensajerosActivos = cargarMensajerosActivos;
         vm.cargarMensajerosBloqueados = cargarMensajerosBloqueados;
+        vm.cargarMensajerosAusentes = cargarMensajerosAusentes;
+
         vm.verMensajero = verMensajero;
         vm.addListaNegra = addListaNegra;
         vm.bloquearMensajero = bloquearMensajero;
@@ -34,16 +37,16 @@
         function cargarMensajeros() {
             vm.mensajerosActivos = 0;
             vm.mensajerosBloqueados = 0;
-            vm.mensajerosSancionados = 0;
-            var campos = 'all';
+            vm.mensajerosAusentes = 0;
+            var campos = 'condicion';
             Restangular.service('mensajeros?fields=' + campos, Restangular.one('empresas', authService.currentUser().id)).getList().then(function (response) {
                 angular.forEach(response, function (m) {
-                    if (m.activo == 1) {
+                    if (m.condicion == 'activo') {
                         vm.mensajerosActivos++;
-                    } else if (m.activo == 2) {
+                    } else if (m.condicion == 'sancionado') {
                         vm.mensajerosBloqueados++;
-                    } else if (m.activo == 3) {
-                        vm.mensajerosSancionados++;
+                    } else if (m.condicion == 'ausente') {
+                        vm.mensajerosAusentes++;
                     }
                 })
             });
@@ -52,29 +55,44 @@
         function cargarMensajerosActivos() {
             vm.texto = 'Mensajeros Activos';
             vm.mensajeros = [];
-            var campos = 'activo,direccion,nombre,apellidos,telefonos,email,vehiculo,cedula,id';
-            Restangular.service('mensajeros?fields=' + campos, Restangular.one('empresas', authService.currentUser().id)).getList({activo: 1}).then(function (response) {
+            var campos = 'fotografia,condicion,direccion,nombre,apellidos,telefonos,email,vehiculo,cedula,id';
+            Restangular.service('mensajeros?fields=' + campos, Restangular.one('empresas', authService.currentUser().id)).getList({condicion: 'activo'}).then(function (response) {
                 vm.mensajeros = response;
             });
         }
 
         function cargarMensajerosBloqueados() {
-            vm.texto = 'Mensajeros Bloqueados';
+            vm.texto = 'Mensajeros Sancionados';
             vm.mensajeros = [];
-            var campos = 'activo,direccion,nombre,apellidos,telefonos,email,vehiculo,cedula,id';
-            Restangular.service('mensajeros?fields=' + campos, Restangular.one('empresas', authService.currentUser().id)).getList({activo: 2}).then(function (response) {
+            var campos = 'fotografia,condicion,direccion,nombre,apellidos,telefonos,email,vehiculo,cedula,id';
+            Restangular.service('mensajeros?fields=' + campos, Restangular.one('empresas', authService.currentUser().id)).getList({condicion: 'sancionado'}).then(function (response) {
+                vm.mensajeros = response;
+            });
+        }
+
+        function cargarMensajerosAusentes() {
+            vm.texto = 'Mensajeros Ausentes';
+            vm.mensajeros = [];
+            var campos = 'fotografia,condicion,direccion,nombre,apellidos,telefonos,email,vehiculo,cedula,id';
+            Restangular.service('mensajeros?fields=' + campos, Restangular.one('empresas', authService.currentUser().id)).getList({condicion: 'ausente' }).then(function (response) {
                 vm.mensajeros = response;
             });
         }
 
         function cargarDatosUnMensajero(responde) {
             vm.mensajero = responde;
+            vm.mensajero.cedula = parseInt(vm.mensajero.cedula);
+            vm.mensajero.telefonos = parseInt(vm.mensajero.telefonos);
+            vm.mensajero.licencia_conducion = parseInt(vm.mensajero.licencia_conducion);
+            vm.mensajero.fecha_expedicion_licencia = new Date(vm.mensajero.fecha_expedicion_licencia);
+            vm.mensajero.fecha_vencimiento_licencia = new Date(vm.mensajero.fecha_vencimiento_licencia);
+            vm.mensajero.fecha_nacimiento = new Date(vm.mensajero.fecha_nacimiento);
         }
 
         function verMensajero(mensajero) {
             vm.mensajero = mensajero;
-            vm.mensajero.cedula = parseInt(vm.mensajero.cedula)
-            vm.mensajero.telefonos = parseInt(vm.mensajero.telefonos)
+            vm.mensajero.cedula = parseInt(vm.mensajero.cedula);
+            vm.mensajero.telefonos = parseInt(vm.mensajero.telefonos);
             $('#verMensajero').modal('show');
         }
 
@@ -86,19 +104,22 @@
             vm.m = mensajero;
             swal({
                 title: "ESTAS SEGURO?",
-                text: "Estas intentando bloquear al mensajero " + mensajero.nombre + ' ' + mensajero.apellidos,
+                text: "Estas intentando sancionar al mensajero " + mensajero.nombre + ' ' + mensajero.apellidos,
                 type: "info",
                 showCancelButton: true,
-                cancelButtonText: 'Cancelar',
+                cancelButtonText: 'No',
                 confirmButtonText: 'Si',
                 closeOnConfirm: false,
                 showLoaderOnConfirm: true,
             }, function () {
                 setTimeout(function () {
-                    var mensjaero = Restangular.one('mensajeros/' + vm.m.id + '/estado');
-                    mensjaero.activo = 2;
+                    var mensjaero = Restangular.one('mensajeros/' + vm.m.id + '/condicion');
+                    mensjaero.condicion = 'sancionado';
                     mensjaero.put().then(function (response) {
-                        swal(response.nombre + ' ' + response.apellidos + ' bloqueado correctamente');
+                        console.log(response)
+                        $('#verMensajero').modal('toggle');
+                        // swal(response.nombre + ' ' + response.apellidos + ' sancionado correctamente');
+                        swal('Sancionado correctamente');
                         cargarDatosUnMensajero(response)
                         cargarMensajeros();
                         cargarMensajerosBloqueados();
@@ -111,19 +132,21 @@
             vm.m = mensajero;
             swal({
                 title: "ESTAS SEGURO?",
-                text: "Estas intentando desbloquear al mensajero " + mensajero.nombre + ' ' + mensajero.apellidos,
+                text: "Estas intentando quitar la sancion al mensajero " + mensajero.nombre + ' ' + mensajero.apellidos,
                 type: "info",
                 showCancelButton: true,
-                cancelButtonText: 'Cancelar',
+                cancelButtonText: 'No',
                 confirmButtonText: 'Si',
                 closeOnConfirm: false,
                 showLoaderOnConfirm: true,
             }, function () {
                 setTimeout(function () {
-                    var mensjaero = Restangular.one('mensajeros/' + vm.m.id + '/estado');
-                    mensjaero.activo = 1;
+                    var mensjaero = Restangular.one('mensajeros/' + vm.m.id + '/condicion');
+                    mensjaero.condicion = 'activo';
                     mensjaero.put().then(function (response) {
-                        swal(response.nombre + ' ' + response.apellidos + ' desbloqueado correctamente');
+                        // swal('Sancion quitada correctamente al mensajero ' +response.nombre + ' ' + response.apellidos + ' correctamente');
+                        $('#verMensajero').modal('toggle');
+                        swal('Sancion quitada correctamente al mensajero ');
                         cargarDatosUnMensajero(response)
                         cargarMensajeros();
                         cargarMensajerosActivos();
@@ -135,19 +158,38 @@
         function newMensajero() {
             vm.mensajero = {};
             $('#newMensajero').modal('show');
+            document.getElementById("image").innerHTML = ['<img class="center" id="imagenlogo" style="width:200px; height: 200px; border-radius: 50%; ng-src="http://', vm.mensajero.fotografia, '"  />'].join('');
         }
 
         function guardarMensajero(){
             gMensajero.post(vm.mensajero).then(function (response) {
                 swal('Se guardo correctamente al mensajero '+ response.nombre + ' '+ response.apellidos);
                 $('#newMensajero').modal('toggle');
+                guardarImagen(response);
                 cargarMensajeros();
-                if(response.activo == 1){
+                if(response.condicion == 'activo'){
                     cargarMensajerosActivos();
                 }else{
                     cargarMensajerosBloqueados();
                 }
             })
+        }
+
+        function guardarImagen(mensajero) {
+            console.log(mensajero)
+            console.log(vm.fotografia)
+            // console.log($scope.fileimage)
+            if (vm.fotografia) {
+                var data = new FormData();
+                data.append('fotografia', vm.fotografia);
+
+                return $http.post(
+                    'http://localhost:1337' + '/mensajeros/' + mensajero.id + '/fotografia', data,
+                    {
+                        transformRequest: angular.identity, headers: {'Content-Type': undefined}
+                    }
+                );
+            }
         }
 
         cargarMensajeros();
