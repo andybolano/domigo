@@ -117,7 +117,9 @@
                     mensjaero.condicion = 'sancionado';
                     mensjaero.put().then(function (response) {
                         console.log(response)
-                        swal(response.nombre + ' ' + response.apellidos + ' sancionado correctamente');
+                        $('#verMensajero').modal('toggle');
+                        // swal(response.nombre + ' ' + response.apellidos + ' sancionado correctamente');
+                        swal('Sancionado correctamente');
                         cargarDatosUnMensajero(response)
                         cargarMensajeros();
                         cargarMensajerosBloqueados();
@@ -142,7 +144,9 @@
                     var mensjaero = Restangular.one('mensajeros/' + vm.m.id + '/condicion');
                     mensjaero.condicion = 'activo';
                     mensjaero.put().then(function (response) {
-                        swal('Sancion quitada correctamente al mensajero ' +response.nombre + ' ' + response.apellidos + ' correctamente');
+                        // swal('Sancion quitada correctamente al mensajero ' +response.nombre + ' ' + response.apellidos + ' correctamente');
+                        $('#verMensajero').modal('toggle');
+                        swal('Sancion quitada correctamente al mensajero ');
                         cargarDatosUnMensajero(response)
                         cargarMensajeros();
                         cargarMensajerosActivos();
