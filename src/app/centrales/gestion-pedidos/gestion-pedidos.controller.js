@@ -80,8 +80,13 @@
                         'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
                     }
                 }, function (response) {
+                    var mensjaero = Restangular.one('mensajeros/' + vm.selectedMensajero.id + '/condicion');
+                    mensjaero.condicion = 'ausente';
+                    mensjaero.put().then(function (response) {
+                        cargarMensajeros();
+                    });
+                    console.log(response)
                     swal(response.data);
-
                 });
             } else {
                 swal('No ha seleccionado ninguna solicitud/mensajero para registrar el pedido')

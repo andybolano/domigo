@@ -21,27 +21,6 @@
                         </button> 
                         </span>
                     </div>
-                    <br>
-                    <h3>Nuevo Ingreso</h3><br>
-                    <form name="pagosForm">
-                        <div class="form-group">
-                            <label class=" control-label">Fecha de pago</label><br>
-                            <input ng-model="vm.mensajero.fecha_pago" type="date" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label class=" control-label">Valor</label><br>
-                            <input ng-model="vm.mensajero.valor" type="number" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label class=" control-label">Concepto:</label><br>
-                            <select ng-model="vm.mensajero.concepto" class="form-control" required>
-                                <option value="0">Planilla</option>
-                                <option value="1">Ahorro</option>
-                                <option value="2">Prestamo</option>
-                            </select>
-                        </div>
-                        <input ng-click="vm.guardarPago()" type="submit" class="btn btn-primary" value="Guardar Pago" ng-disabled="pagosForm.$invalid"/>
-                    </form>
                 </div>
             </div>
             <div class="row" ng-repeat="mensajero in vm.mensajero">
