@@ -12,6 +12,7 @@
             'ngResource',
             'ui.router',
             'ui.bootstrap',
+            'localytics.directives',
 
             'commons',
             'angular-jwt',

@@ -12,7 +12,7 @@
     function CentralMensajerosController(Restangular, authService, $http) {
         // variables privadas
         var vm = this;
-        var gMensajero = Restangular.all('/empresas/'+authService.currentUser().id+'/mensajeros')
+        var gMensajero = Restangular.all('/empresas/' + authService.currentUser().id + '/mensajeros')
         vm.variableActivos = true;
         vm.variableBloqueados = false;
         vm.fotografia = '';
@@ -74,7 +74,7 @@
             vm.texto = 'Mensajeros Ausentes';
             vm.mensajeros = [];
             var campos = 'fotografia,condicion,direccion,nombre,apellidos,telefonos,email,vehiculo,cedula,id';
-            Restangular.service('mensajeros?fields=' + campos, Restangular.one('empresas', authService.currentUser().id)).getList({condicion: 'ausente' }).then(function (response) {
+            Restangular.service('mensajeros?fields=' + campos, Restangular.one('empresas', authService.currentUser().id)).getList({condicion: 'ausente'}).then(function (response) {
                 vm.mensajeros = response;
             });
         }
@@ -105,27 +105,55 @@
             swal({
                 title: "ESTAS SEGURO?",
                 text: "Estas intentando sancionar al mensajero " + mensajero.nombre + ' ' + mensajero.apellidos,
-                type: "info",
+                type: "input",
                 showCancelButton: true,
-                cancelButtonText: 'No',
-                confirmButtonText: 'Si',
                 closeOnConfirm: false,
-                showLoaderOnConfirm: true,
-            }, function () {
-                setTimeout(function () {
-                    var mensjaero = Restangular.one('mensajeros/' + vm.m.id + '/condicion');
-                    mensjaero.condicion = 'sancionado';
-                    mensjaero.put().then(function (response) {
-                        console.log(response)
-                        $('#verMensajero').modal('toggle');
-                        // swal(response.nombre + ' ' + response.apellidos + ' sancionado correctamente');
-                        swal('Sancionado correctamente');
-                        cargarDatosUnMensajero(response)
-                        cargarMensajeros();
-                        cargarMensajerosBloqueados();
-                    });
-                }, 200);
-            })
+                animation: "slide-from-top",
+                inputPlaceholder: "Escribe aca la causa de sancion"
+            }, function (inputValue) {
+                if (inputValue === false) return false;
+                if (inputValue === "") {
+                    swal.showInputError("No has escrito nada en el campo!");
+                    return false
+                }
+                var mensjaero = Restangular.one('mensajeros/' + vm.m.id + '/condicion');
+                mensjaero.condicion = 'sancionado';
+                mensjaero.razon = inputValue;
+                mensjaero.put().then(function (response) {
+                    $('#verMensajero').modal('toggle');
+                    swal(response.nombre + ' ' + response.apellidos + ' sancionado correctamente');
+                    swal('Sancionado correctamente');
+                    cargarDatosUnMensajero(response)
+                    cargarMensajeros();
+                    cargarMensajerosBloqueados();
+                });
+
+            });
+
+            // swal({
+            //     title: "ESTAS SEGURO?",
+            //     text: "Estas intentando sancionar al mensajero " + mensajero.nombre + ' ' + mensajero.apellidos,
+            //     type: "info",
+            //     showCancelButton: true,
+            //     cancelButtonText: 'No',
+            //     confirmButtonText: 'Si',
+            //     closeOnConfirm: false,
+            //     showLoaderOnConfirm: true,
+            // }, function () {
+            //     setTimeout(function () {
+            //         var mensjaero = Restangular.one('mensajeros/' + vm.m.id + '/condicion');
+            //         mensjaero.condicion = 'sancionado';
+            //         mensjaero.put().then(function (response) {
+            //             console.log(response)
+            //             $('#verMensajero').modal('toggle');
+            //             // swal(response.nombre + ' ' + response.apellidos + ' sancionado correctamente');
+            //             swal('Sancionado correctamente');
+            //             cargarDatosUnMensajero(response)
+            //             cargarMensajeros();
+            //             cargarMensajerosBloqueados();
+            //         });
+            //     }, 200);
+            // })
         }
 
         function desbloquearMensajero(mensajero) {
@@ -161,15 +189,15 @@
             document.getElementById("image").innerHTML = ['<img class="center" id="imagenlogo" style="width:200px; height: 200px; border-radius: 50%; ng-src="http://', vm.mensajero.fotografia, '"  />'].join('');
         }
 
-        function guardarMensajero(){
+        function guardarMensajero() {
             gMensajero.post(vm.mensajero).then(function (response) {
-                swal('Se guardo correctamente al mensajero '+ response.nombre + ' '+ response.apellidos);
+                swal('Se guardo correctamente al mensajero ' + response.nombre + ' ' + response.apellidos);
                 $('#newMensajero').modal('toggle');
                 guardarImagen(response);
                 cargarMensajeros();
-                if(response.condicion == 'activo'){
+                if (response.condicion == 'activo') {
                     cargarMensajerosActivos();
-                }else{
+                } else {
                     cargarMensajerosBloqueados();
                 }
             })

@@ -1,3 +1,16 @@
+<style>
+    .typeahead-demo .custom-popup-wrapper {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 1000;
+        display: none;
+        background-color: #f9f9f9;
+    }
+</style>
+<script type="text/ng-template" id="customTemplate.html">
+    <a href="javascript:;" ng-bind-html="match.label | uibTypeaheadHighlight:query"></a>
+</script>
 <div class="wrapper wrapper-content animated fadeIn">
     <div class="ibox float-e-margins">
         <div class="ibox-title">
@@ -12,50 +25,94 @@
             <div class="row">
                 <div class="col-lg-9">
                     <ul class="sortable-list connectList agile-list ui-sortable" id="inprogress">
-                        <li style="border:1px solid #DF1008;" class="col-lg-4" ng-repeat="pedido in vm.pedidos"
-                            ng-click="vm.selectPedido(pedido)">
-                            <h4>Solicitud # {{$index+1}}</h4>
-                            <hr>
-                            <input value="{{pedido.telefono}}" type="number"
-                                   placeholder="Telefono" id="exampleInputEmail2" class="form-control"
-                                   style="margin-top:3px;" readonly>
-
-                            <input  value="{{pedido.nombre}}" type="text" placeholder="Nombres" id="exampleInputEmail2"
-                                   class="form-control"
-                                   style="margin-top:3px;" readonly>
-                            <div class="input-group">
-                                <input  value="{{pedido.direccion}}" type="text" class="form-control"
-                                       placeholder="Origen"
-                                       style="margin-top:3px;" ng-model="vm.pedido.direccion_origen" required>
-
-                                <div class="input-group-btn">
-                                    <button ng-click="vm.cargarDirecciones('origen')" data-toggle="dropdown"
-                                            class="btn btn-primary dropdown-toggle" type="button"
-                                            aria-expanded="true"><i class="fa fa-star"></i> <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li style="padding:0;margin:0" ng-repeat="dorigen in vm.dorigens">{{dorigen}}
-                                        </li>
-                                    </ul>
+                        <li style="border:1px solid #DF1008;" class="col-lg-4"
+                            ng-repeat="cliente in vm.clientes track by $index"
+                            ng-mouseover="vm.selectPedido(cliente.cliente)">
+                            <form name="pedidoForm">
+                                <h4>Solicitud # {{$index+1}}</h4>
+                                <hr>
+                                <div>
+                                    <label>
+                                        <input ng-value="'particular'" ng-checked="cliente.cliente.tipo == 'particular'"
+                                               type="radio" name="tipoCliente" ng-model="cliente.cliente.tipo" required>
+                                        Particular
+                                    </label>
                                 </div>
-                            </div>
-                            <input type="text" placeholder="Destino" id="exampleInputEmail2" class="form-control"
-                                   style="margin-top:3px;" ng-model="vm.pedido.direccion_destino">
-                            <div style="margin-top:5px;">
-                                <small>Tipo de Servicio</small>
-                                <select class="form-control m-b" name="account" ng-model="vm.pedido.tipo" required>
-                                    <option value="1">Comida rapida ida y vuelta</option>
-                                    <option value="2">Acompanamiento de consignacion bancaria</option>
-                                    <option value="3">Pago de factura en banco</option>
-                                </select>
-                            </div>
-                            <button ng-click="vm.guardarPedido()" class="btn btn-danger  dim" style="margin-top:5px;margin-left:5px;" type="button"><i
-                                    class="fa fa-check"></i>Registrar
-                            </button>
+                                <div>
+                                    <label>
+                                        <input ng-value="'empresa'" ng-checked="cliente.cliente.tipo != 'particular'"
+                                               type="radio" name="tipoCliente" ng-model="cliente.cliente.tipo" required>
+                                        Empresa
+                                    </label>
+                                </div>
+
+                                <input ng-min="0" value="{{cliente.cliente.telefono }}" type="number"
+                                       placeholder="Telefono" id="exampleInputEmail2" class="form-control"
+                                       style="margin-top:3px;" ng-model="cliente.cliente.telefono" required>
+
+                                <input value="{{cliente.cliente.nombre}}" type="text" placeholder="Nombres"
+                                       id="exampleInputEmail2"
+                                       class="form-control"
+                                       ng-model="cliente.cliente.nombre" style="margin-top:3px;" required>
+
+
+                                <div class="input-group">
+                                    <input class="form-control" style="margin-top: 3px" type="text"
+                                           ng-model="cliente.direccion_origen"
+                                           placeholder="Direccion de origen"
+                                           uib-typeahead="direccion for direccion in vm.dorigens | filter:$viewValue"
+                                           typeahead-template-url="customTemplate.html"
+                                           typeahead-show-hint="true" typeahead-min-length="0"
+                                           ng-init="vm.cargarDireccionesOrigen(cliente.cliente.id, 'origen')" required>
+
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary" style="margin-top: 3px">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+
+
+                                <div class="input-group">
+                                    <input style="margin-top: 3px" type="text" ng-model="cliente.direccion_destino"
+                                           placeholder="Direccion de destino"
+                                           uib-typeahead="direccion for direccion in vm.ddestinos | filter:$viewValue"
+                                           typeahead-template-url="customTemplate.html" class="form-control"
+                                           typeahead-show-hint="true" typeahead-min-length="0"
+                                           ng-init="vm.cargarDireccionesDestino(cliente.cliente.id, 'destino')"
+                                           required>
+
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary" style="margin-top: 3px">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+
+                                <div style="margin-top:3px;">
+                                    <small>Tipo de Servicio</small>
+                                    <select class="form-control m-b" name="account" ng-model="cliente.tipo" required>
+                                        <option value="" disabled>Selecciona el tipo del servicio</option>
+                                        <option value="1">Comida rapida ida y vuelta</option>
+                                        <option value="2">Acompanamiento de consignacion bancaria</option>
+                                        <option value="3">Pago de factura en banco</option>
+                                    </select>
+                                </div>
+
+                                <input type="text"
+                                       placeholder="Descripcion del pedido" class="form-control"
+                                       style="margin-top:3px;" ng-model="cliente.descripcion" required>
+
+                                <div style="text-align: center">
+                                    <button ng-disabled="pedidoForm.$invalid" ng-click="vm.guardarPedido($index)"
+                                            class="btn btn-danger  dim"
+                                            style="margin-top:5px;margin-left:5px; text-align: center" type="submit"><i
+                                            class="fa fa-check"></i>Registrar
+                                    </button>
+                                </div>
+                            </form>
                         </li>
                     </ul>
-
-
                 </div>
                 <div class="col-lg-3">
                     <h4>Mensajeros Disponibles</h4>
@@ -69,7 +126,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="mensajero in vm.mensajeros">
+                        <tr ng-repeat="mensajero in vm.mensajeros | orderBy : 'nombre'">
                             <td></td>
                             <td>{{mensajero.nombre}}</td>
                             <td>{{mensajero.telefonos[0]}}</td>
