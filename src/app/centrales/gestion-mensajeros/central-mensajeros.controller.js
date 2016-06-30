@@ -129,31 +129,6 @@
                 });
 
             });
-
-            // swal({
-            //     title: "ESTAS SEGURO?",
-            //     text: "Estas intentando sancionar al mensajero " + mensajero.nombre + ' ' + mensajero.apellidos,
-            //     type: "info",
-            //     showCancelButton: true,
-            //     cancelButtonText: 'No',
-            //     confirmButtonText: 'Si',
-            //     closeOnConfirm: false,
-            //     showLoaderOnConfirm: true,
-            // }, function () {
-            //     setTimeout(function () {
-            //         var mensjaero = Restangular.one('mensajeros/' + vm.m.id + '/condicion');
-            //         mensjaero.condicion = 'sancionado';
-            //         mensjaero.put().then(function (response) {
-            //             console.log(response)
-            //             $('#verMensajero').modal('toggle');
-            //             // swal(response.nombre + ' ' + response.apellidos + ' sancionado correctamente');
-            //             swal('Sancionado correctamente');
-            //             cargarDatosUnMensajero(response)
-            //             cargarMensajeros();
-            //             cargarMensajerosBloqueados();
-            //         });
-            //     }, 200);
-            // })
         }
 
         function desbloquearMensajero(mensajero) {
@@ -186,7 +161,7 @@
         function newMensajero() {
             vm.mensajero = {};
             $('#newMensajero').modal('show');
-            document.getElementById("image").innerHTML = ['<img class="center" id="imagenlogo" style="width:200px; height: 200px; border-radius: 50%; ng-src="http://', vm.mensajero.fotografia, '"  />'].join('');
+            document.getElementById("image").innerHTML = ['<img class="center" id="imagenlogo" style="width:200px; height: 200px; border-radius: 50%; ng-src="http://api.domigo.co/images/mensajeros/', vm.mensajero.fotografia, '"  />'].join('');
         }
 
         function guardarMensajero() {
