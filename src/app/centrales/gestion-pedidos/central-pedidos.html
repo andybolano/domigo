@@ -29,6 +29,13 @@
                             ng-repeat="cliente in vm.clientes track by $index"
                             ng-mouseover="vm.selectPedido(cliente.cliente)">
                             <form name="pedidoForm">
+                                <div style="float: right; margin-top: -15px">
+                                    <button ng-click="vm.removePedido($index)"
+                                            class="btn btn-danger  dim"
+                                            style="margin-top:5px;margin-left:5px; text-align: center" type="button"><i
+                                            class="fa fa-close"></i>
+                                    </button>
+                                </div>
                                 <h4>Solicitud # {{$index+1}}</h4>
                                 <hr>
                                 <div>

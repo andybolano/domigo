@@ -4,7 +4,7 @@
     angular
         .module('domigo')
         .config(routerConfig)
-        .constant('API', 'http://api.domigo.co');
+        .constant('API', 'http://localhost:1337');
 
     /** @ngInject */
     function routerConfig($stateProvider, $urlRouterProvider, RestangularProvider, jwtInterceptorProvider, $httpProvider) {

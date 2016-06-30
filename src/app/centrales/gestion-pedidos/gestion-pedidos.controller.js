@@ -18,6 +18,7 @@
         vm.cargarDireccionesOrigen = cargarDireccionesOrigen;
         vm.cargarDireccionesDestino = cargarDireccionesDestino;
         vm.guardarPedido = guardarPedido;
+        vm.removePedido = removePedido;
 
         // variables publicas
         vm.dorigens = [];
@@ -97,6 +98,25 @@
             } else {
                 swal('No ha seleccionado ninguna mensajero para registrar el pedido')
             }
+        }
+
+        function removePedido(index) {
+            var pedido = vm.clientes[index];
+            swal({
+                title: "Estas seguro?",
+                text: "Estas intentando eliminar un pedido!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                cancelButtonText: "No",
+                confirmButtonText: "Si",
+                closeOnConfirm: false
+            }, function () {
+                vm.clientes.splice(index, 1);
+                sessionStorage.setItem('pedidos', JSON.stringify(vm.clientes));
+                swal("Eliminado!", "Has eliminado el pedido correctamente.", "success");
+            });
+
         }
 
         cargarMensajeros();

@@ -43,7 +43,7 @@
             if (rol == 'SUPER_ADM') {
                 $state.go('app.admin-centrales');
             } else if (rol == 'EMPRESA') {
-                $state.go('app.central-mensajeros');
+                $state.go('app.gestion-pedidos');
             }else if(rol == 'MENSAJERO'){
                 vm.mensajeError = 'Este usuario no tiene autorizacion para acceder al sistema del administrador, por favor comuniquese con soporte';
             }

@@ -7,7 +7,7 @@
 
     angular
         .module('app.central', [
-        	'app.central_home',
+        	// 'app.central_home',
         	'app.central_pedidos',
             'app.central_mensajeros',         
             'app.central_pagos'

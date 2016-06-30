@@ -55,7 +55,7 @@
         function cargarMensajerosActivos() {
             vm.texto = 'Mensajeros Activos';
             vm.mensajeros = [];
-            var campos = 'fotografia,condicion,direccion,nombre,apellidos,telefonos,email,vehiculo,cedula,id';
+            var campos = 'n_domicilios_exitosos,n_domicilios_rechazados,fotografia,condicion,direccion,nombre,apellidos,telefonos,email,vehiculo,cedula,id';
             Restangular.service('mensajeros?fields=' + campos, Restangular.one('empresas', authService.currentUser().empresa.id)).getList({condicion: 'activo'}).then(function (response) {
                 vm.mensajeros = response;
             });
@@ -64,7 +64,7 @@
         function cargarMensajerosBloqueados() {
             vm.texto = 'Mensajeros Sancionados';
             vm.mensajeros = [];
-            var campos = 'fotografia,condicion,direccion,nombre,apellidos,telefonos,email,vehiculo,cedula,id';
+            var campos = 'n_domicilios_exitosos,n_domicilios_rechazados,fotografia,condicion,direccion,nombre,apellidos,telefonos,email,vehiculo,cedula,id';
             Restangular.service('mensajeros?fields=' + campos, Restangular.one('empresas', authService.currentUser().empresa.id)).getList({condicion: 'sancionado'}).then(function (response) {
                 vm.mensajeros = response;
             });
@@ -73,7 +73,7 @@
         function cargarMensajerosAusentes() {
             vm.texto = 'Mensajeros Ausentes';
             vm.mensajeros = [];
-            var campos = 'fotografia,condicion,direccion,nombre,apellidos,telefonos,email,vehiculo,cedula,id';
+            var campos = 'n_domicilios_exitosos,n_domicilios_rechazados,fotografia,condicion,direccion,nombre,apellidos,telefonos,email,vehiculo,cedula,id';
             Restangular.service('mensajeros?fields=' + campos, Restangular.one('empresas', authService.currentUser().empresa.id)).getList({condicion: 'ausente'}).then(function (response) {
                 vm.mensajeros = response;
             });
@@ -87,12 +87,19 @@
             vm.mensajero.fecha_expedicion_licencia = new Date(vm.mensajero.fecha_expedicion_licencia);
             vm.mensajero.fecha_vencimiento_licencia = new Date(vm.mensajero.fecha_vencimiento_licencia);
             vm.mensajero.fecha_nacimiento = new Date(vm.mensajero.fecha_nacimiento);
+            Restangular.service('domicilios', Restangular.one('mensajeros',responde.id)).getList({estado: 'terminado'}).then(function (response) {
+                vm.domicilios = response;
+            });
+
         }
 
         function verMensajero(mensajero) {
             vm.mensajero = mensajero;
             vm.mensajero.cedula = parseInt(vm.mensajero.cedula);
             vm.mensajero.telefonos = parseInt(vm.mensajero.telefonos);
+            Restangular.service('domicilios', Restangular.one('mensajeros',mensajero.id)).getList().then(function (response) {
+                vm.domicilios = response;
+            });
             $('#verMensajero').modal('show');
         }
 
@@ -179,9 +186,6 @@
         }
 
         function guardarImagen(mensajero) {
-            console.log(mensajero)
-            console.log(vm.fotografia)
-            // console.log($scope.fileimage)
             if (vm.fotografia) {
                 var data = new FormData();
                 data.append('fotografia', vm.fotografia);
