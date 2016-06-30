@@ -9,10 +9,10 @@
         .module('app.central_mensajeros')
         .controller('CentralMensajerosController', CentralMensajerosController);
 
-    function CentralMensajerosController(Restangular, authService, $http) {
+    function CentralMensajerosController(Restangular, authService, $http, API) {
         // variables privadas
         var vm = this;
-        var gMensajero = Restangular.all('/empresas/' + authService.currentUser().id + '/mensajeros')
+        var gMensajero = Restangular.all('/empresas/' + authService.currentUser().empresa.id + '/mensajeros')
         vm.variableActivos = true;
         vm.variableBloqueados = false;
         vm.fotografia = '';
@@ -39,7 +39,7 @@
             vm.mensajerosBloqueados = 0;
             vm.mensajerosAusentes = 0;
             var campos = 'condicion';
-            Restangular.service('mensajeros?fields=' + campos, Restangular.one('empresas', authService.currentUser().id)).getList().then(function (response) {
+            Restangular.service('mensajeros?fields=' + campos, Restangular.one('empresas', authService.currentUser().empresa.id)).getList().then(function (response) {
                 angular.forEach(response, function (m) {
                     if (m.condicion == 'activo') {
                         vm.mensajerosActivos++;
@@ -56,7 +56,7 @@
             vm.texto = 'Mensajeros Activos';
             vm.mensajeros = [];
             var campos = 'fotografia,condicion,direccion,nombre,apellidos,telefonos,email,vehiculo,cedula,id';
-            Restangular.service('mensajeros?fields=' + campos, Restangular.one('empresas', authService.currentUser().id)).getList({condicion: 'activo'}).then(function (response) {
+            Restangular.service('mensajeros?fields=' + campos, Restangular.one('empresas', authService.currentUser().empresa.id)).getList({condicion: 'activo'}).then(function (response) {
                 vm.mensajeros = response;
             });
         }
@@ -65,7 +65,7 @@
             vm.texto = 'Mensajeros Sancionados';
             vm.mensajeros = [];
             var campos = 'fotografia,condicion,direccion,nombre,apellidos,telefonos,email,vehiculo,cedula,id';
-            Restangular.service('mensajeros?fields=' + campos, Restangular.one('empresas', authService.currentUser().id)).getList({condicion: 'sancionado'}).then(function (response) {
+            Restangular.service('mensajeros?fields=' + campos, Restangular.one('empresas', authService.currentUser().empresa.id)).getList({condicion: 'sancionado'}).then(function (response) {
                 vm.mensajeros = response;
             });
         }
@@ -74,7 +74,7 @@
             vm.texto = 'Mensajeros Ausentes';
             vm.mensajeros = [];
             var campos = 'fotografia,condicion,direccion,nombre,apellidos,telefonos,email,vehiculo,cedula,id';
-            Restangular.service('mensajeros?fields=' + campos, Restangular.one('empresas', authService.currentUser().id)).getList({condicion: 'ausente'}).then(function (response) {
+            Restangular.service('mensajeros?fields=' + campos, Restangular.one('empresas', authService.currentUser().empresa.id)).getList({condicion: 'ausente'}).then(function (response) {
                 vm.mensajeros = response;
             });
         }
@@ -212,7 +212,7 @@
                 data.append('fotografia', vm.fotografia);
 
                 return $http.post(
-                    'http://localhost:1337' + '/mensajeros/' + mensajero.id + '/fotografia', data,
+                    API + '/mensajeros/' + mensajero.id + '/fotografia', data,
                     {
                         transformRequest: angular.identity, headers: {'Content-Type': undefined}
                     }

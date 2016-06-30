@@ -13,7 +13,7 @@
     /* @ngInject */
     function httpConfig(RestangularProvider) {
         // config restangular
-        RestangularProvider.setBaseUrl('http://localhost:1337/');
+        RestangularProvider.setBaseUrl('http://api.domigo.co');
         RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
             var extractedData;
             // .. to look for getList operations

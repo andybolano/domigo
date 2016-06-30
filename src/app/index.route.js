@@ -4,10 +4,11 @@
     angular
         .module('domigo')
         .config(routerConfig)
-        .constant('API', 'http://localhost:1337');
+        .constant('API', 'http://api.domigo.co');
 
     /** @ngInject */
     function routerConfig($stateProvider, $urlRouterProvider, RestangularProvider, jwtInterceptorProvider, $httpProvider) {
+        /** @ngInject */
         jwtInterceptorProvider.tokenGetter = function (jwtHelper, $http, API) {
             var jwt = sessionStorage.getItem('jwt');
             if (jwt) {
@@ -28,7 +29,7 @@
                 }
             }
         };
-
+        /** @ngInject */
         $httpProvider.interceptors.push('jwtInterceptor');
 
         $urlRouterProvider.when('', '/');

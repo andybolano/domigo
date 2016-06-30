@@ -84,7 +84,7 @@
                             <tr ng-repeat="mensajero in vm.mensajeros | filter: filtro | orderBy : 'nombre' ">
                                 <td>{{$index+1}}</td>
                                 <td>
-                                    <img ng-src="http://localhost:1337/images/mensajeros/{{mensajero.fotografia}}" class="img-circle"
+                                    <img ng-src="http://api.domigo.co/images/mensajeros/{{mensajero.fotografia}}" class="img-circle"
                                          width="40px;" height="40px">
                                 </td>
                                 <td>{{mensajero.cedula}}</td>
