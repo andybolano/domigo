@@ -23,22 +23,24 @@
         <div class="ibox-content" style="border-top:0 ">
 
             <div class="row">
-                <div class="col-lg-9">
-                    <ul class="sortable-list connectList agile-list ui-sortable" id="inprogress">
-                        <li style="border:1px solid #DF1008;" class="col-lg-4"
-                            ng-repeat="cliente in vm.clientes track by $index"
+                <div class="col-lg-10">
+                    <ul style="margin:0;padding: 0">
+                       
+                        <li style="padding: 0;margin: 0;" ng-repeat="cliente in vm.clientes track by $index"
                             ng-mouseover="vm.selectPedido(cliente.cliente)">
-                            <form name="pedidoForm">
-                                <div style="float: right; margin-top: -15px">
+                            <table style="width:100%">
+                                <tr>
+                                     <td width="3%">#{{$index+1}}</td>
+                                    <td>
                                     <button ng-click="vm.removePedido($index)"
                                             class="btn btn-danger  dim"
-                                            style="margin-top:5px;margin-left:5px; text-align: center" type="button"><i
+                                            type="button"><i
                                             class="fa fa-close"></i>
                                     </button>
-                                </div>
-                                <h4>Solicitud # {{$index+1}}</h4>
-                                <hr>
-                                <div>
+                                </td>
+                                   
+                                    <td style="width:15%">
+                                         <div>
                                     <label>
                                         <input ng-value="'particular'" ng-checked="cliente.cliente.tipo == 'particular'"
                                                type="radio" name="tipoCliente" ng-model="cliente.cliente.tipo" required>
@@ -52,21 +54,24 @@
                                         Empresa
                                     </label>
                                 </div>
-
-                                <input ng-min="0" value="{{cliente.cliente.telefono }}" type="number"
+                                    </td>
+                                    <td  width="10%">
+                                         <input ng-min="0" value="{{cliente.cliente.telefono }}" type="number"
                                        placeholder="Telefono" id="exampleInputEmail2" class="form-control"
                                        style="margin-top:3px;" ng-model="cliente.cliente.telefono" required>
-
-                                <input value="{{cliente.cliente.nombre}}" type="text" placeholder="Nombres"
+                                    </td>
+                                    <td  width="10%">
+                                         <input value="{{cliente.cliente.nombre}}" type="text" placeholder="Nombres"
                                        id="exampleInputEmail2"
                                        class="form-control"
                                        ng-model="cliente.cliente.nombre" style="margin-top:3px;" required>
-
-
-                                <div class="input-group">
+                                    </td>
+                                    <td width="15%">
+                                       
+                                <div class="input-group" style="margin-top: 5px">
                                     <input class="form-control" style="margin-top: 3px" type="text"
                                            ng-model="cliente.direccion_origen"
-                                           placeholder="Direccion de origen"
+                                           placeholder="Origen"
                                            uib-typeahead="direccion for direccion in vm.dorigens | filter:$viewValue"
                                            typeahead-template-url="customTemplate.html"
                                            typeahead-show-hint="true" typeahead-min-length="0"
@@ -78,11 +83,11 @@
                                         </button>
                                     </span>
                                 </div>
-
-
-                                <div class="input-group">
+                                    </td>
+                                    <td width="15%">
+                                         <div class="input-group" style="margin-top: 5px">
                                     <input style="margin-top: 3px" type="text" ng-model="cliente.direccion_destino"
-                                           placeholder="Direccion de destino"
+                                           placeholder="Destino"
                                            uib-typeahead="direccion for direccion in vm.ddestinos | filter:$viewValue"
                                            typeahead-template-url="customTemplate.html" class="form-control"
                                            typeahead-show-hint="true" typeahead-min-length="0"
@@ -95,49 +100,51 @@
                                         </button>
                                     </span>
                                 </div>
-
-                                <div style="margin-top:3px;">
-                                    <small>Tipo de Servicio</small>
-                                    <select class="form-control m-b" name="account" ng-model="cliente.tipo" required>
+                                    </td>
+                                    <td  width="15%">
+                                        <div style="margin-top: 20px;">
+                                        <select class="form-control m-b" name="account" ng-model="cliente.tipo" required>
                                         <option value="" disabled>Selecciona el tipo del servicio</option>
                                         <option value="1">Comida rapida ida y vuelta</option>
                                         <option value="2">Acompanamiento de consignacion bancaria</option>
                                         <option value="3">Pago de factura en banco</option>
                                     </select>
-                                </div>
-
-                                <input type="text"
-                                       placeholder="Descripcion del pedido" class="form-control"
-                                       style="margin-top:3px;" ng-model="cliente.descripcion" required>
-
-                                <div style="text-align: center">
-                                    <button ng-disabled="pedidoForm.$invalid" ng-click="vm.guardarPedido($index)"
+                                        </div>
+                                    </td> 
+                                    <td  width="10%">
+                                        <input type="text"
+                                       placeholder="Descripcion" class="form-control"
+                                       style="margin-top:6px;" ng-model="cliente.descripcion" required>
+                                    </td>
+                                    <td>
+                                        <button ng-disabled="pedidoForm.$invalid" ng-click="vm.guardarPedido($index)"
                                             class="btn btn-danger  dim"
-                                            style="margin-top:5px;margin-left:5px; text-align: center" type="submit"><i
-                                            class="fa fa-check"></i>Registrar
+                                            style="margin-top:15px;margin-left:5px; text-align: center" type="submit"><i
+                                            class="fa fa-check"></i>
                                     </button>
-                                </div>
-                            </form>
+                                    </td>
+                                </tr>
+                            </table>
                         </li>
+                      
+                   
                     </ul>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-2">
                     <h4>Mensajeros Disponibles</h4>
                     <table class="table table-striped">
                         <thead>
                         <tr>
                             <th></th>
                             <th>Nombre</th>
-                            <th>telefono</th>
-                            <th>Opcion</th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr ng-repeat="mensajero in vm.mensajeros | orderBy : 'nombre'">
                             <td></td>
                             <td>{{mensajero.nombre}}</td>
-                            <td>{{mensajero.telefonos[0]}}</td>
-                            <th><a href="javascript:;" ng-click="vm.selectMensajero(mensajero)">select</a></th>
+                            <th><a href="javascript:;" ng-click="vm.selectMensajero(mensajero)">S</a></th>
                         </tr>
                         </tbody>
                     </table>
