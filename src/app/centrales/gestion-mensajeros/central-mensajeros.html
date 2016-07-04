@@ -1,107 +1,146 @@
 <div class="wrapper wrapper-content animated fadeIn">
 
     <div class="ibox float-e-margins">
-        <div class="ibox-title ">
+        <div class="ibox-title radio-title">
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="btn-group">
-                        <button class="btn btn-primary" type="button"
-                                ng-click="vm.cargarMensajerosActivos()">Activos <span
-                                class="badge badge-warning">{{vm.mensajerosActivos}}</span></button>
-                        <button class="btn btn-white" type="button"
-                                ng-click="vm.cargarMensajerosAusentes()">Ausentes <span
-                                class="badge badge-warning">{{vm.mensajerosAusentes}}</span></button>
-                        <button class="btn btn-white" type="button"
-                                ng-click="vm.cargarMensajerosBloqueados()">Sancionados <span
-                                class="badge badge-warning">{{vm.mensajerosBloqueados}}</span></button>
-                        <!--<button class="btn btn-white" type="button">Lista Negra <span-->
-                        <!--class="badge badge-warning">0</span></button>-->
-                    </div>
+                <div class="col-lg-4">
+                <table>
+                    <tr>
+                        <td><button class="btn btn-circle btn-lg btn-green" type="button" ng-click="vm.newMensajero()"><i class="fa fa-plus"></i>
+                            </button></td>
+                            <td><h1 style="margin-left:10px;font-size:22px;">Todos los Mensajeros</h1></td>
+                    </tr>
+                </table>
+                    
                 </div>
-                <br><br><br>
-                <div class="col-lg-7">
-                    <h2>{{vm.texto}}</h2>
-                </div>
-                <!--<div class="col-lg-4">
-                    <br>
-                    <table width="80%">
-                        <tr>
-                            <td width="10%"><h5>Activos</h5></td>
-                            <td><span class="label label-success pull-left" style="margin-top: -6px;">{{vm.mensajerosActivos}}</span></td>
-
-                            <td width="10%"><h5>Inactivos</h5></td>
-                            <td><span class="label label-danger pull-left" style="margin-top: -6px;">{{vm.mensajerosInactivos}}</span></td>
-
-                            <td width="10%"><h5>Total</h5></td>
-                            <td><span class="label label-primary pull-left" style="margin-top: -6px;">{{vm.mensajerosActivos+vm.mensajerosInactivos}}</span></td>
-                        </tr>
-                    </table>
-                </div>-->
-                <div class="col-lg-3">
-                    <div class="input-group">
-                        <input type="text" placeholder="Buscador" class="input-sm form-control buscador-domigo"
-                               ng-model="filtro">
-                        <span class="input-group-btn">
-                        <button type="button" class="btn btn-sm btn-primary">
-                        <i class="fa fa-search"></i>
+               
+                <div class="col-lg-2">
+                    <div class="input-group" style="margin-top:5px;">
+                  <span class="input-group-btn">
+                        <button type="button" class="btn btn-sm btn-buscador" >
+                        <i class="fa fa-search" style="color:#DF1008"></i>
                         </button> 
                         </span>
+                        <input type="text" placeholder="Buscador" class="input-sm form-control buscador-domigo"
+                               ng-model="filtro">
+                       
                     </div>
                 </div>
-                <div class="col-lg-1">
-                    <button type="button" class="btn btn-sm btn-primary" ng-click="vm.newMensajero()">
-                        <i class="fa fa-plus"></i> Mensajero
-                    </button>
+                <div class="col-lg-4" style="text-align:right;">
+                   
+                        <button class="btn" type="button"
+                                ng-click="vm.cargarMensajerosActivos()" style="border-radius:20px;color:#FFF;background-color:#558b2f">{{vm.mensajerosActivos}} Activos</button>
+                        <button class="btn" type="button"
+                                ng-click="vm.cargarMensajerosAusentes()" style="border-radius:20px;color:#FFF;background-color:#ef6c00">{{vm.mensajerosAusentes}} Ausentes</button>
+                        <button class="btn" type="button"
+                                ng-click="vm.cargarMensajerosBloqueados()" style="border-radius:20px;color:#FFF;background-color:#DF1008">{{vm.mensajerosBloqueados}} Sancionados </button>
+                      
+                   
                 </div>
+
+               <div class="col-lg-2" style="text-align:center;color:#DF1008">
+                <i class="fa fa-star"></i>
+                MENSAJEROS<BR>
+                DESTACADOS
+                </div>
+
 
 
             </div>
-            <div class="hr-line-dashed"></div>
+
+                <div style="border:1px solid #DF1008;" class="col-lg-10"></div>
 
         </div>
-        <div class="ibox-content " style="border-top:0 ">
+        <div class="ibox-content radio-body" style="border-top:0 ">
             <div class="row">
-                <div class="col-lg-12">
-                    <div ng-if="vm.mensajeros.length <= 0" style="text-align: center">
-                        <h2>No se registran mensajeros en esta seccion</h2>
+                <div class="col-lg-10">
+                    <div ng-if="vm.mensajeros.length <= 0" style="text-align:center">
+                    <i class="material-icons" style="color:#e0e0e0;font-size:200px;">motorcycle</i><br>
+                        <h2 style="font-size:24px;color:#e0e0e0;font-weight:600;"">No se registran mensajeros en esta sección</h2>
                     </div>
                     <div ng-if="vm.mensajeros.length > 0">
-                        <table id="mensajerosTable" class="table" dt-options="vm.dtOptions">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <td></td>
-                                <th>Cedula</th>
-                                <th>Nombre</th>
-                                <th>Telefono</th>
-                                <th>Email</th>
-                                <th>Direccion</th>
-                                <th>Placa</th>
-                                <th>Opciones</th>
-                            </tr>
-                            </thead>
+                        <table id="mensajerosTable" class="table table-hover" dt-options="vm.dtOptions" style="font-weight:400;zoom:95%">
                             <tbody>
-                            <tr ng-repeat="mensajero in vm.mensajeros | filter: filtro | orderBy : 'nombre' ">
-                                <td>{{$index+1}}</td>
+<tr ng-repeat="mensajero in vm.mensajeros | filter: filtro | orderBy : 'nombre' ">
                                 <td>
                                     <img ng-src="http://localhost:1337/images/mensajeros/{{mensajero.fotografia}}" class="img-circle"
                                          width="40px;" height="40px">
                                 </td>
-                                <td>{{mensajero.cedula}}</td>
-                                <td>{{mensajero.nombre}} {{mensajero.apellidos}}</td>
-                                <td>{{mensajero.telefonos[0]}}</td>
-                                <td>{{mensajero.email}}</td>
-                                <td>{{mensajero.direccion}}</td>
-                                <td>{{mensajero.vehiculo}}</td>
-                                <td>
-                                    <button ng-click="vm.verMensajero(mensajero)"
-                                            class="btn btn-sm btn-outline btn-success  dim" type="button"><i
-                                            class="fa fa-eye"></i></button>
+                                <td width="10%;">{{mensajero.cedula}}</td>
+                                <td style="font-size:14px" width="20%;">{{mensajero.nombre}} {{mensajero.apellidos}}</td>
+                                <td><i class="material-icons" style="color:#DF1008;margin:0">call</i> {{mensajero.telefonos[0]}}</td>
+                                <td><i class="material-icons" style="color:#DF1008">email</i> {{mensajero.email}}</td>
+                                <td width="15%"><i class="material-icons" style="color:#DF1008">motorcycle</i> <span style="text-transform:uppercase"> {{mensajero.vehiculo}}</span></td>
+                                <td style="zoom:80%" width="15%">
+                                <button class="btn btn-circle btn-lg btn-green" type="button" ng-click="vm.verMensajero(mensajero)" style="padding:0;background-color:#ef6c00 "><i class="fa fa-eye"></i>
+                            </button>
+                            <button class="btn btn-circle btn-lg btn-green" type="button" ng-click="vm.verMensajero(mensajero)" style="padding:0;background-color:#558b2f "><i class="fa fa-pencil"></i>
+                            </button>
+
+                              
                                 </td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
+                </div>
+                <div class="col-lg-2" style="border-left:2px solid #DF1008">
+                        <div class="widget-head-color-box bg-domigo p-lg text-center" style="border-top-left-radius:20px;border-top-right-radius:20px">
+                            <div class="m-b-md">
+                                <h2 class="font-bold no-margins text-white">
+                                    {{vm.mensajero.nombre}} {{vm.mensajero.apellidos}}
+                                </h2>
+                                <small class="text-white">Mensajero</small>
+                            </div>
+                            <img  style="height: 60px; width: 60px" ng-src="http://localhost:1337/images/mensajeros/{{vm.mensajero.fotografia}}" class="img-circle  m-b-md"
+                                 alt="profile">
+                            <div class="text-white">
+                                <span>Calificacion</span>
+                                <span>80%</span><br>
+                                <div ng-if="vm.mensajero.condicion == 'ausente'" class="badge badge-danger">INACTIVO
+                                </div>
+                                <div ng-if="vm.mensajero.condicion == 'activo'" class="badge badge-primary">ACTIVO</div>
+                                <div ng-if="vm.mensajero.condicion == 'sancionado'" class="badge badge-warning">
+                                    SANCIONADO
+                                </div>
+                            </div>
+                        </div>
+                        <div class="widget-text-box" style="background-color:#e0e0e0;border-bottom-left-radius:20px;border-bottom-right-radius:20px">
+                        <div class="row">
+                        <div class="col-lg-12">
+                        </div>
+                        </div>
+                        </div>
+
+
+                         <div class="widget-head-color-box bg-domigo p-lg text-center" style="border-top-left-radius:20px;border-top-right-radius:20px">
+                            <div class="m-b-md">
+                                <h2 class="font-bold no-margins text-white">
+                                    {{vm.mensajero.nombre}} {{vm.mensajero.apellidos}}
+                                </h2>
+                                <small class="text-white">Mensajero</small>
+                            </div>
+                            <img  style="height: 60px; width: 60px" ng-src="http://localhost:1337/images/mensajeros/{{vm.mensajero.fotografia}}" class="img-circle  m-b-md"
+                                 alt="profile">
+                            <div class="text-white">
+                                <span>Calificacion</span>
+                                <span>80%</span><br>
+                                <div ng-if="vm.mensajero.condicion == 'ausente'" class="badge badge-danger">INACTIVO
+                                </div>
+                                <div ng-if="vm.mensajero.condicion == 'activo'" class="badge badge-primary">ACTIVO</div>
+                                <div ng-if="vm.mensajero.condicion == 'sancionado'" class="badge badge-warning">
+                                    SANCIONADO
+                                </div>
+                            </div>
+                        </div>
+                        <div class="widget-text-box" style="background-color:#e0e0e0;border-bottom-left-radius:20px;border-bottom-right-radius:20px">
+                        <div class="row">
+                        <div class="col-lg-12">
+                        </div>
+                        </div>
+                        </div>
+
+
                 </div>
             </div>
         </div>
@@ -109,58 +148,78 @@
 </div>
 
 <div id="newMensajero" class="modal inmodal in face" role="dialog">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg" style="min-width:95%; zoom:90%;border-radius:20px;">
         <form name="mensajeroForm" novalidate>
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2>Registro de Mensajero</h2>
+            <div class="modal-content" style="border-radius:20px;">
+                <div class="modal-header" style="padding:15px;text-align:left">
+                    <h3 style="font-weight:400;color:#B71C1C;">Registra los datos personales de tu mensajero</h3>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" style="border-radius:20px;">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <table>
+                        <tr>
+                        <td style="zoom:80%"><button class="btn btn-circle btn-lg " type="button" style="margin-top:5px;background-color:transparent;border:2px solid #B71C1C;"><i class="fa fa-star" style="color:#DF1008"></i>
+                       </button></td><td><h3 style="font-weight:400;color:#B71C1C;margin-top:15px;margin-left:10px;">Perfil</h3></td>
+                       </tr>
+                       </table>
+                    </div>
+                    <div class="col-lg-4" style="text-align:right;">
+                        <h3 style="font-weight:400;color:#B71C1C;margin-top:15px;margin-left:10px;">* Todos los campos son obligatorios</h3>
+                    </div>
+                </div>
+                <br>
                     <div class="row">
+
                         <div class="col-lg-4">
-                            <div class="form-group">
-                                <label class=" control-label">Cedula:</label><br>
+                        
+                 
+                            <div class="form-group ">
                                 <input ng-model="vm.mensajero.cedula" name="cedula" type="number" min="0"
                                        class="form-control"
-                                       ng-model-options="{ updateOn: 'blur' }" required>
+                                       ng-model-options="{ updateOn: 'blur' }" required placeholder="Cedula" style="border:0;border-bottom:1px solid #e0e0e0;background-color:transparent">
                                 <div class="messages"
                                      ng-show="mensajeroForm.$submitted || mensajeroForm.cedula.$touched">
                                     <span ng-show="mensajeroForm.cedula.$error.required">El campo es obligatorio.</span>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label">Nombres:</label><br>
+                          
+                            <div class="form-group col-lg-6">
                                 <input name="nombres" ng-model="vm.mensajero.nombre" type="text" class="form-control"
-                                       ng-model-options="{ updateOn: 'blur' }" required>
+                                       ng-model-options="{ updateOn: 'blur' }" placeholder="Nombres" required style="border:0;border-bottom:1px solid #e0e0e0;background-color:transparent">
                                 <div class="messages"
                                      ng-show="mensajeroForm.$submitted || mensajeroForm.nombres.$touched">
                                     <span ng-show="mensajeroForm.nombres.$error.required">El campo es obligatorio.</span>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class=" control-label">Apellidos:</label><br>
+                         
+                            <div class="form-group col-lg-6">
+                     
                                 <input name="apellidos" ng-model="vm.mensajero.apellidos" type="text"
                                        class="form-control"
-                                       ng-model-options="{ updateOn: 'blur' }" required>
+                                       ng-model-options="{ updateOn: 'blur' }" placeholder="Apellidos" required style="border:0;border-bottom:1px solid #e0e0e0;background-color:transparent">
                                 <div class="messages"
                                      ng-show="mensajeroForm.$submitted || mensajeroForm.apellidos.$touched">
                                     <span ng-show="mensajeroForm.apellidos.$error.required">El campo es obligatorio.</span>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class=" control-label">Fecha de nacimiento:</label><br>
+                           
+                            <div class="form-group col-lg-6">
+                                <small class=" control-label" style="color:#9e9e9e">Fecha de nacimiento:</small><br>
                                 <input name="fnacimiento" ng-model="vm.mensajero.fecha_nacimiento" type="date"
                                        class="form-control"
-                                       ng-model-options="{ updateOn: 'blur' }" required>
+                                       ng-model-options="{ updateOn: 'blur' }" required style="border:0;border-bottom:1px solid #e0e0e0;background-color:transparent">
                                 <div class="messages"
                                      ng-show="mensajeroForm.$submitted || mensajeroForm.fnacimiento.$touched">
                                     <span ng-show="mensajeroForm.fnacimiento.$error.required">El campo es obligatorio.</span>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class=" control-label">Sexo:</label><br>
+                         
+                    
+                            <div class="form-group col-lg-6">
+                                <small class=" control-label" style="color:#9e9e9e">Sexo:</small><br>
                                 <select name="sexo" ng-model="vm.mensajero.sexo" class="form-control"
-                                        ng-model-options="{ updateOn: 'blur' }" required>
+                                        ng-model-options="{ updateOn: 'blur' }" required style="border:0;border-bottom:1px solid #e0e0e0;background-color:transparent">
                                     <option value="M">M</option>
                                     <option value="F">F</option>
                                 </select>
@@ -168,100 +227,136 @@
                                     <span ng-show="mensajeroForm.sexo.$error.required">El campo es obligatorio.</span>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class=" control-label">Fecha de expedicion de la licencia de
-                                    conduccion:</label><br>
-                                <input name="felicencia" ng-model="vm.mensajero.fecha_expedicion_licencia" type="date"
-                                       class="form-control" ng-model-options="{ updateOn: 'blur' }" required>
-                                <div class="messages"
-                                     ng-show="mensajeroForm.$submitted || mensajeroForm.felicencia.$touched">
-                                    <span ng-show="mensajeroForm.felicencia.$error.required">El campo es obligatorio.</span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class=" control-label">Numero de licencia:</label><br>
-                                <input name="nlicencia" ng-model="vm.mensajero.licencia_conducion" type="number"
-                                       class="form-control"
-                                       ng-model-options="{ updateOn: 'blur' }" required>
-                                <div class="messages"
-                                     ng-show="mensajeroForm.$submitted || mensajeroForm.nlicencia.$touched">
-                                    <span ng-show="mensajeroForm.nlicencia.$error.required">El campo es obligatorio.</span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class=" control-label">Placa del vehiculo:</label><br>
-                                <input name="pvehiculo" ng-model="vm.mensajero.vehiculo" type="text"
-                                       class="form-control"
-                                       ng-model-options="{ updateOn: 'blur' }" required>
-                                <div class="messages"
-                                     ng-show="mensajeroForm.$submitted || mensajeroForm.pvehiculo.$touched">
-                                    <span ng-show="mensajeroForm.pvehiculo.$error.required">El campo es obligatorio.</span>
-                                </div>
-                            </div>
-                        </div>
+                          
 
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                                <label class=" control-label">Direccion:</label><br>
+                            <div class="form-group col-lg-6">
+                 
                                 <input name="direccion" ng-model="vm.mensajero.direccion" type="text"
                                        class="form-control"
-                                       ng-model-options="{ updateOn: 'blur' }" required>
+                                       ng-model-options="{ updateOn: 'blur' }" required style="border:0;border-bottom:1px solid #e0e0e0;background-color:transparent" placeholder="Direccion">
                                 <div class="messages"
                                      ng-show="mensajeroForm.$submitted || mensajeroForm.direccion.$touched">
                                     <span ng-show="mensajeroForm.direccion.$error.required">El campo es obligatorio.</span>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class=" control-label">Barrio:</label><br>
+                            <div class="form-group col-lg-6">
+                                
                                 <input name="barrio" ng-model="vm.mensajero.barrio" type="text" class="form-control"
-                                       ng-model-options="{ updateOn: 'blur' }" required>
+                                       ng-model-options="{ updateOn: 'blur' }" required style="border:0;border-bottom:1px solid #e0e0e0;background-color:transparent" placeholder="Barrio">
                                 <div class="messages"
                                      ng-show="mensajeroForm.$submitted || mensajeroForm.barrio.$touched">
                                     <span ng-show="mensajeroForm.barrio.$error.required">El campo es obligatorio.</span>
                                 </div>
                             </div>
+                           
+                        </div>
+
+                        <div class="col-lg-4">
+                            
                             <div class="form-group">
-                                <label class="control-label">Ciudad:</label><br>
+                        
                                 <input name="ciudad" ng-model="vm.mensajero.ciudad" type="text" class="form-control"
-                                       ng-model-options="{ updateOn: 'blur' }" required>
+                                       ng-model-options="{ updateOn: 'blur' }" placeholder="Ciudad" required style="border:0;border-bottom:1px solid #e0e0e0;background-color:transparent">
                                 <div class="messages"
                                      ng-show="mensajeroForm.$submitted || mensajeroForm.ciudad.$touched">
                                     <span ng-show="mensajeroForm.ciudad.$error.required">El campo es obligatorio.</span>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class=" control-label">Telefono:</label><br>
+                              
                                 <input name="telefono" ng-model="vm.mensajero.telefonos" type="number"
                                        class="form-control"
-                                       ng-model-options="{ updateOn: 'blur' }" required>
+                                       ng-model-options="{ updateOn: 'blur' }" placeholder="Telefono" required style="border:0;border-bottom:1px solid #e0e0e0;background-color:transparent">
                                 <div class="messages"
                                      ng-show="mensajeroForm.$submitted || mensajeroForm.telefono.$touched">
                                     <span ng-show="mensajeroForm.telefono.$error.required">El campo es obligatorio.</span>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class=" control-label">Email:</label><br>
+                               
                                 <input name="email" ng-model="vm.mensajero.email" type="email" class="form-control"
-                                       ng-model-options="{ updateOn: 'blur' }" required>
+                                       ng-model-options="{ updateOn: 'blur' }" placeholder="Correo" required style="border:0;border-bottom:1px solid #e0e0e0;background-color:transparent">
                                 <div class="messages"
                                      ng-show="mensajeroForm.$submitted || mensajeroForm.email.$touched">
                                     <span ng-show="mensajeroForm.email.$error.required">El campo es obligatorio.</span>
                                     <span ng-show="mensajeroForm.email.$error.email">Formato de email incorrecto.</span>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class=" control-label">Fecha de vencimiento de la licencia de conduccion:</label><br>
+                         
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="ibox-content text-center">
+                                <div class="m-b-sm" id="image">
+                                    <img style="width: 200px; height: 200px" id="imagenlogo" alt="image" class="img-circle" src="http://localhost:1337/images/mensajeros/{{vm.mensajero.fotografia}}">
+                                </div>
+                                <div class="text-center">
+                                    <div class="col-lg-12" style="border: none">
+                                        <input id="files" uploader-model="vm.fotografia" type="file">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-lg-4">
+                        <table>
+                        <tr>
+                        <td style="zoom:80%"><button class="btn btn-circle btn-lg " type="button" style="margin-top:5px;background-color:transparent;border:2px solid #B71C1C;"><i class="fa fa-star" style="color:#DF1008"></i>
+                       </button></td><td><h3 style="font-weight:400;color:#B71C1C;margin-top:15px;margin-left:10px;">Licencia de Conducción</h3></td>
+                       </tr>
+                       </table>
+                    </div>
+                    <div class="col-lg-4" style="text-align:right;">
+                        <h3 style="font-weight:400;color:#B71C1C;margin-top:15px;margin-left:10px;">* Todos los campos son obligatorios</h3>
+                    </div>
+
+                    <div class="row">
+                    <div class="col-lg-8"> 
+                    <br>
+                     <div class="form-group col-lg-6">
+                                <small class=" control-label" style="color:#9e9e9e">Fecha de expedicion de la licencia de
+                                    conduccion:</small><br>
+                                <input name="felicencia" ng-model="vm.mensajero.fecha_expedicion_licencia" type="date"
+                                       class="form-control" ng-model-options="{ updateOn: 'blur' }" required style="border:0;border-bottom:1px solid #e0e0e0;background-color:transparent">
+                                <div class="messages"
+                                     ng-show="mensajeroForm.$submitted || mensajeroForm.felicencia.$touched">
+                                    <span ng-show="mensajeroForm.felicencia.$error.required">El campo es obligatorio.</span>
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-6">
+                    
+                                <input name="nlicencia" ng-model="vm.mensajero.licencia_conducion" type="number"
+                                       class="form-control"
+                                       ng-model-options="{ updateOn: 'blur' }" required placeholder="Numero de Licencia" style="border:0;border-bottom:1px solid #e0e0e0;background-color:transparent">
+                                <div class="messages"
+                                     ng-show="mensajeroForm.$submitted || mensajeroForm.nlicencia.$touched">
+                                    <span ng-show="mensajeroForm.nlicencia.$error.required">El campo es obligatorio.</span>
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-6">
+                               
+                                <input name="pvehiculo" ng-model="vm.mensajero.vehiculo" type="text"
+                                       class="form-control"
+                                       ng-model-options="{ updateOn: 'blur' }" required placeholder="Placa del Vehiculo" style="border:0;border-bottom:1px solid #e0e0e0;background-color:transparent">
+                                <div class="messages"
+                                     ng-show="mensajeroForm.$submitted || mensajeroForm.pvehiculo.$touched">
+                                    <span ng-show="mensajeroForm.pvehiculo.$error.required">El campo es obligatorio.</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-lg-6">
+                                <small class=" control-label" style="color:#9e9e9e">Fecha de vencimiento de la licencia de conduccion:</small><br>
                                 <input name="fvlicencia" ng-model="vm.mensajero.fecha_vencimiento_licencia" type="date"
-                                       class="form-control" ng-model-options="{ updateOn: 'blur' }" required>
+                                       class="form-control" ng-model-options="{ updateOn: 'blur' }" required style="border:0;border-bottom:1px solid #e0e0e0;background-color:transparent">
                                 <div class="messages"
                                      ng-show="mensajeroForm.$submitted || mensajeroForm.fvlicencia.$touched">
                                     <span ng-show="mensajeroForm.fvlicencia.$error.required">El campo es obligatorio.</span>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class=" control-label">Categoria de licencia:</label><br>
+                            <div class="form-group col-lg-6">
+                                <small class=" control-label" style="color:#9e9e9e">Categoria de licencia:</small><br>
                                 <select ng-model="vm.mensajero.licencia_tipo" class="form-control" name="clicencia"
-                                        required>
+                                        required style="border:0;border-bottom:1px solid #e0e0e0;background-color:transparent">
                                     <option value="A1" title="Motos con cilindrada hasta de 125 c.c.">A1</option>
                                     <option value="A2"
                                             title="Motos, motociclos y mototriciclos con cilindrada mayor a 125 c.c.">A2
@@ -286,20 +381,17 @@
                                     </div>
                                 </select>
                             </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="ibox-content text-center">
-                                <div class="m-b-sm" id="image">
-                                    <img style="width: 200px; height: 200px" id="imagenlogo" alt="image" class="img-circle" src="http://localhost:1337/images/mensajeros/{{vm.mensajero.fotografia}}">
-                                </div>
-                                <div class="text-center">
-                                    <div class="col-lg-12" style="border: none">
-                                        <input id="files" uploader-model="vm.fotografia" type="file">
-                                    </div>
-                                </div>
-                            </div>
+                    </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-8" style="text-align:right;zoom:110%">
+                    <input type="submit" class="btn " style="background-color:#689f38;color:#FFF;font-weight:600" value="Registrar Mensajero" ng-click="vm.guardarMensajero();"
+                           ng-disabled="mensajeroForm.$invalid"/>
                         </div>
                     </div>
+
+                </div>
                     <!--<div class="row">-->
                     <!--<fieldset>-->
                     <!--<legend style="text-align: center">Datos de usuario</legend>-->
@@ -334,11 +426,6 @@
                     <!--</fieldset>-->
                     <!--</div>-->
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
-                    <input type="submit" class="btn btn-primary" value="Registrar" ng-click="vm.guardarMensajero();"
-                           ng-disabled="mensajeroForm.$invalid"/>
-                </div>
             </div>
         </form>
     </div>
@@ -346,21 +433,21 @@
 
 
 <div id="verMensajero" class="modal inmodal in fade" role="dialog">
-    <div class="modal-dialog modal-lg" style="min-width:100%;">
+    <div class="modal-dialog modal-lg" style="min-width:95%;border-radius:20px;">
 
         <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-body">
+        <div class="modal-content" style="border-radius:20px;">
+            <div class="modal-body" style="zoom:90%;background-color:#FFF;border-radius:20px;">
                 <div class="row">
                     <div class="col-lg-3">
-                        <div class="widget-head-color-box bg-domigo p-lg text-center">
+                        <div class="widget-head-color-box bg-domigo p-lg text-center" style="border-top-left-radius:20px;border-top-right-radius:20px">
                             <div class="m-b-md">
                                 <h2 class="font-bold no-margins text-white">
                                     {{vm.mensajero.nombre}} {{vm.mensajero.apellidos}}
                                 </h2>
                                 <small class="text-white">Mensajero</small>
                             </div>
-                            <img  style="height: 140px; width: 140px" ng-src="http://localhost:1337/images/mensajeros/{{vm.mensajero.fotografia}}" class="img-circle circle-border m-b-md"
+                            <img  style="height: 140px; width: 140px" ng-src="http://localhost:1337/images/mensajeros/{{vm.mensajero.fotografia}}" class="img-circle  m-b-md"
                                  alt="profile">
                             <div class="text-white">
                                 <span>Calificacion</span>
@@ -373,15 +460,52 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="widget-text-box">
-                            <label style="color:#000">Cedula:</label> {{vm.mensajero.cedula}}<br>
-                            <label style="color:#000">Telefono:</label> {{vm.mensajero.telefonos}}<br>
-                            <label style="color:#000">Email:</label> {{vm.mensajero.email}}<br>
-                            <label style="color:#000">Direccion:</label> {{vm.mensajero.direccion}}<br>
-                            <label style="color:#000">Placa:</label> {{vm.mensajero.vehiculo}}<br>
-                            <br>
-                            <div class="center">
-                                <a ng-if="vm.mensajero.condicion == 'ausente'" class="btn btn-xs btn-success"
+                        <div class="widget-text-box" style="background-color:#e0e0e0;border-bottom-left-radius:20px;border-bottom-right-radius:20px">
+                        <div class="row">
+                        <div class="col-lg-6">
+                        ID: {{vm.mensajero.cedula}}
+                        </div>
+                        <div class="col-lg-6">
+                            <i class="material-icons" style="color:#DF1008;margin:0">call</i>  {{vm.mensajero.telefonos}}
+                        </div>
+                     
+                          
+                            <div class="col-lg-12" style="text-align:center"> <i class="material-icons" style="color:#DF1008;margin:0">email</i> {{vm.mensajero.email}}</div>
+                        
+                            <div class="col-lg-12" style="text-align:center;margin-top:10px;margin-bottom:20px;"> {{vm.mensajero.direccion}}</div>
+                            
+
+                            <div class="col-lg-12" style="text-align:center"><span style="color:#FFF;background-color:#424242;font-weight:300; padding:10px;margin-top:10px;margin-bottom:10px">{{vm.mensajero.vehiculo}}</span></div>
+
+                            </div>
+                        <br><br>
+                            <div class="center" style="text-align:center">
+
+                              <button ng-click="" title="Activo" 
+                                            class="btn"
+                                            type="button" style="margin-top:5px;margin-left:5px; border-radius:50%;width:40px;height:40px;background-color:#afb42b;"><i
+                                            class="fa fa-check" style="color:#FFF"></i>
+                                    </button>
+
+                                    <button ng-click="" title="Desactivar"
+                                            class="btn"
+                                            type="button" style="margin-top:5px;margin-left:5px; border-radius:50%;width:40px;height:40px;background-color:transparent;border:2px solid #b71c1c "><i
+                                            class="fa fa-exclamation" style="color:#b71c1c"></i>
+                                    </button>
+
+                                    <button ng-click="vm.bloquearMensajero(vm.mensajero)" title="Sancionar"
+                                            class="btn"
+                                            type="button" style="margin-top:5px;margin-left:5px; border-radius:50%;width:40px;height:40px;background-color:transparent;border:2px solid #e65100"><i
+                                            class="fa fa-minus" style="color:#e65100"></i>
+                                    </button>
+
+                                    <button ng-click="vm.addListaNegra()" title="Lista Negra"
+                                            class="btn"
+                                            type="button" style="margin-top:5px;margin-left:5px; border-radius:50%;width:40px;height:40px;background-color:transparent;border:2px solid #000"><i
+                                            class="fa fa-close" style="color:#000"></i>
+                                    </button>
+
+                                <!--<a ng-if="vm.mensajero.condicion == 'ausente'" class="btn btn-xs btn-success"
                                    style="text-transform:capitalize;"
                                    ng-click="">
                                     <i class="fa fa-unlock"> Activar</i>
@@ -391,7 +515,7 @@
                                    <!--ng-click="">-->
                                     <!--<i class="fa fa-lock"> Inhabilitar</i>-->
                                 <!--</a>-->
-                                <a ng-if="vm.mensajero.condicion == 'sancionado'" class="btn btn-xs btn-success"
+                              <!--  <a ng-if="vm.mensajero.condicion == 'sancionado'" class="btn btn-xs btn-success"
                                    style="text-transform:capitalize;"
                                    ng-click="vm.desbloquearMensajero(vm.mensajero)">
                                     <i class="fa fa-unlock"> Desbloquear</i>
@@ -400,10 +524,8 @@
                                    style="text-transform:capitalize;"
                                    ng-click="vm.bloquearMensajero(vm.mensajero)">
                                     <i class="fa fa-legal"> Sancionar</i>
-                                </a>
-                                <a class="btn btn-xs"
-                                   style="background-color:#00695c;color:#FFF;text-transform:capitalize;"
-                                   ng-click="vm.addListaNegra()"><i class="fa fa-trash"></i> Lista Negra</a>
+                                </a>-->
+                                
                             </div>
 
                         </div>
@@ -411,26 +533,25 @@
                     <div class="col-lg-2">
                         <div class="row">
                             <div class="col-lg-12">
-                                <div class="widget yellow-bg p-lg text-center">
+                                <div class="widget yellow-bg p-lg text-center" style="border-radius:20px;">
                                     <div class="m-b-md">
-                                        <i class="fa fa-thumbs-up fa-4x"></i>
-                                        <h1 class="m-xs">{{vm.mensajero.n_domicilios_exitosos}}</h1>
+                                        <h1 style="color:#FFF;font-size:62px; font-weight:900">{{vm.mensajero.n_domicilios_exitosos}}</h1>
                                         <h3 class="font-bold no-margins">
-                                            Exitosos
+                                            SERVICIOS EXITOSOS
                                         </h3>
-                                        <small>Servicios</small>
+                                       
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-12">
-                                <div class="widget  p-lg text-center" style="background-color:#00695C">
+                                <div class="widget  p-lg text-center" style="background-color:#00695C;border-radius:20px;">
                                     <div class="m-b-md text-white">
-                                        <i class="fa fa-thumbs-down fa-4x"></i>
-                                        <h1 class="m-xs">{{vm.mensajero.n_domicilios_rechazados}}</h1>
+                                       
+                                        <h1 style="color:#FFF;font-size:62px; font-weight:900">{{vm.mensajero.n_domicilios_rechazados}}</h1>
                                         <h3 class="font-bold no-margins">
-                                            RECHAZADOS
+                                            SERVICIOS RECHAZADOS
                                         </h3>
-                                        <small>Servicios</small>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -441,33 +562,42 @@
 
                         <div class="row">
                             <div class="col-lg-6">
-                                <h2>Historial de servicios</h2>
+                                <h1>Historial de servicios</h1>
                             </div>
-                            <div class="col-lg-4">
-                                <div class="input-group" style="margin-top:20px">
-                                    <input type="text" placeholder="Buscador"
-                                           class="input-sm form-control buscador-domigo" ng-model="filtroDomicilios">
-                        <span class="input-group-btn">
-                        <button type="button" class="btn btn-sm btn-primary">
-                        <i class="fa fa-search"></i>
-                        </button>
+                            <div class="col-lg-6" style="text-align:right">
+                            <table width="100%">
+                            <tr>
+                            <td>
+                             <div class="input-group style="margin-top:25px;">
+                  <span class="input-group-btn">
+                        <button type="button" class="btn btn-sm btn-buscador">
+                        <i class="fa fa-search" style="color:#DF1008"></i>
+                        </button> 
                         </span>
-                                </div>
+                        <input type="text" placeholder="Buscador" class="input-sm form-control buscador-domigo"
+                               ng-model="filtroDomicilios">
+                       
+                    </div>
+</td>
+<td  style="text-align:right;padding-left:20px;">
 
-                            </div>
-                            <div class="col-lg-2">
+                             
+
                                 <h2 class="badge badge-primary"
-                                    style="font-size:36px; margin-top:10px;background-color:#DF1008">{{vm.domicilios.length}}</h2>
+                                    style="font-size:24px; margin-top:15px;background-color:#DF1008">{{vm.domicilios.length}}</h2>
+                                    </td>
+                                    </tr>
+                                    </table>
                             </div>
                         </div>
                         <table class="table table-striped">
                             <thead>
-                            <td>Fecha de solicitud</td>
+                            <th>Fecha de solicitud</th>
                             <th>Fecha de entrega</th>
                             <th>Origen</th>
                             <th>Destino</th>
                             <th>Tipo Servicio</th>
-                            <td>estado</td>
+                            <th>estado</th>
                             </thead>
                             <tbody>
                             <tr ng-repeat="domicilio in vm.domicilios | filter : filtroDomicilios">
@@ -478,6 +608,21 @@
                                 <td>{{domicilio.tipo}}</td>
                                 <td><span class="badge badge-primary bg-domigo">{{domicilio.estado}}</span></td>
                             </tr>
+                            <tr ng-if="vm.domicilios.lenght == 0">
+                              
+                                <table align="center" style="margin-top:40px;">
+                                        <tr>
+                                          <td style="text-align:center">
+                                      
+                                          <i class="material-icons" style="font-size:120px;color:#E0E0E0;margin-left:40%">chat-bubble</i> 
+                                  
+                                          <div style="font-size:24px;color:#e0e0e0;font-weight:600">
+                                            Aùn no tienes servicios registrados <span style="color:#DF1008">:(</span>
+                                            </div>
+                                            
+                                          </td>
+                                        </tr>
+                             </table>
                             </tbody>
                         </table>
                     </div>
@@ -495,6 +640,9 @@
 
 <script>
     $(document).ready(function () {
+
+        $('#ui').css("background-color","#e0e0e0");
+        $("#page-wrapper").css("background-color","#e0e0e0");
         function archivo(evt) {
             var files = evt.target.files; // FileList object
 

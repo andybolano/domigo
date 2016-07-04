@@ -19,7 +19,7 @@
         vm.cargarDireccionesDestino = cargarDireccionesDestino;
         vm.guardarPedido = guardarPedido;
         vm.removePedido = removePedido;
-
+        vm.modalDescripcion = modalDescripcion;
         // variables publicas
         vm.dorigens = [];
         vm.ddestinos = [];
@@ -36,6 +36,11 @@
 
         function selectPedido(pedido) {
             vm.selectedPedido = pedido;
+        }
+
+        function modalDescripcion(){
+           
+             $('#modalDescripcion').modal('show');
         }
 
         function selectMensajero(mensajero) {

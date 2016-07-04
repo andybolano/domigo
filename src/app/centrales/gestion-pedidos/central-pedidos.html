@@ -11,99 +11,153 @@
 <script type="text/ng-template" id="customTemplate.html">
     <a href="javascript:;" ng-bind-html="match.label | uibTypeaheadHighlight:query"></a>
 </script>
+
+
+<div id="modalDescripcion" class="modal inmodal in face" role="dialog">
+    <div class="modal-dialog " style="min-width:25%;">
+    
+            <div class="modal-content" style="border-radius:20px;">
+                <div class="modal-header" style="padding:15px;text-align:left">
+                    <h3 style="font-weight:400;color:#B71C1C;">#pedido: Nombre, telefono</h3>
+                </div>
+                <div class="modal-body" style="border-radius:20px;">
+                    <textarea
+                       placeholder="Descripcion" class="input-sm form-control buscador-domigo"
+                       style="margin-top:5px;" ng-model="cliente.descripcion" required>
+                       </textarea>
+                </div>
+           </div>
+         </div>
+     </div>
+
 <div class="wrapper wrapper-content animated fadeIn">
     <div class="ibox float-e-margins">
-        <div class="ibox-title">
+        <div class="ibox-title radio-title">
             <div class="row">
-                <div class="col-lg-12">
-                    <h1>Nuevos Pedidos</h1>
+                <div class="col-lg-1" style="text-align:right;margin-top:5px;">
+                    <i class="fa fa-dropbox icon-title"></i>
+                </div>
+                <div class="col-lg-5">
+                        <h1>Nuevos Pedidos</h1>
+                </div>
+                <div class="col-lg-4">
+                 <div class="input-group" style="margin-top:5px;">
+                  <span class="input-group-btn">
+                        <button type="button" class="btn btn-sm btn-buscador" >
+                        <i class="fa fa-search" style="color:#DF1008"></i>
+                        </button> 
+                        </span>
+                        <input type="text" placeholder="Buscador" class="input-sm form-control buscador-domigo"
+                               ng-model="filtro">
+                       
+                    </div>
+                </div>
+                <div class="col-lg-2" style="text-align:center;color:#DF1008">
+                <i class="fa fa-star"></i>
+                MENSAJEROS<BR>
+                DISPONIBLES
                 </div>
             </div>
         </div>
-        <div class="ibox-content" style="border-top:0 ">
-
+        <div class="ibox-content radio-body" style="border-top:0;" id="content">
+<!---->
             <div class="row">
-                <div class="col-lg-10">
+                <div class="col-lg-10" style="padding:0">
                     <ul style="margin:0;padding: 0">
                        
-                        <li style="padding: 0;margin: 0;" ng-repeat="cliente in vm.clientes track by $index"
-                            ng-mouseover="vm.selectPedido(cliente.cliente)">
-                            <table style="width:100%">
+                    <li style="padding: 0;margin: 0;list-style:none;zoom:90%" 
+                            ng-mouseover="vm.selectPedido(cliente.cliente)" ng-repeat="cliente in vm.clientes track by $index">
+                         
+                            <table  width="100%">
                                 <tr>
-                                     <td width="3%">#{{$index+1}}</td>
-                                    <td>
-                                    <button ng-click="vm.removePedido($index)"
-                                            class="btn btn-danger  dim"
-                                            type="button"><i
-                                            class="fa fa-close"></i>
-                                    </button>
-                                </td>
+                                     <td width="3%">{{$index+1}}</td>
+                              
                                    
-                                    <td style="width:15%">
-                                         <div>
-                                    <label>
+                                    <td style="width:10%">
+
+                                    <div class="row">
+                                      <div class="col-lg-12" style="padding:0">
+
+                                <button ng-click=""
+                                            class="btn"
+                                            type="button" style="margin-top:5px;margin-left:5px; border-radius:50%;width:40px;height:40px;background-color:transparent;border:3px solid #b71c1c"><i
+                                            class="fa fa-user" style="color:#b71c1c"></i>
+                                    </button>
+
+                                        <button  ng-click=""
+                                            class="btn "
+                                            style="margin-top:5px;margin-left:5px; border-radius:50%;width:40px;height:40px;background-color:transparent;border:3px solid #b71c1c" type="submit"><i
+                                            class="fa fa-bank" style="color:#b71c1c"></i>
+                                    </button>
+                                      </div>
+                                      
+                                    </div>
+                                    <!--
+                                <div>
+                            <label>
                                         <input ng-value="'particular'" ng-checked="cliente.cliente.tipo == 'particular'"
                                                type="radio" name="tipoCliente" ng-model="cliente.cliente.tipo" required>
-                                        Particular
+                                        P
                                     </label>
                                 </div>
                                 <div>
                                     <label>
                                         <input ng-value="'empresa'" ng-checked="cliente.cliente.tipo != 'particular'"
                                                type="radio" name="tipoCliente" ng-model="cliente.cliente.tipo" required>
-                                        Empresa
+                                        E
                                     </label>
-                                </div>
+                                </div>-->
+
+
                                     </td>
                                     <td  width="10%">
                                          <input ng-min="0" value="{{cliente.cliente.telefono }}" type="number"
-                                       placeholder="Telefono" id="exampleInputEmail2" class="form-control"
+                                       placeholder="Telefono" id="exampleInputEmail2" class="input-sm form-control buscador-domigo"
                                        style="margin-top:3px;" ng-model="cliente.cliente.telefono" required>
+
+
+
                                     </td>
-                                    <td  width="10%">
+                                    <td  width="12%">
                                          <input value="{{cliente.cliente.nombre}}" type="text" placeholder="Nombres"
                                        id="exampleInputEmail2"
-                                       class="form-control"
+                                       class="input-sm form-control buscador-domigo"
                                        ng-model="cliente.cliente.nombre" style="margin-top:3px;" required>
                                     </td>
-                                    <td width="15%">
+                                    <td width="17%">
                                        
-                                <div class="input-group" style="margin-top: 5px">
-                                    <input class="form-control" style="margin-top: 3px" type="text"
+
+                               
+
+                                    <input class="input-sm form-control buscador-domigo"  type="text"
                                            ng-model="cliente.direccion_origen"
                                            placeholder="Origen"
                                            uib-typeahead="direccion for direccion in vm.dorigens | filter:$viewValue"
                                            typeahead-template-url="customTemplate.html"
                                            typeahead-show-hint="true" typeahead-min-length="0"
-                                           ng-init="vm.cargarDireccionesOrigen(cliente.cliente.id, 'origen')" required>
+                                           ng-init="vm.cargarDireccionesOrigen(cliente.cliente.id, 'origen')" required style="margin-top: 3px;background-color:#EFEFEF !important;border:1px solid #EFEFEF">
 
-                                    <span class="input-group-btn">
-                                        <button type="button" class="btn btn-primary" style="margin-top: 3px">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </span>
-                                </div>
+                                       
+                            
                                     </td>
-                                    <td width="15%">
-                                         <div class="input-group" style="margin-top: 5px">
-                                    <input style="margin-top: 3px" type="text" ng-model="cliente.direccion_destino"
+                                    <td width="17%">
+
+
+                                    <input type="text" ng-model="cliente.direccion_destino"
                                            placeholder="Destino"
                                            uib-typeahead="direccion for direccion in vm.ddestinos | filter:$viewValue"
-                                           typeahead-template-url="customTemplate.html" class="form-control"
+                                           typeahead-template-url="customTemplate.html" class="input-sm form-control buscador-domigo"
                                            typeahead-show-hint="true" typeahead-min-length="0"
                                            ng-init="vm.cargarDireccionesDestino(cliente.cliente.id, 'destino')"
-                                           required>
+                                           required style="margin-top: 3px;background-color:#EFEFEF !important;border:1px solid #EFEFEF">
 
-                                    <span class="input-group-btn">
-                                        <button type="button" class="btn btn-primary" style="margin-top: 3px">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </span>
-                                </div>
+
+                                    
+                        
                                     </td>
                                     <td  width="15%">
-                                        <div style="margin-top: 20px;">
-                                        <select class="form-control m-b" name="account" ng-model="cliente.tipo" required>
+                                        <div style="margin-top: 5px;">
+                                        <select class="input-sm form-control buscador-domigo" name="account" ng-model="cliente.tipo" required>
                                         <option value="" disabled>Selecciona el tipo del servicio</option>
                                         <option value="1">Comida rapida ida y vuelta</option>
                                         <option value="2">Acompanamiento de consignacion bancaria</option>
@@ -111,99 +165,94 @@
                                     </select>
                                         </div>
                                     </td> 
-                                    <td  width="10%">
-                                        <input type="text"
-                                       placeholder="Descripcion" class="form-control"
-                                       style="margin-top:6px;" ng-model="cliente.descripcion" required>
+                                    <td  width="5%" style="text-align:center">
+                                    <a href="javascript:;" title="descripcion" ng-click="vm.modalDescripcion()"><i class="fa fa-comments" style="font-size:24px;color:#b71c1c"></i></a>
+                                       
                                     </td>
-                                    <td>
+                                    <td width="10">
+
+                                <button ng-click="vm.removePedido($index)"
+                                            class="btn btn-danger"
+                                            type="button" style="margin-top:5px;margin-left:5px; border-radius:50%;width:40px;height:40px;"><i
+                                            class="fa fa-close"></i>
+                                    </button>
+
                                         <button ng-disabled="pedidoForm.$invalid" ng-click="vm.guardarPedido($index)"
-                                            class="btn btn-danger  dim"
-                                            style="margin-top:15px;margin-left:5px; text-align: center" type="submit"><i
+                                            class="btn btn-green  "
+                                            style="margin-top:5px;margin-left:5px; border-radius:50%;width:40px;height:40px;" type="submit"><i
                                             class="fa fa-check"></i>
                                     </button>
+
                                     </td>
                                 </tr>
                             </table>
+                        </li>
+                        <li ng-if="vm.clientes.length == 0" style="list-style:none">
+                            <div class="row">
+                                <div class="col-lg-12" style="margin-top:15%;text-align:center">
+                                  
+                                        <table align="center">
+                                        <tr>
+                                          <td>
+                                          <i class="fa fa-dropbox icon-title" style="font-size:120px;"></i> 
+                                          </td>
+                                          <td style="font-size:24px;color:#e0e0e0;font-weight:600">
+                                            Aùn no tienes pedidos registrados <span style="color:#DF1008">:(</span>
+                                            <br>Agregar tu nuevo pedido <button class="btn btn-circle btn-lg btn-green" type="button"><i class="fa fa-plus"></i>
+                            </button>
+                                          </td>
+                                        </tr>
+                                        </table>  
+                                         
+                                </div>
+                            </div>
                         </li>
                       
                    
                     </ul>
                 </div>
-                <div class="col-lg-2">
-                    <h4>Mensajeros Disponibles</h4>
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th></th>
-                            <th>Nombre</th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
+                <div class="col-lg-2" style="padding:0;">
+                <center ng-if="vm.mensajeros.length > 0">
+                 <div style="height:80px;width:80px;border-radius:50%;background-color:#DF1008;">
+                    <center style="font-size:24px;color:#FFF;padding-top:20px;">{{vm.mensajeros.length}}</center>
+                </div>
+                </center>
+                <center ng-if="vm.mensajeros.length == 0">
+                 <div style="height:80px;width:80px;border-radius:50%;background-color:#e0e0e0;">
+                    <center style="font-size:24px;color:#FFF;padding-top:20px;">00</center>
+                </div>
+                </center>
+                <br>
+                <div style="border:2px solid #DF1008;border-radius:10px;padding:0;font-weight:100">
+                    <table class="table" ng-if="vm.mensajeros.length > 0">      
                         <tr ng-repeat="mensajero in vm.mensajeros | orderBy : 'nombre'">
-                            <td></td>
-                            <td>{{mensajero.nombre}}</td>
-                            <th><a href="javascript:;" ng-click="vm.selectMensajero(mensajero)">S</a></th>
+                            <td style="border-bottom:1px solid #e0e0e0">{{mensajero.nombre}}</td>
+                            <td style="border-bottom:1px solid #e0e0e0"><a href="javascript:;" ng-click="vm.selectMensajero(mensajero)">S</a></td>
                         </tr>
-                        </tbody>
                     </table>
+                    <table class="table" ng-if="vm.mensajeros.length == 0">      
+                        <tr>
+                            <td style="font-size:16px;color:#e0e0e0;font-weight:600;text-align:center">No tienes mensajeros disponibles</td>
+                        </tr>
+                    </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- <div class="col-lg-3">
- <div class="ibox float-e-margins">
-         <div class="ibox-title radio-title">
-             <div class="row">
-                 <div class="col-lg-12">
-                     <h3>Mensajeros</h3>
-                 </div>
-              </div>
-         </div>
-         <div class="ibox-content radio-body" style="border-top:0 ">
-             <div class="row">
-                 <ul class="sortable-list connectList agile-list ui-sortable" id="inprogress">
-                             <li class="success-element">
-                                 Nombre Mensajero
-                                     <span class="label label-success pull-right">Estado</span>
 
-                             </li>
-                             <li class="success-element">
-                                 Nombre Mensajero
-                                     <span class="label label-success pull-right">Estado</span>
 
-                             </li>
-                             <li class="success-element">
-                                 Nombre Mensajero
-                                     <span class="label label-success pull-right">Estado</span>
 
-                             </li>
-                             <li class="success-element">
-                                 Nombre Mensajero
-                                     <span class="label label-success pull-right">Estado</span>
+</div> 
 
-                             </li>
-                             <li class="success-element">
-                                 Nombre Mensajero
-                                     <span class="label label-success pull-right">Estado</span>
 
-                             </li>
-                             <li class="success-element">
-                                 Nombre Mensajero
-                                     <span class="label label-success pull-right">Estado</span>
+<script>
+var alto = $(window).height();
+$('#content').css({'min-height':alto-200+'px' });
 
-                             </li>
-                             <li class="success-element">
-                                 Nombre Mensajero
-                                     <span class="label label-success pull-right">Estado</span>
 
-                             </li>
+ $('#ui').css("background-color","#b71c1c");
+        $("#page-wrapper").css("background-color","#b71c1c");
 
-                         </ul>
-             </div>
-         </div>
-     </div>-->
-
-</div>                    
+</script>                 

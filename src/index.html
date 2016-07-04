@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app="domigo" style="background-color:#DF1008">
+<html ng-app="domigo">
 <head>
     <meta charset="utf-8">
     <title>Domigo | Admin</title>
@@ -8,6 +8,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,800,800italic,700italic' rel='stylesheet'
           type='text/css'>
+          <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -24,7 +26,7 @@
     <!-- endinject -->
     <!-- endbuild -->
 </head>
-<body ng-controller="LayoutController as main" class="pace-done bg-domigo" style="background-color:#DF1008">
+<body ng-controller="LayoutController as main" class="pace-done" style="text-transform: capitalize;color:#000;background-color:#FFF">
 <!--[if lt IE 10]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
     your browser</a> to improve your experience.</p>
@@ -53,6 +55,7 @@
 <script src="../bower_components/pace/pace.min.js"></script>
 <script src="../bower_components/slimScroll/jquery.slimscroll.min.js"></script>
 <script src="../bower_components/sails.io.js/dist/sails.io.js"></script>
+<script src="assets/js/inspinia.js"></script>
 <script src="assets/js/plugins/chosen.js"></script>
 <script src="assets/js/plugins/icheck.min.js"></script>
 <script type="text/javascript">
@@ -63,7 +66,14 @@
 
 
 <script>
+
+function menu(){
+$('body').toggleClass('mini-navbar');
+}
     $(document).ready(function () {
+
+
+
         $("body").removeClass("skin-1");
         $("body").removeClass("skin-2");
         $("body").removeClass("skin-3");
