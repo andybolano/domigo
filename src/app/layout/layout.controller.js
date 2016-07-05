@@ -10,10 +10,10 @@
         .controller('LayoutController', LayoutController);
 
 
-    function LayoutController($state) {
+    function LayoutController($state, authService) {
         var vm = this;
         vm.hoy = new Date;
-
+        vm.user = authService.currentUser();
         vm.cerrarSesion = cerrarSesion;
 
         function cerrarSesion() {
