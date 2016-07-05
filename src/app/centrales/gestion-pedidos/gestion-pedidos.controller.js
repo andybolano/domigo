@@ -9,7 +9,7 @@
         .module('app.central_pedidos')
         .controller('CentralPedidosController', CentralPedidosController);
 
-    function CentralPedidosController(Restangular, SocketcSailsService, authService, $scope) {
+    function CentralPedidosController(Restangular, SocketcSailsService, authService, $scope, $uibModal) {
         SocketcSailsService.suscribe(authService.currentUser().empresa.id);
         // variables privadas
         var vm = this;
@@ -24,6 +24,7 @@
         vm.dorigens = [];
         vm.ddestinos = [];
         vm.pedido = {};
+        vm.mensajerosS = [];
         vm.clientes = JSON.parse(sessionStorage.getItem('pedidos')) || [];
 
         io.socket.on('newCall', function (msg) {
@@ -38,13 +39,14 @@
             vm.selectedPedido = pedido;
         }
 
-        function modalDescripcion(){
-           
-             $('#modalDescripcion').modal('show');
+        function modalDescripcion() {
+
+            $('#modalDescripcion').modal('show');
         }
 
         function selectMensajero(mensajero) {
             vm.selectedMensajero = mensajero;
+            vm.selectedCantidadMensajeros(vm.selectedMensajero)
         }
 
         function cargarDireccionesOrigen(cliente_id, tipo) {
@@ -71,7 +73,7 @@
             });
         }
 
-        function cargarMensajeros() {
+        function cargarMensajerosDisponibles() {
             vm.mensajeros = [];
             var campos = 'condicion,nombre,apellidos,telefonos,cedula,id';
             Restangular.service('mensajeros?fields=' + campos, Restangular.one('empresas', authService.currentUser().empresa.id)).getList({
@@ -82,26 +84,94 @@
             });
         }
 
+        function cargarMensajerosOcupados() {
+            vm.mensajerosOcupados = [];
+            var campos = 'condicion,nombre,apellidos,telefonos,cedula,id';
+            Restangular.service('mensajeros?fields=' + campos, Restangular.one('empresas', authService.currentUser().empresa.id)).getList({
+                condicion: 'activo',
+                estado: 0
+            }).then(function (response) {
+                vm.mensajerosOcupados = response;
+            });
+        }
+
+        vm.selectedCantidadMensajeros = function (mensajero) {
+            vm.mensajerosS.push(mensajero.id);
+            console.log(vm.mensajerosS)
+        }
+
         function guardarPedido(index) {
-            if (vm.selectedMensajero && vm.selectedPedido) {
+            if (vm.selectedMensajero && vm.selectedPedido && vm.mensajerosS) {
                 var pedido = vm.clientes[index];
-                vm.pedido.mensajero = vm.selectedMensajero.id;
-                vm.pedido.empresa = authService.currentUser().empresa.id;
+                pedido.mensajeros = vm.mensajerosS;
+                pedido.empresa = authService.currentUser().empresa.id;
                 io.socket.request({
                     method: 'post',
-                    url: '/mensajeros/' + vm.selectedMensajero.id + '/domicilios',
+                    url: '/domicilios',
                     data: pedido,
                     headers: {
                         'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
                     }
                 }, function (response) {
-                    cargarMensajeros();
+                    vm.selectedMensajero = {};
+                    vm.mensajerosS = {};
+                    swal('Se registro el pedido correctamente')
                     vm.clientes.splice(index, 1);
                     sessionStorage.setItem('pedidos', JSON.stringify(vm.clientes));
-                    swal('Se registro el pedido correctamente')
+                    setTimeout(cargarMensajerosDisponibles(),2000);
+                    setTimeout(cargarMensajerosOcupados(),2000);
+
                 });
             } else {
                 swal('No ha seleccionado ninguna mensajero para registrar el pedido')
+            }
+        }
+
+        vm.selectedColorTipoIconoParticular = function ($index) {
+            if (vm.clientes[$index].cliente.tipo == 'particular') {
+                return {
+                    'color': '#64dd17',
+                }
+            } else {
+                return {
+                    'color': '#b71c1c'
+                }
+            }
+        };
+
+        vm.selectedColorTipoIconoEmpresa = function ($index) {
+            if (vm.clientes[$index].cliente.tipo == 'empresa') {
+                return {
+                    'color': '#64dd17',
+                }
+            } else {
+                return {
+                    'color': '#b71c1c'
+                }
+            }
+        }
+
+        vm.selectedColorTipoBotonParticular = function ($index) {
+            if (vm.clientes[$index].cliente.tipo == 'particular') {
+                return {
+                    'border': '3px solid #64dd17'
+                }
+            } else {
+                return {
+                    'border': '3px solid #b71c1c'
+                }
+            }
+        }
+
+        vm.selectedColorTipoBotonEmpresa = function ($index) {
+            if (vm.clientes[$index].cliente.tipo == 'empresa') {
+                return {
+                    'border': '3px solid #64dd17'
+                }
+            } else {
+                return {
+                    'border': '3px solid #b71c1c'
+                }
             }
         }
 
@@ -121,9 +191,41 @@
                 sessionStorage.setItem('pedidos', JSON.stringify(vm.clientes));
                 swal("Eliminado!", "Has eliminado el pedido correctamente.", "success");
             });
+        };
 
+        vm.agregarDescripcion = function ($index) {
+            vm.pedido = vm.clientes[$index];
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'modal-descripcion.html',
+                controller: 'modalDescripcionController',
+                resolve: {
+                    descripcion: function () {
+                        return $scope.descripcion;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (selectedItem) {
+                vm.pedido.descripcion = selectedItem
+                vm.clientes.slice(vm.pedido, 1);
+                sessionStorage.setItem('pedidos', JSON.stringify(vm.clientes));
+            }, function () {
+               console.log('Modal dismissed at: ' + new Date());
+            });
         }
 
-        cargarMensajeros();
+        vm.changeTipoCliente = function (tipo, $index) {
+            if(tipo == 'empresa'){
+                vm.clientes[$index].cliente.tipo = tipo;
+                sessionStorage.setItem('pedidos', JSON.stringify(vm.clientes));
+            }else if(tipo == 'particular'){
+                vm.clientes[$index].cliente.tipo = tipo;
+                sessionStorage.setItem('pedidos', JSON.stringify(vm.clientes));
+            }
+        };
+
+        cargarMensajerosDisponibles();
+        cargarMensajerosOcupados();
     }
 })();

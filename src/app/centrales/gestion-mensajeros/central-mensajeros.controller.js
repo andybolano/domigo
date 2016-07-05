@@ -16,6 +16,7 @@
         vm.variableActivos = true;
         vm.variableBloqueados = false;
         vm.fotografia = '';
+        vm.editMode = true;
 
         // funciones publicas
         vm.cargarMensajeros = cargarMensajeros;
@@ -24,6 +25,7 @@
         vm.cargarMensajerosAusentes = cargarMensajerosAusentes;
 
         vm.verMensajero = verMensajero;
+        vm.verMmensajero = verMmensajero;
         vm.addListaNegra = addListaNegra;
         vm.bloquearMensajero = bloquearMensajero;
         vm.desbloquearMensajero = desbloquearMensajero;
@@ -55,7 +57,8 @@
         function cargarMensajerosActivos() {
             vm.texto = 'Mensajeros Activos';
             vm.mensajeros = [];
-            var campos = 'n_domicilios_exitosos,n_domicilios_rechazados,fotografia,condicion,direccion,nombre,apellidos,telefonos,email,vehiculo,cedula,id';
+            // var campos = 'enlista_negra,n_domicilios_exitosos,n_domicilios_rechazados,fotografia,condicion,direccion,nombre,apellidos,telefonos,email,vehiculo,cedula,id';
+            var campos = 'all';
             Restangular.service('mensajeros?fields=' + campos, Restangular.one('empresas', authService.currentUser().empresa.id)).getList({condicion: 'activo'}).then(function (response) {
                 vm.mensajeros = response;
             });
@@ -64,7 +67,8 @@
         function cargarMensajerosBloqueados() {
             vm.texto = 'Mensajeros Sancionados';
             vm.mensajeros = [];
-            var campos = 'n_domicilios_exitosos,n_domicilios_rechazados,fotografia,condicion,direccion,nombre,apellidos,telefonos,email,vehiculo,cedula,id';
+            var campos = 'all';
+            // var campos = 'enlista_negra,n_domicilios_exitosos,n_domicilios_rechazados,fotografia,condicion,direccion,nombre,apellidos,telefonos,email,vehiculo,cedula,id';
             Restangular.service('mensajeros?fields=' + campos, Restangular.one('empresas', authService.currentUser().empresa.id)).getList({condicion: 'sancionado'}).then(function (response) {
                 vm.mensajeros = response;
             });
@@ -73,7 +77,8 @@
         function cargarMensajerosAusentes() {
             vm.texto = 'Mensajeros Ausentes';
             vm.mensajeros = [];
-            var campos = 'n_domicilios_exitosos,n_domicilios_rechazados,fotografia,condicion,direccion,nombre,apellidos,telefonos,email,vehiculo,cedula,id';
+            var campos = 'all';
+            // var campos = 'enlista_negra,n_domicilios_exitosos,n_domicilios_rechazados,fotografia,condicion,direccion,nombre,apellidos,telefonos,email,vehiculo,cedula,id';
             Restangular.service('mensajeros?fields=' + campos, Restangular.one('empresas', authService.currentUser().empresa.id)).getList({condicion: 'ausente'}).then(function (response) {
                 vm.mensajeros = response;
             });
@@ -87,7 +92,7 @@
             vm.mensajero.fecha_expedicion_licencia = new Date(vm.mensajero.fecha_expedicion_licencia);
             vm.mensajero.fecha_vencimiento_licencia = new Date(vm.mensajero.fecha_vencimiento_licencia);
             vm.mensajero.fecha_nacimiento = new Date(vm.mensajero.fecha_nacimiento);
-            Restangular.service('domicilios', Restangular.one('mensajeros',responde.id)).getList({estado: 'terminado'}).then(function (response) {
+            Restangular.service('domicilios', Restangular.one('mensajeros',responde.id)).getList().then(function (response) {
                 vm.domicilios = response;
             });
 
@@ -103,8 +108,35 @@
             $('#verMensajero').modal('show');
         }
 
-        function addListaNegra() {
-            $('#addListaNegra').modal('show');
+        function addListaNegra(mensajero) {
+            vm.m = mensajero;
+            swal({
+                title: "ESTAS SEGURO?",
+                text: "Estas intentando agregar a la lista negra, al mensajero " + mensajero.nombre + ' ' + mensajero.apellidos,
+                type: "input",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                animation: "slide-from-top",
+                inputPlaceholder: "Escribe aca la causa de sancion"
+            }, function (inputValue) {
+                if (inputValue === false) return false;
+                if (inputValue === "") {
+                    swal.showInputError("No has escrito nada en el campo!");
+                    return false
+                }
+                var listaNegra = Restangular.all('lista_negra');
+                var obj = {
+                    id: vm.m.id,
+                    razon: inputValue
+                }
+                listaNegra.post(obj).then(function (response) {
+                    $('#verMensajero').modal('toggle');
+                    // cargarDatosUnMensajero(response)
+                    cargarMensajeros();
+                    cargarMensajerosBloqueados();
+                    swal('Sancionado correctamente');
+                })
+            });
         }
 
         function bloquearMensajero(mensajero) {
@@ -128,13 +160,12 @@
                 mensjaero.razon = inputValue;
                 mensjaero.put().then(function (response) {
                     $('#verMensajero').modal('toggle');
-                    swal(response.nombre + ' ' + response.apellidos + ' sancionado correctamente');
+                    // swal(response.nombre + ' ' + response.apellidos + ' sancionado correctamente');
                     swal('Sancionado correctamente');
-                    cargarDatosUnMensajero(response)
+                    // cargarDatosUnMensajero(response)
                     cargarMensajeros();
                     cargarMensajerosBloqueados();
                 });
-
             });
         }
 
@@ -157,7 +188,7 @@
                         // swal('Sancion quitada correctamente al mensajero ' +response.nombre + ' ' + response.apellidos + ' correctamente');
                         $('#verMensajero').modal('toggle');
                         swal('Sancion quitada correctamente al mensajero ');
-                        cargarDatosUnMensajero(response)
+                        // cargarDatosUnMensajero(response)
                         cargarMensajeros();
                         cargarMensajerosActivos();
                     });
@@ -166,9 +197,27 @@
         }
 
         function newMensajero() {
+            vm.editMode = true;
             vm.mensajero = {};
             $('#newMensajero').modal('show');
             document.getElementById("image").innerHTML = ['<img class="center" id="imagenlogo" style="width:200px; height: 200px; border-radius: 50%; ng-src="http://api.domigo.co/images/mensajeros/', vm.mensajero.fotografia, '"  />'].join('');
+        }
+
+        function verMmensajero(mensajero){
+            vm.mensajero = mensajero;
+            vm.mensajero.cedula = parseInt(vm.mensajero.cedula);
+            vm.mensajero.telefonos = parseInt(vm.mensajero.telefonos);
+            vm.mensajero.licencia_conducion = parseInt(vm.mensajero.licencia_conducion);
+            vm.mensajero.fecha_expedicion_licencia = new Date(vm.mensajero.fecha_expedicion_licencia);
+            vm.mensajero.fecha_vencimiento_licencia = new Date(vm.mensajero.fecha_vencimiento_licencia);
+            vm.mensajero.fecha_nacimiento = new Date(vm.mensajero.fecha_nacimiento);
+            vm.editMode = false;
+            document.getElementById("image").innerHTML = ['<img class="center" id="imagenlogo" style="width:200px; height: 200px; border-radius: 50%; ng-src="http://api.domigo.co/images/mensajeros/', vm.mensajero.fotografia, '"  />'].join('');
+            $('#newMensajero').modal('show');
+        }
+
+        function modificarMensajero() {
+
         }
 
         function guardarMensajero() {

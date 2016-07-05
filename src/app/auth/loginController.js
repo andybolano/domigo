@@ -32,9 +32,17 @@
             }
 
             function error(error) {
+                vm.mensajeError = '';
+                if(error.status == 401 && error.data.code == 'E_USER_NOT_FOUND'){
+                    vm.mensajeError = 'Usuario y/o contraseña incorrectas, intentalo de nuevo';
+                }
+                if(error.status == 401 && error.data.code == 'E_INACTIVE'){
+                    swal('Tu usuario ha sido desactivado, contacta a soporte para volver a activarl0')
+                }
+                // console.log(error)
                 // document.getElementById("loading").style.display = "none";
                 // document.getElementById("btn-inicio").disabled = false;
-                vm.mensajeError = error.status == 401 ? 'Usuario y/o contraseña incorrectas, intentalo de nuevo' : 'Ha ocurrido un error inesperado';
+                // vm.mensajeError = error.status == 401 ? 'Usuario y/o contraseña incorrectas, intentalo de nuevo' : 'Ha ocurrido un error inesperado';
             }
         }
 

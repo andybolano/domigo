@@ -1,62 +1,62 @@
 <div class="wrapper wrapper-content animated fadeIn">
-  <!--  <div class="col-lg-2">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <span class="label label-success pull-right">Activas</span>
-                        <h5>Empresas</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <h1 class="no-margins">{{vm.empresasActivas}}</h1>
-                        <div class="stat-percent font-bold text-success">{{(vm.empresasActivas)/(vm.empresasActivas+vm.empresasInactivas)*100 | number: 0}}%</div>
-                        <small></small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-12">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <span class="label label-info pull-right">Inacti</span>
-                        <h5>Empresas</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <h1 class="no-margins">{{vm.empresasInactivas}}</h1>
-                        <div class="stat-percent font-bold text-info">{{(vm.empresasInactivas)/(vm.empresasActivas+vm.empresasInactivas)*100 | number: 0}}%</div>
-                        <small></small>
-                    </div>
-                </div>
-            </div>
+    <!--  <div class="col-lg-2">
+          <div class="row">
+              <div class="col-lg-12">
+                  <div class="ibox float-e-margins">
+                      <div class="ibox-title">
+                          <span class="label label-success pull-right">Activas</span>
+                          <h5>Empresas</h5>
+                      </div>
+                      <div class="ibox-content">
+                          <h1 class="no-margins">{{vm.empresasActivas}}</h1>
+                          <div class="stat-percent font-bold text-success">{{(vm.empresasActivas)/(vm.empresasActivas+vm.empresasInactivas)*100 | number: 0}}%</div>
+                          <small></small>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-lg-12">
+                  <div class="ibox float-e-margins">
+                      <div class="ibox-title">
+                          <span class="label label-info pull-right">Inacti</span>
+                          <h5>Empresas</h5>
+                      </div>
+                      <div class="ibox-content">
+                          <h1 class="no-margins">{{vm.empresasInactivas}}</h1>
+                          <div class="stat-percent font-bold text-info">{{(vm.empresasInactivas)/(vm.empresasActivas+vm.empresasInactivas)*100 | number: 0}}%</div>
+                          <small></small>
+                      </div>
+                  </div>
+              </div>
 
-            <div class="col-lg-12">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <span class="label label-success pull-right">Acti</span>
-                        <h5>Mensajeros</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <h1 class="no-margins">{{vm.mensajerosActivos}}</h1>
-                        <div class="stat-percent font-bold text-success">{{(vm.mensajerosActivos)/(vm.mensajerosActivos+vm.mensajerosInactivos)*100 | number: 0}}%</div>
-                        <small></small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-12">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <span class="label label-info pull-right">Inacti</span>
-                        <h5>Mensajeros</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <h1 class="no-margins">{{vm.mensajerosInactivos}}</h1>
-                        <div class="stat-percent font-bold text-info">{{(vm.mensajerosInactivos)/(vm.mensajerosActivos+vm.mensajerosInactivos)*100 | number: 0}}%</div>
-                        <small></small>
-                    </div>
-                </div>
-            </div>
+              <div class="col-lg-12">
+                  <div class="ibox float-e-margins">
+                      <div class="ibox-title">
+                          <span class="label label-success pull-right">Acti</span>
+                          <h5>Mensajeros</h5>
+                      </div>
+                      <div class="ibox-content">
+                          <h1 class="no-margins">{{vm.mensajerosActivos}}</h1>
+                          <div class="stat-percent font-bold text-success">{{(vm.mensajerosActivos)/(vm.mensajerosActivos+vm.mensajerosInactivos)*100 | number: 0}}%</div>
+                          <small></small>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-lg-12">
+                  <div class="ibox float-e-margins">
+                      <div class="ibox-title">
+                          <span class="label label-info pull-right">Inacti</span>
+                          <h5>Mensajeros</h5>
+                      </div>
+                      <div class="ibox-content">
+                          <h1 class="no-margins">{{vm.mensajerosInactivos}}</h1>
+                          <div class="stat-percent font-bold text-info">{{(vm.mensajerosInactivos)/(vm.mensajerosActivos+vm.mensajerosInactivos)*100 | number: 0}}%</div>
+                          <small></small>
+                      </div>
+                  </div>
+              </div>
 
-     </div>
-    </div>-->
+       </div>
+      </div>-->
 
     <div class="col-lg-12">
         <div class="ibox float-e-margin">
@@ -67,7 +67,8 @@
                     </div>
                     <div class="col-lg-3">
                         <div class="input-group">
-                       <input type="text" placeholder="Buscador" class="input-sm form-control buscador-domigo" ng-model="filtro">
+                            <input type="text" placeholder="Buscador" class="input-sm form-control buscador-domigo"
+                                   ng-model="filtro">
                         <span class="input-group-btn">
                         <button type="button" class="btn btn-sm btn-primary">
                         <i class="fa fa-search"></i>
@@ -75,7 +76,7 @@
                         </span>
                         </div>
                     </div>
-                   <div class="col-lg-2" style="text-align: right">
+                    <div class="col-lg-2" style="text-align: right">
                         <button type="button" class="btn btn-sm btn-primary" ng-click="vm.nuevaEmpresa()">
                             <i class="fa fa-plus"></i> Empresa
                         </button>
@@ -86,36 +87,41 @@
             <div class="ibox-content radio-body" style="border-top:0 ">
                 <div class="row">
                     <div class="col-lg-12">
-                        <table class="table"  dt-options="vm.dtOptions">
+                        <table class="table" dt-options="vm.dtOptions">
                             <thead>
-                                <th>Nit</th>
-                                <th>Nombre</th>
-                                <th>Telefono</th>
-                                <th>Ciudad</th>
-                                <th>Direccion</th>
-                                <th># Mensajeros</th>
-                                <th>Opciones</th>
+                            <th>Nit</th>
+                            <th>Nombre</th>
+                            <th>Telefono</th>
+                            <th>Ciudad</th>
+                            <th>Direccion</th>
+                            <th># Mensajeros</th>
+                            <th>Opciones</th>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="empresa in vm.empresas | filter : filtro" >
+                            <tr ng-repeat="empresa in vm.empresas | filter : filtro">
                                 <td>{{empresa.nit}}</td>
                                 <td>{{empresa.nombre}}</td>
                                 <td>{{empresa.telefonos[0]}}</td>
                                 <td>{{empresa.ciudad}}</td>
                                 <td>{{empresa.direccion}}</td>
-                                <td style="text-align: center"><span class="label label-warning" style="font-size:12px">{{empresa.n_mensajeros}}</span></td>
+                                <td style="text-align: center"><span class="label label-warning" style="font-size:12px">{{empresa.n_mensajeros}}</span>
+                                </td>
                                 <td>
-                                    <button ng-click="vm.verEmpresa(empresa)" type="button" class="btn btn-sm btn-success"
+                                    <button ng-click="vm.verEmpresa(empresa)" type="button"
+                                            class="btn btn-sm btn-success"
                                             title="Ver y Editar"><i
                                             class="fa fa-eye"></i></button>
-                                    <a class="btn btn-sm btn-danger" title="Ver Mensajeros"
-                                       ui-sref="app.admin-centrales-mensajeros({ id:empresa.id, nombre:empresa.nombre })"><i class="fa fa-group"></i></a>
+                                    <!--<a class="btn btn-sm btn-danger" title="Ver Mensajeros"-->
+                                       <!--ui-sref="app.admin-centrales-mensajeros({ id:empresa.id, nombre:empresa.nombre })"><i-->
+                                            <!--class="fa fa-group"></i></a>-->
                                     <button ng-if="empresa.activa == false" type="button"
-                                            class="btn btn-sm btn-primary" title="Activar"><i
-                                            class="fa fa-thumbs-down"></i></button>
+                                            ng-click="vm.activarEmpresa(empresa.id)"
+                                            class="btn btn-sm btn-primary" title="Activar">
+                                        <i class="fa fa-thumbs-down"></i></button>
                                     <button ng-if="empresa.activa == true" type="button"
-                                            class="btn btn-sm btn-warning" title="Desactivar"><i
-                                            class="fa fa-thumbs-up"></i></button>
+                                            ng-click="vm.desactivarEmpresa(empresa.id)"
+                                            class="btn btn-sm btn-warning" title="Desactivar">
+                                        <i class="fa fa-thumbs-up"></i></button>
                                 </td>
                             </tr>
                             </tbody>
@@ -145,13 +151,15 @@
                                 </div>
                                 <div class="input-group">
                                     <label>Nombre :</label>
-                                    <input type="text" ng-model="vm.empresa.nombre" class="input-sm form-control" required>
+                                    <input type="text" ng-model="vm.empresa.nombre" class="input-sm form-control"
+                                           required>
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="input-group">
                                     <label>Direccion:</label>
-                                    <input type="text" ng-model="vm.empresa.direccion" class="input-sm form-control" required>
+                                    <input type="text" ng-model="vm.empresa.direccion" class="input-sm form-control"
+                                           required>
                                 </div>
                                 <div class="input-group">
                                     <label>Ciudad:</label>
@@ -179,11 +187,13 @@
                             <div class="col-lg-4">
                                 <div class="input-group">
                                     <label>Barrio:</label>
-                                    <input type="text" ng-model="vm.empresa.barrio" class="input-sm form-control" required>
+                                    <input type="text" ng-model="vm.empresa.barrio" class="input-sm form-control"
+                                           required>
                                 </div>
                                 <div class="input-group">
                                     <label>Teléfono:</label>
-                                    <input type="text" ng-model="vm.empresa.telefonos" class="input-sm form-control" required>
+                                    <input type="text" ng-model="vm.empresa.telefonos" class="input-sm form-control"
+                                           required>
                                 </div>
                             </div>
                         </div>
@@ -191,7 +201,8 @@
                             <div class="col-lg-4">
                                 <div class="input-group">
                                     <label>Horario de atención:</label>
-                                    <input type="text" ng-model="vm.empresa.horario" class="input-sm form-control" required>
+                                    <input type="text" ng-model="vm.empresa.horario" class="input-sm form-control"
+                                           required>
                                 </div>
                             </div>
                         </div>
@@ -229,7 +240,7 @@
                         Registrar
                     </button>
                     <button ng-hide="vm.editMode" type="button" class="btn btn-primary"
-                            ng-click="vm.editarEmpresa();" ng-disabled="!empresaForm.$valid">
+                            ng-click="vm.modificarEmpresa(vm.empresa);" ng-disabled="!empresaForm.$valid">
                         Modificar
                     </button>
                 </div>

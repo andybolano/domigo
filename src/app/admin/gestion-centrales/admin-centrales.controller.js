@@ -20,6 +20,9 @@
         vm.verEmpresa = verEmpresa;
         vm.nuevaEmpresa = nuevaEmpresa;
         vm.registrarEmpresa = registrarEmpresa;
+        vm.modificarEmpresa = modificarEmpresa;
+        vm.activarEmpresa = activarEmpresa;
+        vm.desactivarEmpresa = desactivarEmpresa;
 
         vm.dtOptions = DTOptionsBuilder
             .fromSource()
@@ -85,9 +88,62 @@
             })
         }
 
+        function modificarEmpresa() {
+            var empresa = Restangular.one('empresas', vm.empresa.id);
+            empresa.put(vm.empresa).then(function (response) {
+                swal('Actualizada correctamente')
+                $('#newEmpresa').modal('hide');
+            })
+        }
+
         function limpiar() {
             vm.empresas = [];
             vm.empresa = {};
+        }
+
+        function activarEmpresa(empresa) {
+            var empresa = Restangular.one('empresas', empresa);
+            swal({
+                title: "Estas seguro?",
+                text: "Estas intentando activar nuevamente esta empresa!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                cancelButtonText: "No",
+                confirmButtonText: "Si",
+                closeOnConfirm: false
+            }, function () {
+                empresa.activa = true;
+                empresa.put().then(function (response) {
+                    swal('Activada correctamente');
+                    cargarEmpresas();
+                },function (error) {
+                    swal('Ocurrio un problema al intentar activar esta empresa')
+                })
+            });
+        }
+
+        function desactivarEmpresa(empresa) {
+            var empresa = Restangular.one('empresas', empresa);
+            swal({
+                title: "Estas seguro?",
+                text: "Estas intentando activar nuevamente esta empresa!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                cancelButtonText: "No",
+                confirmButtonText: "Si",
+                closeOnConfirm: false
+            }, function () {
+                empresa.activa = false;
+                empresa.put().then(function (response) {
+                    swal('Desactivada correctamente');
+                    cargarEmpresas();
+                },function (error) {
+                    swal('Ocurrio un problema al intentar desactivar esta empresa')
+                })
+            });
+
         }
     }
 })();

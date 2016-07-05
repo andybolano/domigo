@@ -22,7 +22,7 @@
         }
 
         function cargarMensajero() {
-            vm.pago = {}
+            vm.pago = {};
             var campos = 'fotografia,condicion,direccion,nombre,apellidos,telefonos,email,vehiculo,cedula,id';
             Restangular.service('mensajeros?fields=' + campos + '&populate=pagos', Restangular.one('empresas', authService.currentUser().empresa.id)).getList({cedula: vm.buscar}).then(function (response) {
                 if (response.length <= 0) {
@@ -37,6 +37,7 @@
 
         function guardarPago() {
             vm.pago.mensajero = vm.mensajero.id;
+            // vm.pago.empresa = authService.currentUser().empresa.id;
             io.socket.request({
                 method: 'post',
                 url: '/mensajeros/' + vm.mensajero.id + '/pagos',
@@ -45,18 +46,35 @@
                     'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
                 }
             }, function (response) {
-                cargarPagosMensajeros(response.data)
+                vm.pago = {}
+                vm.pago.fecha = new Date();
+                cargarPagosMensajeros(vm.mensajero);
+                cargarUltimosPagos();
                 swal('Pago registrado correctamente')
             });
         }
 
         function cargarPagosMensajeros(mensajero) {
+            vm.pagos = [];
             Restangular.service('pagos?populate=concepto', Restangular.one('mensajeros', mensajero.id)).getList().then(function (response) {
                 vm.pagos = response;
             });
 
         }
 
+        function cargarUltimosPagos() {
+            // var upagos = Restangular.all('empresas/'+authService.currentUser().empresa.id+'/total_ultimos_pagos');
+
+            Restangular.one('empresas/', authService.currentUser().empresa.id).customGET('total_ultimos_pagos').then(function (response) {
+                vm.ultimosPagos = response;
+            })
+            // ultimosPagos = Restangular.all('empresas/' + authService.currentUser().empresa.id + '/total_ultimos_pagos').getList();
+            // Restangular.service('total_ultimos_pagos', Restangular.one('empresas', authService.currentUser().empresa.id)).get().then(function (response) {
+            //     vm.ultimosPagos = response;
+            // });
+        }
+
+        cargarUltimosPagos();
         cargarConceptosEmpresa();
     }
 })();

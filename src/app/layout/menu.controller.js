@@ -7,9 +7,9 @@
 
     function MenuCtrl(appMenu, authService) {
         var vm = this;
-        var user = authService.currentUser();
-        if (user) {
-            vm.menu = appMenu.getOf(user.rol);
+        vm.user = authService.currentUser();
+        if (vm.user) {
+            vm.menu = appMenu.getOf(vm.user.rol);
         }
     }
 })();
