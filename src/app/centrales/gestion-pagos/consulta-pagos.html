@@ -1,0 +1,107 @@
+<div class="wrapper wrapper-content animated fadeIn">
+
+    <div class="ibox float-e-margins">
+        <div class="ibox-title radio-title">
+            <div class="row">
+                <div class="col-lg-1" style="text-align:right;margin-top:5px;">
+                    <i class="fa fa-search icon-title"></i>
+                </div>
+                <div class="col-lg-4">
+                    <h1>Consulta de pagos</h1>
+                </div>
+                <div class="col-lg-3">
+                    Desde:
+                    <div class="input-group" style="margin-top:5px;">
+                  <span class="input-group-btn">
+                        <button type="button" class="btn btn-sm btn-buscador">
+                        <i class="fa fa-calendar" style="color:#DF1008"></i>
+                        </button> 
+                        </span>
+                        <input type="date" class="input-sm form-control buscador-domigo"
+                               ng-model="vm.fechaInicio">
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    Hasta:
+                    <div class="input-group" style="margin-top:5px;">
+                  <span class="input-group-btn">
+                        <button type="button" class="btn btn-sm btn-buscador">
+                        <i class="fa fa-calendar" style="color:#DF1008"></i>
+                        </button> 
+                        </span>
+                        <input type="date" class="input-sm form-control buscador-domigo"
+                               ng-model="vm.fechaFinal">
+
+                    </div>
+                </div>
+
+                <div class="col-lg-1">
+                    <button class="btn btn-primary" style="margin-top:20px;"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="ibox-content radio-body" style="border-top:0 ">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div ng-if="vm.pagos <= 0" style="text-align: center;margin-top:20px;">
+                            <table align="center">
+                                <tr>
+                                    <td>
+                                        <i class="fa fa-money " style="font-size:120px;color:#e0e0e0"></i>
+                                    </td>
+                                    <td style="font-size:24px;color:#e0e0e0;font-weight:600">
+                                        Aun no a realizado una consulta  <span
+                                            style="color:#DF1008">:(</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div ng-if="vm.pagos != 0">
+
+                            <table class="table table-hover">
+                                <tr>
+                                    <td>#</td>
+                                    <th></th>
+                                    <th>Mensajero</th>
+                                    <th>fecha</th>
+                                    <th>Valor</th>
+                                    <th>Concepto</th>
+                                </tr>
+                                <tbody>
+                                <tr ng-repeat="pagoMensajero in vm.pagos track by $index">
+                                    <td>1</td>
+                                    <td>
+                                        <img ng-src="http://localhost:1337/images/mensajeros/{{pagoMensajero.fotografia}}"
+                                            class="img-circle "
+                                            alt="profile" width="30px" height="30px">
+                                    </td>
+                                    <td>{{pagoMensajero.mensajero.nombre}} {{pagoMensajero.mensajero.apellidos}}</td>
+                                    <td>
+                                        {{pagoMensajero.fecha}}
+                                    </td>
+                                    <td>
+                                        {{pagoMensajero.valor | currency}}
+                                    </td>
+                                    <td>
+                                        {{pagoMensajero.concepto.nombre}}
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="row">
+                                <div class="col-lg-11" style="text-align:right">
+                                    <h2>TOTAL: <span style="color:#000">{{vm.total | currency}}</span></h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('#ui').css("background-color", "#DF1008");
+    $("#page-wrapper").css("background-color", "#DF1008");
+</script>

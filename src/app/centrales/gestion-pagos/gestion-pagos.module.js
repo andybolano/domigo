@@ -21,11 +21,22 @@
                 controller: 'CentralPagosController',
                 controllerAs: 'vm'
             })
+
+            .state('app.consulta-pagos', {
+                url: '/central/pagos',
+                templateUrl: 'app/centrales/gestion-pagos/consulta-pagos.html',
+                data: {
+                    onlyAccess: 'EMPRESA'
+                },
+                controller: 'ConsultarPagosController',
+                controllerAs: 'vm'
+            })
     }
 
     function run(appMenu) {
         appMenu.addTo([
-            {nombre: 'Gestion de pagos', link: 'app.gestion-pagos', icon: 'fa fa-money'},
+            {nombre: 'Registro de pagos', link: 'app.gestion-pagos', icon: 'fa fa-money'},
+            {nombre: 'Consulta de pagos', link: 'app.consulta-pagos', icon: 'fa fa-search'},
         ], 'EMPRESA');
     }
 })();

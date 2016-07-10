@@ -344,7 +344,7 @@
                                 </div>
                                 <div class="text-center">
                                     <div class="col-lg-12" style="border: none">
-                                        <input id="files" uploader-model="vm.fotografia" type="file">
+                                        <input id="files" uploader-model="vm.fotografia" type="file" required>
                                     </div>
                                 </div>
                             </div>
@@ -472,7 +472,7 @@
 
                                 <input ng-hide="vm.editMode" type="submit" class="btn btn-primary "
                                        style="background-color:#689f38;color:#FFF;font-weight:600"
-                                       value="Modificar Mensajero" ng-click="vm.guardarMensajero();"
+                                       value="Modificar Mensajero" ng-click="vm.modificarMensajero(vm.mensajero);"
                                        ng-disabled="mensajeroForm.$invalid"/>
                             </div>
                         </div>

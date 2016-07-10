@@ -31,6 +31,7 @@
         vm.desbloquearMensajero = desbloquearMensajero;
         vm.newMensajero = newMensajero;
         vm.guardarMensajero = guardarMensajero;
+        vm.modificarMensajero = modificarMensajero;
 
         if (vm.variableActivos == true) {
             cargarMensajerosActivos();
@@ -102,6 +103,10 @@
             vm.mensajero = mensajero;
             vm.mensajero.cedula = parseInt(vm.mensajero.cedula);
             vm.mensajero.telefonos = parseInt(vm.mensajero.telefonos);
+            vm.mensajero.licencia_conducion = parseInt(vm.mensajero.licencia_conducion);
+            vm.mensajero.fecha_expedicion_licencia = new Date(vm.mensajero.fecha_expedicion_licencia);
+            vm.mensajero.fecha_vencimiento_licencia = new Date(vm.mensajero.fecha_vencimiento_licencia);
+            vm.mensajero.fecha_nacimiento = new Date(vm.mensajero.fecha_nacimiento);
             Restangular.service('domicilios', Restangular.one('mensajeros',mensajero.id)).getList().then(function (response) {
                 vm.domicilios = response;
             });
@@ -217,7 +222,33 @@
         }
 
         function modificarMensajero() {
-
+            var mensajero = Restangular.one('mensajeros', vm.mensajero.id);
+            mensajero.cedula = vm.mensajero.cedula;
+            mensajero.nombre = vm.mensajero.nombre;
+            mensajero.apellidos = vm.mensajero.apellidos;
+            mensajero.fecha_nacimiento = vm.mensajero.fecha_nacimiento;
+            mensajero.sexo = vm.mensajero.sexo;
+            mensajero.direccion = vm.mensajero.direccion;
+            mensajero.barrio = vm.mensajero.barrio;
+            mensajero.telefonos = vm.mensajero.telefonos;
+            mensajero.ciudad = vm.mensajero.ciudad;
+            mensajero.email = vm.mensajero.email;
+            mensajero.vehiculo = vm.mensajero.vehiculo;
+            mensajero.licencia_conduccion = vm.mensajero.licencia_conduccion;
+            mensajero.licencia_tipo = vm.mensajero.licencia_tipo;
+            mensajero.fecha_expedicion_licencia = vm.mensajero.fecha_expedicion_licencia;
+            mensajero.fecha_vencimiento_licencia = vm.mensajero.fecha_vencimiento_licencia;
+            mensajero.put().then(function (response) {
+                guardarImagen(response);
+                swal('Actualizado correctamente')
+                cargarMensajeros();
+                if (response.condicion == 'activo') {
+                    cargarMensajerosActivos();
+                } else {
+                    cargarMensajerosBloqueados();
+                }
+                $('#newMensajero').modal('hide');
+            })
         }
 
         function guardarMensajero() {

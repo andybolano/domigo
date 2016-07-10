@@ -12,6 +12,9 @@
     function CentralPagosController(Restangular, authService, $scope) {
         var vm = this;
         vm.buscar = '';
+        vm.total = 0;
+        vm.fechaInicio = new Date();
+        vm.fechaFinal = new Date();
         vm.cargarMensajero = cargarMensajero;
         vm.guardarPago = guardarPago;
 
@@ -56,8 +59,12 @@
 
         function cargarPagosMensajeros(mensajero) {
             vm.pagos = [];
+            vm.total = 0;
             Restangular.service('pagos?populate=concepto', Restangular.one('mensajeros', mensajero.id)).getList().then(function (response) {
                 vm.pagos = response;
+                angular.forEach(vm.pagos, function (pago) {
+                    vm.total += pago.valor;
+                })
             });
 
         }

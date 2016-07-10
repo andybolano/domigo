@@ -225,6 +225,27 @@
             }
         };
 
+        vm.colocarDisponible = function (mensajero) {
+            vm.m = mensajero;
+            swal({
+                title: "ESTAS SEGURO?",
+                text: "Estas intentando colocar disponible al mensajero " + mensajero.nombre + ' ' + mensajero.apellidos,
+                showCancelButton: true,
+                closeOnConfirm: false,
+                cancelButtonText: 'No',
+                confirmButtonText: 'Si',
+                animation: "slide-from-top",
+            }, function () {
+                var mensjaero = Restangular.one('mensajeros/' + vm.m.id + '/estado');
+                mensjaero.estado = 1;
+                mensjaero.put().then(function (response) {
+                    cargarMensajerosDisponibles();
+                    cargarMensajerosOcupados();
+                    swal('Se coloco disponible al mensajero')
+                });
+            });
+        }
+
         cargarMensajerosDisponibles();
         cargarMensajerosOcupados();
     }
