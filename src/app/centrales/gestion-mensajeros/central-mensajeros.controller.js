@@ -93,7 +93,7 @@
             vm.mensajero.fecha_expedicion_licencia = new Date(vm.mensajero.fecha_expedicion_licencia);
             vm.mensajero.fecha_vencimiento_licencia = new Date(vm.mensajero.fecha_vencimiento_licencia);
             vm.mensajero.fecha_nacimiento = new Date(vm.mensajero.fecha_nacimiento);
-            Restangular.service('domicilios', Restangular.one('mensajeros',responde.id)).getList().then(function (response) {
+            Restangular.service('domicilios', Restangular.one('mensajeros', responde.id)).getList().then(function (response) {
                 vm.domicilios = response;
             });
 
@@ -107,7 +107,7 @@
             vm.mensajero.fecha_expedicion_licencia = new Date(vm.mensajero.fecha_expedicion_licencia);
             vm.mensajero.fecha_vencimiento_licencia = new Date(vm.mensajero.fecha_vencimiento_licencia);
             vm.mensajero.fecha_nacimiento = new Date(vm.mensajero.fecha_nacimiento);
-            Restangular.service('domicilios', Restangular.one('mensajeros',mensajero.id)).getList().then(function (response) {
+            Restangular.service('domicilios', Restangular.one('mensajeros', mensajero.id)).getList().then(function (response) {
                 vm.domicilios = response;
             });
             $('#verMensajero').modal('show');
@@ -203,12 +203,12 @@
 
         function newMensajero() {
             vm.editMode = true;
-            vm.mensajero = {};
+            vm.mensajero = '';
             $('#newMensajero').modal('show');
             document.getElementById("image").innerHTML = ['<img class="center" id="imagenlogo" style="width:200px; height: 200px; border-radius: 50%; ng-src="http://api.domigo.co/images/mensajeros/', vm.mensajero.fotografia, '"  />'].join('');
         }
 
-        function verMmensajero(mensajero){
+        function verMmensajero(mensajero) {
             vm.mensajero = mensajero;
             vm.mensajero.cedula = parseInt(vm.mensajero.cedula);
             vm.mensajero.telefonos = parseInt(vm.mensajero.telefonos);
@@ -242,11 +242,14 @@
                 guardarImagen(response);
                 swal('Actualizado correctamente')
                 cargarMensajeros();
-                if (response.condicion == 'activo') {
-                    cargarMensajerosActivos();
-                } else {
-                    cargarMensajerosBloqueados();
-                }
+
+                setTimeout(function () {
+                    if (response.condicion == 'activo') {
+                        cargarMensajerosActivos();
+                    } else {
+                        cargarMensajerosBloqueados();
+                    }
+                }, 3000);
                 $('#newMensajero').modal('hide');
             })
         }
@@ -257,11 +260,19 @@
                 $('#newMensajero').modal('toggle');
                 guardarImagen(response);
                 cargarMensajeros();
-                if (response.condicion == 'activo') {
-                    cargarMensajerosActivos();
-                } else {
-                    cargarMensajerosBloqueados();
-                }
+                setTimeout(function () {
+                    if (response.condicion == 'activo') {
+                        cargarMensajerosActivos();
+                    } else {
+                        cargarMensajerosBloqueados();
+                    }
+                }, 3000);
+            }, function (error) {
+                angular.forEach(error, function (e) {
+                    if(e.code == 'E_VALIDATION'){
+                        swal('Ya existe un mensajero registrado con esta identificación')
+                    }
+                })
             })
         }
 
