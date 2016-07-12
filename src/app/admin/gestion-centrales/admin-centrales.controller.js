@@ -127,7 +127,7 @@
             var empresa = Restangular.one('empresas', empresa);
             swal({
                 title: "Estas seguro?",
-                text: "Estas intentando activar nuevamente esta empresa!",
+                text: "Estas intentando desactivar esta empresa!",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",

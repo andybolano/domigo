@@ -13,6 +13,7 @@
         SocketcSailsService.suscribe(authService.currentUser().empresa.id);
         // variables privadas
         var vm = this;
+        vm.newPedidoManual = newPedidoManual;
         vm.selectPedido = selectPedido;
         vm.selectMensajero = selectMensajero;
         vm.cargarDireccionesOrigen = cargarDireccionesOrigen;
@@ -101,27 +102,31 @@
         }
 
         function guardarPedido(index) {
-            if (vm.selectedMensajero && vm.selectedPedido && vm.mensajerosS) {
+            if (vm.selectedMensajero && vm.selectedPedido && vm.mensajerosS.length > 0) {
                 var pedido = vm.clientes[index];
                 pedido.mensajeros = vm.mensajerosS;
                 pedido.empresa = authService.currentUser().empresa.id;
-                io.socket.request({
-                    method: 'post',
-                    url: '/domicilios',
-                    data: pedido,
-                    headers: {
-                        'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
-                    }
-                }, function (response) {
-                    vm.selectedMensajero = {};
-                    vm.mensajerosS = {};
-                    swal('Se registro el pedido correctamente')
-                    vm.clientes.splice(index, 1);
-                    sessionStorage.setItem('pedidos', JSON.stringify(vm.clientes));
-                    setTimeout(cargarMensajerosDisponibles(),2000);
-                    setTimeout(cargarMensajerosOcupados(),2000);
+                if(pedido.cliente.tipo == 'empresa' || pedido.cliente.tipo == 'particular'){
+                    io.socket.request({
+                        method: 'post',
+                        url: '/domicilios',
+                        data: pedido,
+                        headers: {
+                            'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
+                        }
+                    }, function (response) {
+                        vm.selectedMensajero = {};
+                        vm.mensajerosS = [];
+                        swal('Se registro el pedido correctamente')
+                        vm.clientes.splice(index, 1);
+                        sessionStorage.setItem('pedidos', JSON.stringify(vm.clientes));
+                        setTimeout(cargarMensajerosDisponibles(),2000);
+                        setTimeout(cargarMensajerosOcupados(),2000);
 
-                });
+                    });
+                }else{
+                    swal('No has seleccionado el tipo de cliente Empresa/Particular')
+                }
             } else {
                 swal('No ha seleccionado ninguna mensajero para registrar el pedido')
             }
@@ -244,6 +249,22 @@
                     swal('Se coloco disponible al mensajero')
                 });
             });
+        }
+
+        function newPedidoManual() {
+            var item = {
+                cliente : {
+                    tipo : '',
+                    telefono : '',
+                    direccion : '',
+                    nombre: ''
+                },
+                direccion_origen : '',
+                direccion_destino: '',
+                tipo : '',
+                descripcion: ''
+            }
+            vm.clientes.push(item)
         }
 
         cargarMensajerosDisponibles();

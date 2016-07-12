@@ -23,7 +23,7 @@
             })
 
             .state('app.consulta-pagos', {
-                url: '/central/pagos',
+                url: '/central/consultar-pagos',
                 templateUrl: 'app/centrales/gestion-pagos/consulta-pagos.html',
                 data: {
                     onlyAccess: 'EMPRESA'

@@ -61,8 +61,19 @@
                     <i class="fa fa-dropbox icon-title"></i>
                 </div>
                 <div class="col-lg-5">
-                    <h1>Nuevos Pedidos</h1>
+                    <div style="float:left;">
+                        <h1>Nuevos Pedidos</h1>
+                    </div>
+                    <div style="text-align: center;">
+                        <a class="btn btn-circle btn-lg btn-green"
+                           ng-click="vm.newPedidoManual()" >
+                            <i class="fa fa-plus"></i>
+                        </a>
+                    </div>
                 </div>
+                <!--<div class="col-lg-3" style="text-align: left">-->
+                    <!---->
+                <!--</div>-->
                 <div class="col-lg-4">
                     <div class="input-group" style="margin-top:5px;">
                   <!--<span class="input-group-btn">-->
@@ -99,7 +110,6 @@
                                         <td style="width:10%">
                                             <div class="row">
                                                 <div class="col-lg-12" style="padding:0">
-
                                                     <button ng-click="vm.changeTipoCliente('particular', $index)"
                                                             class="btn"
                                                             id="checkParticular"
@@ -189,7 +199,7 @@
                                                ng-click="vm.agregarDescripcion($index)"><i
                                                     class="fa fa-comments" style="font-size:24px;color:#b71c1c"></i></a>
 
-                                            <input type="text" ng-model="cliente.descripcion" required ng-show="false">
+                                            <input type="text" ng-model="cliente.descripcion" ng-show="false">
                                         </td>
                                         <td width="10">
                                             <button ng-click="vm.removePedido($index)"
