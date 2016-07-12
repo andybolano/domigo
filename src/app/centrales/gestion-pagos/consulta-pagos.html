@@ -9,35 +9,35 @@
                 <div class="col-lg-4">
                     <h1>Consulta de pagos</h1>
                 </div>
-                <div class="col-lg-3">
-                    Desde:
-                    <div class="input-group" style="margin-top:5px;">
+                <form name="formConsulta" novalidate>
+                    <div class="col-lg-3">
+                        Desde:
+                        <div class="input-group" style="margin-top:5px;">
                   <span class="input-group-btn">
                         <button type="button" class="btn btn-sm btn-buscador">
                         <i class="fa fa-calendar" style="color:#DF1008"></i>
                         </button> 
                         </span>
-                        <input type="date" class="input-sm form-control buscador-domigo"
-                               ng-model="vm.fechaInicio">
+                            <input type="date" class="input-sm form-control buscador-domigo"
+                                   ng-model="vm.fechaInicio" required>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-3">
-                    Hasta:
-                    <div class="input-group" style="margin-top:5px;">
+                    <div class="col-lg-3">
+                        Hasta:
+                        <div class="input-group" style="margin-top:5px;">
                   <span class="input-group-btn">
                         <button type="button" class="btn btn-sm btn-buscador">
                         <i class="fa fa-calendar" style="color:#DF1008"></i>
                         </button> 
                         </span>
-                        <input type="date" class="input-sm form-control buscador-domigo"
-                               ng-model="vm.fechaFinal">
-
+                            <input type="date" class="input-sm form-control buscador-domigo"
+                                   ng-model="vm.fechaFinal" required>
+                        </div>
                     </div>
-                </div>
-
-                <div class="col-lg-1">
-                    <button class="btn btn-primary" style="margin-top:20px;"><i class="fa fa-search"></i></button>
-                </div>
+                    <div class="col-lg-1">
+                        <button ng-disabled="formConsulta.$invalid" ng-click="vm.cargarPagos()" class="btn btn-primary" style="margin-top:20px;"><i class="fa fa-search"></i></button>
+                    </div>
+                </form>
             </div>
         </div>
         <div class="ibox-content radio-body" style="border-top:0 ">
@@ -62,7 +62,6 @@
                             <table class="table table-hover">
                                 <tr>
                                     <td>#</td>
-                                    <th></th>
                                     <th>Mensajero</th>
                                     <th>fecha</th>
                                     <th>Valor</th>
@@ -71,20 +70,19 @@
                                 <tbody>
                                 <tr ng-repeat="pagoMensajero in vm.pagos track by $index">
                                     <td>1</td>
-                                    <td>
-                                        <img ng-src="http://localhost:1337/images/mensajeros/{{pagoMensajero.fotografia}}"
-                                            class="img-circle "
-                                            alt="profile" width="30px" height="30px">
-                                    </td>
                                     <td>{{pagoMensajero.mensajero.nombre}} {{pagoMensajero.mensajero.apellidos}}</td>
                                     <td>
-                                        {{pagoMensajero.fecha}}
+                                        {{pagoMensajero.fecha | date}}
                                     </td>
                                     <td>
                                         {{pagoMensajero.valor | currency}}
                                     </td>
-                                    <td>
-                                        {{pagoMensajero.concepto.nombre}}
+                                    <td ng-if="pagoMensajero.concepto.nombre == 'planilla'"><span
+                                            class="badge badge-primary bg-domigo">{{pagoMensajero.concepto.nombre}}</span>
+                                    </td>
+                                    <td ng-if="pagoMensajero.concepto.nombre == 'ahorro'"><span class="badge badge-warning ">{{pagoMensajero.concepto.nombre}}</span>
+                                    </td>
+                                    <td ng-if="pagoMensajero.concepto.nombre == 'prestamo'"><span class="badge badge-success">{{pagoMensajero.concepto.nombre}}</span>
                                     </td>
                                 </tr>
                                 </tbody>
