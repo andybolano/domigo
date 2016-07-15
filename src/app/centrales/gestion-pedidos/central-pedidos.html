@@ -262,9 +262,10 @@
                             <tr ng-repeat="mensajero in vm.mensajeros | orderBy : 'nombre'">
                                 <td style="border-bottom:1px solid #e0e0e0">{{mensajero.nombre}}</td>
                                 <td style="border-bottom:1px solid #e0e0e0">
-                                    <a href="javascript:;"
-                                       ng-click="vm.selectMensajero(mensajero)">
-                                        S
+                                    <a href="javascript:;" style="color: #DF1008"
+                                       ng-click="vm.selectMensajero(mensajero)"
+                                       title="Seleccionar">
+                                        <i class="fa fa-hand-o-up"></i>
                                     </a>
                                 </td>
                             </tr>
