@@ -48,6 +48,7 @@
                     </div>
                     <div ng-if="vm.domicilios.length > 0">
                         <table class="table table-hover">
+                            <thead>
                             <tr>
                                 <td>#</td>
                                 <th></th>
@@ -55,8 +56,9 @@
                                 <th>Cliente</th>
                                 <th>fecha</th>
                                 <th>Destino</th>
-                                <th>Estado pedido</th>
+                                <th style="text-align: center;">Estado pedido</th>
                             </tr>
+                            </thead>
                             <tbody>
                             <tr ng-repeat="domicilio in vm.domicilios | filter: filtro">
                                 <td>{{$index+1}}</td>
@@ -76,8 +78,9 @@
                                 <td>
                                     {{domicilio.direccion_destino}}
                                 </td>
-                                <td>
-                                    {{domicilio.estado}}
+                                <td style="text-align: center">
+                                    <span class="badge-primary" ng-if="domicilio.estado == 'asignado'" style="background-color:#64dd17;padding: 3px;border-radius:5px;font-size: 12px;">{{domicilio.estado}}</span>
+                                    <span class="badge-danger" ng-if="domicilio.estado == 'finalizado'" style="background-color:#DF1008;padding: 3px;border-radius:5px;font-size: 12px;">{{domicilio.estado}}</span>
                                 </td>
                             </tr>
                             </tbody>

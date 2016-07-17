@@ -10,6 +10,7 @@
         	// 'app.central_home',
         	'app.central_pedidos',
             'app.central_mensajeros',         
-            'app.central_pagos'
+            'app.central_pagos',
+            'app.central_configuracion'
         ]);
 })();

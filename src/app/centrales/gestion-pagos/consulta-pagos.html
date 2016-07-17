@@ -60,6 +60,7 @@
                         <div ng-if="vm.pagos != 0">
 
                             <table class="table table-hover">
+                                <thead>
                                 <tr>
                                     <td>#</td>
                                     <th>Mensajero</th>
@@ -67,6 +68,7 @@
                                     <th>Valor</th>
                                     <th>Concepto</th>
                                 </tr>
+                                </thead>
                                 <tbody>
                                 <tr ng-repeat="pagoMensajero in vm.pagos track by $index">
                                     <td>1</td>
@@ -80,9 +82,9 @@
                                     <td ng-if="pagoMensajero.concepto.nombre == 'planilla'"><span
                                             class="badge badge-primary bg-domigo">{{pagoMensajero.concepto.nombre}}</span>
                                     </td>
-                                    <td ng-if="pagoMensajero.concepto.nombre == 'ahorro'"><span class="badge badge-warning ">{{pagoMensajero.concepto.nombre}}</span>
+                                    <td ng-if="pagoMensajero.concepto.nombre == 'ahorro'"><span class="badge badge-warning " style="background-color:#DF1008;padding: 3px;border-radius:5px;font-size: 12px;">{{pagoMensajero.concepto.nombre}}</span>
                                     </td>
-                                    <td ng-if="pagoMensajero.concepto.nombre == 'prestamo'"><span class="badge badge-success">{{pagoMensajero.concepto.nombre}}</span>
+                                    <td ng-if="pagoMensajero.concepto.nombre == 'prestamo'"><span class="badge badge-success" style="background-color:#64dd17;padding: 3px;border-radius:5px;font-size: 12px;">{{pagoMensajero.concepto.nombre}}</span>
                                     </td>
                                 </tr>
                                 </tbody>
