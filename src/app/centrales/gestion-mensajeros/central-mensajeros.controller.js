@@ -205,7 +205,7 @@
             vm.editMode = true;
             vm.mensajero = '';
             $('#newMensajero').modal('show');
-            document.getElementById("image").innerHTML = ['<img class="center" id="imagenlogo" style="width:200px; height: 200px; border-radius: 50%; ng-src="http://api.domigo.co/images/mensajeros/', vm.mensajero.fotografia, '"  />'].join('');
+            document.getElementById("image").innerHTML = ['<img class="center" id="imagenlogo" style="width:200px; height: 200px; border-radius: 50%;background-color:#DF1008"; ng-src="http://api.domigo.co/images/mensajeros/', vm.mensajero.fotografia, '"  />'].join('');
         }
 
         function verMmensajero(mensajero) {
