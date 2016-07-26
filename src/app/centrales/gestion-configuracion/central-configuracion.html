@@ -6,119 +6,120 @@
                     <i class="fa fa fa-cogs icon-title"></i>
                 </div>
                 <div class='col-lg-11'>
-                      <h1>Configuración del sistema</h1>
+                    <h1>Configuración del sistema</h1>
                 </div>
             </div>
         </div>
         <div class="ibox-content radio-body" style="border-top:0;" id="content">
             <div class='col-lg-4'>
                 <h3>Gestión: Conceptos de pagos</h3>
-                <table class='table table-hover'>
-                    <thead>
-                    <th>Nombre</th>
-                    <th width='10%'>Opción</th>
-                    </thead>
-               
-                <tbody>
-                    <tr>
-                        <td>
-                            <div class="input-group" style="margin-top:5px;">
-                                                <span class="input-group-btn">
-                                                    <button type="button" class="btn btn-sm btn-buscador">
-                                                        <i class="fa fa-dollar"
-                                                           style="color:#DF1008;font-size:14px;"></i>
-                                                    </button>
-                                                </span>
-                                                <input type="text"  placeholder="Nombre del concepto" class="input-sm form-control autocomplete-domigo" required>
-                                            </div>
-                        </td>
-                        <td>
-                                             <button 
-                                                    class="btn btn-green  "
-                                                    style="margin-top:0px;margin-left:5px; border-radius:50%;width:40px;height:40px;"
-                                                    type="submit"><i
-                                                    class="fa fa-check" title='Guardar concepto'></i>
-                                            </button>
-                        </td>
-                    </tr>
-                    <tr style='border:0'>
-                        <td>Concepto 1</td>
-                        <td style='text-align: center;'><a><i class='fa fa-trash' style='font-size:20px;color:#DF1008'></i></a></td>
-                    </tr>
-                    <tr style='border:0'>
-                        <td>Concepto 2</td>
-                        <td style='text-align: center;'><a><i class='fa fa-trash' style='font-size:20px;color:#DF1008'></i></a></td>
-                    </tr>
-                </tbody>
-               </table>
+                <form name="conceptoForm" novalidate>
+                    <table class='table table-hover'>
+                        <thead>
+                        <th>Nombre</th>
+                        <th width='10%'>Opción</th>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <div class="input-group" style="margin-top:5px;">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-sm btn-buscador">
+                                        <i class="fa fa-dollar" style="color:#DF1008;font-size:14px;"></i>
+                                    </button>
+                                </span>
+                                    <input ng-model="vm.conceptoCobro.nombre" type="text" placeholder="Nombre del concepto"
+                                           class="input-sm form-control autocomplete-domigo" required>
+                                </div>
+                            </td>
+                            <td>
+                                <button ng-disabled="conceptoForm.$invalid" class="btn btn-green"
+                                        ng-click="vm.guardarConcepto()"
+                                        style="margin-top:0px;margin-left:5px; border-radius:50%;width:40px;height:40px;"
+                                        type="submit">
+                                    <i class="fa fa-check" title='Guardar concepto'></i>
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr style='border:0' ng-repeat="concepto in vm.conceptosCobros">
+                            <td>{{concepto.nombre}}</td>
+                            <td style='text-align: center;'><a ng-click="vm.eliminarConcepto(concepto.id)"><i
+                                    class='fa fa-trash' style='font-size:20px;color:#DF1008'></i></a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </form>
             </div>
             <div class='col-lg-1'>
-                
+
             </div>
             <div class='col-lg-6'>
                 <h3>Gestión: Tipos de servicios</h3>
-                <table class='table table-hover'>
-                    <thead>
-                    <th>Nombre</th>
-                    <th>Valor</th>
-                    <th width='10%'>Opción</th>
-                    </thead>
-               
-                <tbody>
-                    <tr>
-                        <td>
-                            <div class="input-group" style="margin-top:5px;">
-                                                <span class="input-group-btn">
-                                                    <button type="button" class="btn btn-sm btn-buscador">
-                                                        <i class="fa fa-thumbs-o-up"
-                                                           style="color:#DF1008;font-size:14px;"></i>
-                                                    </button>
-                                                </span>
-                                                <input type="text"  placeholder="Nombre del servicio" class="input-sm form-control autocomplete-domigo" required>
-                                            </div>
-                        </td>
-                        <td>
-                            <div class="input-group" style="margin-top:5px;">
-                                                <span class="input-group-btn">
-                                                    <button type="button" class="btn btn-sm btn-buscador">
-                                                        <i class="fa fa-money"
-                                                           style="color:#DF1008;font-size:14px;"></i>
-                                                    </button>
-                                                </span>
-                                                <input type="number"  placeholder="Valor del servicio" class="input-sm form-control autocomplete-domigo" required>
-                                            </div>
-                        </td>
-                        <td>
-                                             <button 
-                                                    class="btn btn-green  "
-                                                    style="margin-top:0px;margin-left:5px; border-radius:50%;width:40px;height:40px;"
-                                                    type="submit"><i
-                                                    class="fa fa-check" title='Guardar concepto'></i>
-                                            </button>
-                        </td>
-                    </tr>
-                    <tr style='border:0'>
-                        <td>Servicio 1</td>
-                        <td>$ 30.000</td>
-                        <td style='text-align: center;'>
-                            <a><i class='fa fa-edit' style='font-size:20px;color:#008000'></i></a>
-                            <a><i class='fa fa-trash' style='font-size:20px;color:#DF1008'></i></a>
-                        </td>
-                    </tr>
-                    <tr style='border:0'>
-                        <td>Servicio 2</td>
-                        <td>$ 30.000</td>
-                        <td style='text-align: center;'>
-                            <a><i class='fa fa-edit' style='font-size:20px;color:#008000'></i></a>
-                            <a><i class='fa fa-trash' style='font-size:20px;color:#DF1008'></i></a>
-                        </td>
-                    </tr>
-                </tbody>
-               </table>
+                <form name="servicioForm" novalidate>
+                    <table class='table table-hover'>
+                        <thead>
+                        <th>Nombre</th>
+                        <th>Valor</th>
+                        <th width='10%'>Opción</th>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <div class="input-group" style="margin-top:5px;">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-sm btn-buscador">
+                                        <i class="fa fa-thumbs-o-up" style="color:#DF1008;font-size:14px;"></i>
+                                    </button>
+                                </span>
+                                    <input ng-model="vm.tipoServicio.nombre" type="text" placeholder="Nombre del servicio"
+                                           class="input-sm form-control autocomplete-domigo" required>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="input-group" style="margin-top:5px;">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-sm btn-buscador">
+                                        <i class="fa fa-money" style="color:#DF1008;font-size:14px;"></i>
+                                    </button>
+                                </span>
+                                    <input ng-model="vm.tipoServicio.valor" type="number" placeholder="Valor del servicio"
+                                           class="input-sm form-control autocomplete-domigo" required>
+                                </div>
+                            </td>
+                            <td>
+                                <button ng-hide="vm.editMode" ng-disabled="servicioForm.$invalid" class="btn btn-green"
+                                        ng-click="vm.guardarServicio()"
+                                        style="margin-top:0px;margin-left:5px; border-radius:50%;width:40px;height:40px;"
+                                        type="submit">
+                                    <i class="fa fa-check" title='Guardar servicio'></i>
+                                </button>
+                                <button ng-show="vm.editMode" ng-disabled="servicioForm.$invalid" class="btn btn-green"
+                                        ng-click="vm.modificarServicio()"
+                                        style="margin-top:0px;margin-left:5px; border-radius:50%;width:40px;height:40px;"
+                                        type="submit">
+                                    <i class="fa fa-check" title='Modificar servicio'></i>
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+
+                        <tr style='border:0' ng-repeat="servicio in vm.tiposServicios">
+                            <td>{{servicio.nombre}}</td>
+                            <td>{{servicio.valor | currency}}</td>
+                            <td style='text-align: center;'>
+                                <a ng-click="vm.editarServicio(servicio)"><i class='fa fa-edit'
+                                                                                 style='font-size:20px;color:#008000'></i></a>
+                                <a ng-click="vm.eliminarTipoServicio(servicio.id)"><i class='fa fa-trash'
+                                                                                      style='font-size:20px;color:#DF1008'></i></a>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
             </div>
         </div>
     </div>
-</div>   
+</div>
 
 <script>
     var alto = $(window).height();

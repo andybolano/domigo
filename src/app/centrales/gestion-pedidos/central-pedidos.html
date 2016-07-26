@@ -22,7 +22,7 @@
                 <input type="text" class="form-control finderBar" ng-model="descripcion"
                        placeholder="Escribe aca la descripción del pedido."
                        autofocus>
-            <span class="input-group-btn">
+                <span class="input-group-btn">
             <button class="btn btn-default" type="button" ng-click="ok()">Ya!</button>
         </span>
             </div>
@@ -66,67 +66,68 @@
                     </div>
                     <div style="text-align: center;">
                         <a class="btn btn-circle btn-lg btn-green"
-                           ng-click="vm.newPedidoManual()" >
+                           ng-click="vm.newPedidoManual()">
                             <i class="fa fa-plus"></i>
                         </a>
                     </div>
                 </div>
                 <!--<div class="col-lg-3" style="text-align: left">-->
-                    <!---->
+                <!---->
                 <!--</div>-->
                 <div class="col-lg-3">
                     <div class="input-group" style="margin-top:5px;">
-                  <!--<span class="input-group-btn">-->
+                        <!--<span class="input-group-btn">-->
                         <!--<button type="button" class="btn btn-sm btn-buscador">-->
                         <!--<i class="fa fa-search" style="color:#DF1008"></i>-->
                         <!--</button>-->
                         <!--</span>-->
                         <!--<input type="text" placeholder="Buscador" class="input-sm form-control buscador-domigo"-->
-                               <!--ng-model="filtro">-->
+                        <!--ng-model="filtro">-->
 
                     </div>
                 </div>
                 <div class="col-lg-3" style="text-align:center;color:#DF1008">
                     <div class="row">
                         <div class="col-lg-6">
-                              <i class="fa fa-star"></i>
-                                MENSAJEROS<BR>
-                                DISPONIBLES
-                                <br><br>
-                                 <center ng-if="vm.mensajeros.length > 0">
-                        <div style="height:40px;width:40px;border-radius:50%;background-color:#DF1008;">
-                            <center style="font-size:24px;color:#FFF;padding-top:3px;">{{vm.mensajeros.length}}
+                            <i class="fa fa-star"></i>
+                            MENSAJEROS<BR>
+                            DISPONIBLES
+                            <br><br>
+                            <center ng-if="vm.mensajeros.length > 0">
+                                <div style="height:40px;width:40px;border-radius:50%;background-color:#DF1008;">
+                                    <center style="font-size:24px;color:#FFF;padding-top:3px;">{{vm.mensajeros.length}}
+                                    </center>
+                                </div>
                             </center>
-                        </div>
-                    </center>
-                    <center ng-if="vm.mensajeros.length == 0">
-                        <div style="height:40px;width:40px;border-radius:50%;background-color:#e0e0e0;">
-                            <center style="font-size:24px;color:#FFF;padding-top:3px;">00</center>
-                        </div>
-                    </center>
-                                
+                            <center ng-if="vm.mensajeros.length == 0">
+                                <div style="height:40px;width:40px;border-radius:50%;background-color:#e0e0e0;">
+                                    <center style="font-size:24px;color:#FFF;padding-top:3px;">00</center>
+                                </div>
+                            </center>
+
                         </div>
                         <div class="col-lg-6">
-                              <i class="fa fa-star"></i>
-                                MENSAJEROS<BR>
-                                OCUPADOS
-                                <br>
-                                <br>
-                    <center ng-if="vm.mensajerosOcupados.length > 0">
-                        <div style="height:40px;width:40px;border-radius:50%;background-color:#DF1008;">
-                            <center style="font-size:24px;color:#FFF;padding-top:3px;">{{vm.mensajerosOcupados.length}}
+                            <i class="fa fa-star"></i>
+                            MENSAJEROS<BR>
+                            OCUPADOS
+                            <br>
+                            <br>
+                            <center ng-if="vm.mensajerosOcupados.length > 0">
+                                <div style="height:40px;width:40px;border-radius:50%;background-color:#DF1008;">
+                                    <center style="font-size:24px;color:#FFF;padding-top:3px;">
+                                        {{vm.mensajerosOcupados.length}}
+                                    </center>
+                                </div>
                             </center>
-                        </div>
-                    </center>
-                    <center ng-if="vm.mensajerosOcupados.length == 0">
-                        <div style="height:40px;width:40px;border-radius:50%;background-color:#e0e0e0;">
-                            <center style="font-size:24px;color:#FFF;padding-top:3px;">00</center>
-                        </div>
-                    </center>
-                    
+                            <center ng-if="vm.mensajerosOcupados.length == 0">
+                                <div style="height:40px;width:40px;border-radius:50%;background-color:#e0e0e0;">
+                                    <center style="font-size:24px;color:#FFF;padding-top:3px;">00</center>
+                                </div>
+                            </center>
+
                         </div>
                     </div>
-                  
+
                 </div>
             </div>
         </div>
@@ -153,7 +154,8 @@
                                                             type="button"
                                                             style="margin-top:5px;margin-left:5px; border-radius:50%;width:40px;height:40px;background-color:transparent;border:3px solid #b71c1c"
                                                             ng-style="vm.selectedColorTipoBotonParticular($index)">
-                                                        <i id="checkParticular" ng-style="vm.selectedColorTipoIconoParticular($index)"
+                                                        <i id="checkParticular"
+                                                           ng-style="vm.selectedColorTipoIconoParticular($index)"
                                                            class="fa fa-user" style="color:#b71c1c"></i>
                                                     </button>
 
@@ -163,7 +165,8 @@
                                                             id="checkEmpresa"
                                                             type="button"
                                                             ng-style="vm.selectedColorTipoBotonEmpresa($index)">
-                                                        <i id="checkEmpresa" ng-style="vm.selectedColorTipoIconoEmpresa($index)"
+                                                        <i id="checkEmpresa"
+                                                           ng-style="vm.selectedColorTipoIconoEmpresa($index)"
                                                            class="fa fa-bank" style="color:#b71c1c"></i>
                                                     </button>
                                                 </div>
@@ -222,22 +225,26 @@
                                         </td>
                                         <td width="5%" style="text-align:center">
                                             <div class="input-group">
+                                                <div class="input-group-btn">
+                                                    <a href="javascript:;" title="Tipo de servicio"
+                                                       data-toggle="dropdown" aria-expanded="true">
+                                                        <i class="fa fa-envelope"
+                                                           style="font-size:28px;color:#b71c1c"></i>
+                                                    </a>
 
-                                            <div class="input-group-btn">
-                                                <a href="javascript:;" title="Tipo de servicio" data-toggle="dropdown" aria-expanded="true">
-                                                    <i class="fa fa-envelope" style="font-size:28px;color:#b71c1c"></i>
-                                            </a>
-                                                
-                                                <ul class="dropdown-menu pull-right">
-                                                    <li><a href="javascript:;">Comida rapida ida y vuelta</a></li>
-                                                    <li><a href="javascript:;">Acompanamiento de consignacion bancaria</a></li>
-                                                    <li><a href="javascript:;">Pago de factura en banco</a></li>
+                                                    <ul class="dropdown-menu pull-right">
+                                                        <li ng-class="{active : vm.active === $index}"
+                                                            ng-repeat="servicio in vm.tiposServicios track by $index"
+                                                            ng-click="vm.selectedTipoServicio($index)">
+                                                            <a href="javascript:;">{{servicio.nombre}}
+                                                                <b> valor: {{servicio.valor | currency}}</b>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
 
-                                                </ul>
-                                            </div>
-                                            </div>
-                                      
-                                          
+
                                         </td>
                                         <td width="5%" style="text-align:center">
                                             <a href="javascript:;" title="descripcion"
@@ -276,10 +283,10 @@
                                                 <i class="fa fa-dropbox icon-title" style="font-size:120px;"></i>
                                             </td>
                                             <td style="font-size:24px;color:#e0e0e0;font-weight:600">
-                                                 Aùn no tienes pedidos registrados <span style="color:#DF1008">:(</span>
+                                                Aùn no tienes pedidos registrados <span style="color:#DF1008">:(</span>
                                                 <!--<br>Agregar tu nuevo pedido-->
                                                 <!--<button class="btn btn-circle btn-lg btn-green" type="button"><i-->
-                                                        <!--class="fa fa-plus"></i>-->
+                                                <!--class="fa fa-plus"></i>-->
                                                 <!--</button>-->
                                             </td>
                                         </tr>
@@ -289,71 +296,69 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-lg-3"  style="border:2px solid #DF1008;border-radius:10px;padding:0;font-weight:100;">
+                <div class="col-lg-3" style="border:2px solid #DF1008;border-radius:10px;padding:0;font-weight:100;">
                     <div class='row'>
-                        <div class='col-lg-6' style='padding: 0;margin: 0;border-right:2px solid #DF1008;padding-left:12px;'>
-                           
-                                <table class="table" ng-if="vm.mensajeros.length > 0">
-                                    <tr ng-repeat="mensajero in vm.mensajeros | orderBy : 'nombre'" style='border:0'>
-                                        <td>{{mensajero.nombre}}</td>
-                                        <td style='padding: 0;vertical-align: middle'>
-                                            <a href="javascript:;" style="color: #DF1008"
-                                               ng-click="vm.selectMensajero(mensajero)"
-                                               title="Seleccionar">
-                                                <i class="fa fa-hand-o-up"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <table class="table" ng-if="vm.mensajeros.length == 0">
-                                    <tr>
-                                        <td style="font-size:16px;color:#e0e0e0;font-weight:600;text-align:center">No tienes
-                                            mensajeros disponibles
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                     
-                        <div class='col-lg-6' style='padding:0;margin: 0; border-left:2px solid #DF1008;margin-left:-2px'>
-                           
-                                <table class="table" ng-if="vm.mensajerosOcupados.length > 0" style='margin-left:-5px;width:95%' border='0'>
-                                    <tr ng-repeat="mensajero in vm.mensajerosOcupados | orderBy : 'nombre'" style='border:0'>
-                                        <td width='70%'>{{mensajero.nombre}}</td>
-                                        <td style='padding: 0;vertical-align: middle' width='30%'>
-                                            <a href="javascript:;" style="color: #DF1008"
-                                               ng-click="vm.selectMensajero(mensajero)"
-                                               title="Seleccionar">
-                                                <i class="fa fa-hand-o-up"></i>
-                                            </a>
-                                            <a href="javascript:;" title="Colocar disponible"
-                                               ng-click="vm.colocarDisponible(mensajero)">
-                                                <i class="fa fa-check"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <table class="table" ng-if="vm.mensajerosOcupados.length == 0">
-                                    <tr>
-                                        <td style="font-size:16px;color:#e0e0e0;font-weight:600;text-align:center">No tienes
-                                            mensajeros ocupados
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        
+                        <div class='col-lg-6'
+                             style='padding: 0;margin: 0;border-right:2px solid #DF1008;padding-left:12px;'>
+
+                            <table class="table" ng-if="vm.mensajeros.length > 0">
+                                <tr ng-click="vm.selectMensajero(mensajero)"
+                                    ng-repeat="mensajero in vm.mensajeros | orderBy : 'nombre'" style='border:0'>
+                                    <td>{{mensajero.nombre}}</td>
+                                    <td style='padding: 0;vertical-align: middle'>
+                                        <a href="javascript:;" style="color: #DF1008"
+                                           title="Seleccionar">
+                                            <i class="fa fa-hand-o-up"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table class="table" ng-if="vm.mensajeros.length == 0">
+                                <tr>
+                                    <td style="font-size:16px;color:#e0e0e0;font-weight:600;text-align:center">No tienes
+                                        mensajeros disponibles
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class='col-lg-6'
+                             style='padding:0;margin: 0; border-left:2px solid #DF1008;margin-left:-2px'>
+                            <table class="table" ng-if="vm.mensajerosOcupados.length > 0"
+                                   style='margin-left:-5px;width:95%' border='0'>
+                                <tr ng-repeat="mensajero in vm.mensajerosOcupados | orderBy : 'nombre'"
+                                    style='border:0'>
+                                    <td width='70%'>{{mensajero.nombre}}</td>
+                                    <td style='padding: 0;vertical-align: middle' width='30%'>
+                                        <a href="javascript:;" style="color: #DF1008"
+                                           ng-click="vm.selectMensajero(mensajero)"
+                                           title="Seleccionar">
+                                            <i class="fa fa-hand-o-up"></i>
+                                        </a>
+                                        <a href="javascript:;" title="Colocar disponible"
+                                           ng-click="vm.colocarDisponible(mensajero)">
+                                            <i class="fa fa-check"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table class="table" ng-if="vm.mensajerosOcupados.length == 0">
+                                <tr>
+                                    <td style="font-size:16px;color:#e0e0e0;font-weight:600;text-align:center">No tienes
+                                        mensajeros ocupados
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
                     </div>
-                   
-                    
-              
-               
+
+
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
-
 
 
 <script>

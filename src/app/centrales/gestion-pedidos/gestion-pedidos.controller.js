@@ -103,29 +103,34 @@
 
         function guardarPedido(index) {
             if (vm.selectedMensajero && vm.selectedPedido && vm.mensajerosS.length > 0) {
-                var pedido = vm.clientes[index];
-                pedido.mensajeros = vm.mensajerosS;
-                pedido.empresa = authService.currentUser().empresa.id;
-                if(pedido.cliente.tipo == 'empresa' || pedido.cliente.tipo == 'particular'){
-                    io.socket.request({
-                        method: 'post',
-                        url: '/domicilios',
-                        data: pedido,
-                        headers: {
-                            'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
-                        }
-                    }, function (response) {
-                        vm.selectedMensajero = {};
-                        vm.mensajerosS = [];
-                        swal('Se registro el pedido correctamente')
-                        vm.clientes.splice(index, 1);
-                        sessionStorage.setItem('pedidos', JSON.stringify(vm.clientes));
-                        setTimeout(cargarMensajerosDisponibles(),2000);
-                        setTimeout(cargarMensajerosOcupados(),2000);
+                if (vm.selectedServicio){
+                    var pedido = vm.clientes[index];
+                    pedido.mensajeros = vm.mensajerosS;
+                    pedido.tipo = vm.selectedServicio.id;
+                    pedido.empresa = authService.currentUser().empresa.id;
+                    if (pedido.cliente.tipo == 'empresa' || pedido.cliente.tipo == 'particular') {
+                        io.socket.request({
+                            method: 'post',
+                            url: '/domicilios',
+                            data: pedido,
+                            headers: {
+                                'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
+                            }
+                        }, function (response) {
+                            vm.selectedMensajero = {};
+                            vm.mensajerosS = [];
+                            swal('Se registro el pedido correctamente')
+                            vm.clientes.splice(index, 1);
+                            sessionStorage.setItem('pedidos', JSON.stringify(vm.clientes));
+                            setTimeout(cargarMensajerosDisponibles(), 2000);
+                            setTimeout(cargarMensajerosOcupados(), 2000);
 
-                    });
+                        });
+                    } else {
+                        swal('No has seleccionado el tipo de cliente Empresa/Particular')
+                    }
                 }else{
-                    swal('No has seleccionado el tipo de cliente Empresa/Particular')
+                    swal('No ha seleccionado el tipo de servicio')
                 }
             } else {
                 swal('No ha seleccionado ninguna mensajero para registrar el pedido')
@@ -216,15 +221,15 @@
                 vm.clientes.slice(vm.pedido, 1);
                 sessionStorage.setItem('pedidos', JSON.stringify(vm.clientes));
             }, function () {
-               console.log('Modal dismissed at: ' + new Date());
+                console.log('Modal dismissed at: ' + new Date());
             });
         }
 
         vm.changeTipoCliente = function (tipo, $index) {
-            if(tipo == 'empresa'){
+            if (tipo == 'empresa') {
                 vm.clientes[$index].cliente.tipo = tipo;
                 sessionStorage.setItem('pedidos', JSON.stringify(vm.clientes));
-            }else if(tipo == 'particular'){
+            } else if (tipo == 'particular') {
                 vm.clientes[$index].cliente.tipo = tipo;
                 sessionStorage.setItem('pedidos', JSON.stringify(vm.clientes));
             }
@@ -253,20 +258,33 @@
 
         function newPedidoManual() {
             var item = {
-                cliente : {
-                    tipo : '',
-                    telefono : '',
-                    direccion : '',
+                cliente: {
+                    tipo: '',
+                    telefono: '',
+                    direccion: '',
                     nombre: ''
                 },
-                direccion_origen : '',
+                direccion_origen: '',
                 direccion_destino: '',
-                tipo : '',
+                tipo: '',
                 descripcion: ''
             }
             vm.clientes.push(item)
         }
 
+        function cargarTiposServicios() {
+            vm.tiposServicios = [];
+            Restangular.service('tipos_servicios', Restangular.one('empresas', authService.currentUser().empresa.id)).getList().then(function (response) {
+                vm.tiposServicios = response;
+            });
+        }
+
+        vm.selectedTipoServicio = function ($index) {
+            vm.active = $index;
+            vm.selectedServicio = vm.tiposServicios[$index];
+        };
+
+        cargarTiposServicios();
         cargarMensajerosDisponibles();
         cargarMensajerosOcupados();
     }

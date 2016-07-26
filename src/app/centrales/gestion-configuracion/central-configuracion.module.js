@@ -18,7 +18,7 @@
                 data: {
                     onlyAccess: 'EMPRESA'
                 },
-                controller: 'CentralConfiguracionController',
+                controller: 'CentralconfigController',
                 controllerAs: 'vm'
             })
             
