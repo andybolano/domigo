@@ -82,6 +82,7 @@
             servicio.nombre = vm.tipoServicio.nombre;
             servicio.valor = vm.tipoServicio.valor;
             servicio.put().then(function (response) {
+                vm.tipoServicio = {};
                 cargarTiposServicios();
                 swal('Actualizado correctamente')
             })
@@ -89,7 +90,7 @@
 
         }
 
-        function eliminarConcepto(id) {
+        function eliminarConcepto(concepto) {
             swal({
                 title: "Estas seguro?",
                 text: "Estas intentando eliminar este concepto de pago!",
@@ -100,12 +101,14 @@
                 confirmButtonText: "Si",
                 closeOnConfirm: false
             }, function () {
-                cargarConceptosCobros();
-                swal("Eliminado!", "Has eliminado el concepto correctamente.", "success");
+                Restangular.one('conceptos_cobros', concepto.id).remove().then(function (response) {
+                    cargarConceptosCobros();
+                    swal("Eliminado!", "Has eliminado el concepto correctamente.", "success");
+                });
             });
         };
 
-        function eliminarTipoServicio(id) {
+        function eliminarTipoServicio(servicio) {
             swal({
                 title: "Estas seguro?",
                 text: "Estas intentando eliminar este tipo de servicio!",
@@ -116,8 +119,10 @@
                 confirmButtonText: "Si",
                 closeOnConfirm: false
             }, function () {
-                cargarTiposServicios();
-                swal("Eliminado!", "Has eliminado el servicio correctamente.", "success");
+                Restangular.one('tipos_servicios', servicio.id).remove().then(function (response) {
+                    cargarTiposServicios();
+                    swal("Eliminado!", "Has eliminado el servicio correctamente.", "success");
+                });
             });
         };
 

@@ -44,7 +44,7 @@
 
                         <tr style='border:0' ng-repeat="concepto in vm.conceptosCobros">
                             <td>{{concepto.nombre}}</td>
-                            <td style='text-align: center;'><a ng-click="vm.eliminarConcepto(concepto.id)"><i
+                            <td style='text-align: center;'><a ng-click="vm.eliminarConcepto(concepto)"><i
                                     class='fa fa-trash' style='font-size:20px;color:#DF1008'></i></a></td>
                         </tr>
                         </tbody>
@@ -110,7 +110,7 @@
                             <td style='text-align: center;'>
                                 <a ng-click="vm.editarServicio(servicio)"><i class='fa fa-edit'
                                                                                  style='font-size:20px;color:#008000'></i></a>
-                                <a ng-click="vm.eliminarTipoServicio(servicio.id)"><i class='fa fa-trash'
+                                <a ng-click="vm.eliminarTipoServicio(servicio)"><i class='fa fa-trash'
                                                                                       style='font-size:20px;color:#DF1008'></i></a>
                             </td>
                         </tr>

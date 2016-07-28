@@ -15,6 +15,7 @@
         vm.total = 0;
         vm.fechaInicio = new Date();
         vm.fechaFinal = new Date();
+        vm.mostrar = false;
         vm.cargarMensajero = cargarMensajero;
         vm.guardarPago = guardarPago;
 
@@ -31,6 +32,7 @@
                 if (response.length <= 0) {
                     swal('No se encontro ningun mensajero con esta identificacion')
                 } else {
+                    vm.mostrar = true;
                     vm.mensajero = response[0];
                     cargarPagosMensajeros(response[0]);
                     vm.pago.fecha = new Date();

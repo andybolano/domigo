@@ -22,14 +22,15 @@
                                ng-model="vm.buscar" ng-enter="vm.cargarMensajero()">
 
                     </div>
-
-
                 </div>
             </div>
         </div>
         <div class="ibox-content radio-body" style="border-top:0 ">
             <div class="row">
-                <div class="col-lg-10">
+                <div class="col-lg-10" style="text-align: center" ng-if="vm.mostrar == false">
+                    <h2>No se ha realizado ninguna busqueda de mensajero</h2>
+                </div>
+                <div class="col-lg-10" ng-show="vm.mostrar == true">
                     <div class="widget style1 bg-domigo text-white"
                          style="border-radius:20px;padding-bottom:0;zoom:90%">
                         <div class="row">
@@ -92,11 +93,13 @@
                         <div class="col-lg-3" style="text-align:right">
                             <div class="input-group" style="margin-top:5px;">
                                 <span class="input-group-btn">
-                                    <button type="button" class="btn btn-sm btn-buscador" ng-click="vm.cargarMensajero()">
+                                    <button type="button" class="btn btn-sm btn-buscador"
+                                            ng-click="vm.cargarMensajero()">
                                         <i class="fa fa-search" style="color:#DF1008"></i>
                                     </button>
                                 </span>
-                                <input type="text" placeholder="filtro concepto" class="input-sm form-control buscador-domigo"
+                                <input type="text" placeholder="filtro concepto"
+                                       class="input-sm form-control buscador-domigo"
                                        ng-model="filtro">
                             </div>
                         </div>
@@ -104,134 +107,134 @@
                             <h2>TOTAL: <span style="color:#000">{{vm.total | currency}}</span></h2>
                         </div>
 
-                    <div ng-if="vm.pagos <= 0" style="text-align: center;margin-top:20px;">
-                        <table align="center">
-                            <tr>
-                                <td>
-                                    <i class="fa fa-money " style="font-size:120px;color:#e0e0e0"></i>
-                                </td>
-                                <td style="font-size:24px;color:#e0e0e0;font-weight:600">
-                                    Este Mensajero aun no tiene <br>pagos registrados <span
-                                        style="color:#DF1008">:(</span>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div ng-if="vm.pagos != 0">
+                        <div ng-if="vm.pagos <= 0" style="text-align: center;margin-top:20px;">
+                            <table align="center">
+                                <tr>
+                                    <td>
+                                        <i class="fa fa-money " style="font-size:120px;color:#e0e0e0"></i>
+                                    </td>
+                                    <td style="font-size:24px;color:#e0e0e0;font-weight:600">
+                                        Este Mensajero aun no tiene <br>pagos registrados <span
+                                            style="color:#DF1008">:(</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div ng-if="vm.pagos != 0">
 
-                        <table class="table table-striped">
-                            <tr>
-                                <td>#</td>
-                                <th>fecha</th>
-                                <th>Valor</th>
-                                <th>Concepto</th>
-                                <th></th>
-                            </tr>
-                            <tbody>
-                            <tr ng-repeat="pago in vm.pagos | filter:filtro">
-                                <td>{{$index+1}}</td>
-                                <td>{{pago.fecha | date}}</td>
-                                <td> {{pago.valor | currency}} pesos</td>
-                                <td ng-if="pago.concepto.nombre == 'planilla'"><span
-                                        class="badge badge-primary bg-domigo">{{pago.concepto.nombre}}</span>
-                                </td>
-                                <td ng-if="pago.concepto.nombre == 'ahorro'"><span class="badge badge-warning ">{{pago.concepto.nombre}}</span>
-                                </td>
-                                <td ng-if="pago.concepto.nombre == 'prestamo'"><span class="badge badge-success">{{pago.concepto.nombre}}</span>
-                                </td>
-                                <td style="zoom:80%" width="20%">
-                                    <!--<button class="btn btn-circle btn-lg btn-green" type="button" ng-click=""-->
-                                    <!--style="padding:0;background-color:#fb8c00 "><i class="fa fa-pencil"></i>-->
-                                    <!--</button>-->
-                                    <!--<button class="btn btn-circle btn-lg" type="button" ng-click=""-->
-                                    <!--style="padding:0;background-color:#f44336"><i class="fa fa-close"-->
-                                    <!--style="color:#FFF"></i>-->
-                                    <!--</button>-->
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2" style="border-left:1px solid #B71C1C">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div style="border-bottom:1px solid #B71C1C">
-                            <span style="color:#64dd17">Última Semana</span>
-                            <div style="margin-top:7px;margin-bottom:7px">
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <div style="width:40px;height:40px; background-color:#B71C1C;color:#FFF;border-radius:50%;padding-top:8px;">
-                                                <center style="font-size:16px;">$</center>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <span style="margin-left:10px;">{{vm.ultimosPagos.total_semana | currency}}</span>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
+                            <table class="table table-striped">
+                                <tr>
+                                    <td>#</td>
+                                    <th>fecha</th>
+                                    <th>Valor</th>
+                                    <th>Concepto</th>
+                                    <th></th>
+                                </tr>
+                                <tbody>
+                                <tr ng-repeat="pago in vm.pagos | filter:filtro">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{pago.fecha | date}}</td>
+                                    <td> {{pago.valor | currency}} pesos</td>
+                                    <td ng-if="pago.concepto.nombre == 'planilla'"><span
+                                            class="badge badge-primary bg-domigo">{{pago.concepto.nombre}}</span>
+                                    </td>
+                                    <td ng-if="pago.concepto.nombre == 'ahorro'"><span class="badge badge-warning ">{{pago.concepto.nombre}}</span>
+                                    </td>
+                                    <td ng-if="pago.concepto.nombre == 'prestamo'"><span class="badge badge-success">{{pago.concepto.nombre}}</span>
+                                    </td>
+                                    <td style="zoom:80%" width="20%">
+                                        <!--<button class="btn btn-circle btn-lg btn-green" type="button" ng-click=""-->
+                                        <!--style="padding:0;background-color:#fb8c00 "><i class="fa fa-pencil"></i>-->
+                                        <!--</button>-->
+                                        <!--<button class="btn btn-circle btn-lg" type="button" ng-click=""-->
+                                        <!--style="padding:0;background-color:#f44336"><i class="fa fa-close"-->
+                                        <!--style="color:#FFF"></i>-->
+                                        <!--</button>-->
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-
-
-                <br>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div style="border-bottom:1px solid #B71C1C">
-                            <span style="color:#64dd17">Último Mes</span>
-                            <div style="margin-top:7px;margin-bottom:7px">
-
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <div style="width:40px;height:40px; background-color:#B71C1C;color:#FFF;border-radius:50%;padding-top:8px;">
-                                                <center style="font-size:16px;">$</center>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <span style="margin-left:10px;">{{vm.ultimosPagos.total_mes | currency}}</span>
-                                        </td>
-                                    </tr>
-                                </table>
+                <div class="col-lg-2" style="border-left:1px solid #B71C1C">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div style="border-bottom:1px solid #B71C1C">
+                                <span style="color:#64dd17">Última Semana</span>
+                                <div style="margin-top:7px;margin-bottom:7px">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <div style="width:40px;height:40px; background-color:#B71C1C;color:#FFF;border-radius:50%;padding-top:8px;">
+                                                    <center style="font-size:16px;">$</center>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span style="margin-left:10px;">{{vm.ultimosPagos.total_semana | currency}}</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div style="border-bottom:1px solid #B71C1C">
-                            <span style="color:#64dd17">Último Pagos</span>
-                            <div style="margin-top:7px;">
-                                <div ng-repeat="mensajero in vm.ultimosPagos.mensajeros"
-                                     class="widget style1 bg-domigo text-white"
-                                     style="border-radius:5px;padding:5px;padding-bottom:0;font-weight:100">
-                                    <div class="row" style="zoom:90%">
-                                        <div class="col-lg-3">
-                                            <img ng-src="http://api.domigo.co/images/mensajeros/{{mensajero.fotografia}}"
-                                                 class="img-circle  m-b-md"
-                                                 alt="profile" width="40px" height="40px">
-                                        </div>
-                                        <div class="col-lg-9">
-                                            {{mensajero.nombre}} {{mensajero.apellidos}}
-                                        </div>
 
+
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div style="border-bottom:1px solid #B71C1C">
+                                <span style="color:#64dd17">Último Mes</span>
+                                <div style="margin-top:7px;margin-bottom:7px">
+
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <div style="width:40px;height:40px; background-color:#B71C1C;color:#FFF;border-radius:50%;padding-top:8px;">
+                                                    <center style="font-size:16px;">$</center>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span style="margin-left:10px;">{{vm.ultimosPagos.total_mes | currency}}</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div style="border-bottom:1px solid #B71C1C">
+                                <span style="color:#64dd17">Último Pagos</span>
+                                <div style="margin-top:7px;">
+                                    <div ng-repeat="mensajero in vm.ultimosPagos.mensajeros"
+                                         class="widget style1 bg-domigo text-white"
+                                         style="border-radius:5px;padding:5px;padding-bottom:0;font-weight:100">
+                                        <div class="row" style="zoom:90%">
+                                            <div class="col-lg-3">
+                                                <img ng-src="http://api.domigo.co/images/mensajeros/{{mensajero.fotografia}}"
+                                                     class="img-circle  m-b-md"
+                                                     alt="profile" width="40px" height="40px">
+                                            </div>
+                                            <div class="col-lg-9">
+                                                {{mensajero.nombre}} {{mensajero.apellidos}}
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+
                 </div>
-
-
             </div>
         </div>
     </div>
-</div>
 
 </div>
 
