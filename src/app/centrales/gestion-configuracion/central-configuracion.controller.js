@@ -53,7 +53,7 @@
                 vm.conceptoCobro = {};
                 vm.editMode = false;
                 cargarConceptosCobros();
-                swal('Concepto registrado correctamente')
+                toastr.success('Concepto registrado correctamente');
             });
         }
 
@@ -68,7 +68,7 @@
             }, function (response) {
                 vm.tipoServicio = {};
                 cargarTiposServicios();
-                swal('Tipo de servicio registrado correctamente')
+                toastr.success('Tipo de servicio registrado correctamente');
             });
         }
 
@@ -84,7 +84,7 @@
             servicio.put().then(function (response) {
                 vm.tipoServicio = {};
                 cargarTiposServicios();
-                swal('Actualizado correctamente')
+                toastr.success('Actualizado correctamente');
             })
 
 
@@ -99,11 +99,11 @@
                 confirmButtonColor: "#DD6B55",
                 cancelButtonText: "No",
                 confirmButtonText: "Si",
-                closeOnConfirm: false
+                closeOnConfirm: true
             }, function () {
                 Restangular.one('conceptos_cobros', concepto.id).remove().then(function (response) {
                     cargarConceptosCobros();
-                    swal("Eliminado!", "Has eliminado el concepto correctamente.", "success");
+                    toastr.success('Has eliminado el concepto correctamente.', 'Eliminado!');
                 });
             });
         };
@@ -117,11 +117,11 @@
                 confirmButtonColor: "#DD6B55",
                 cancelButtonText: "No",
                 confirmButtonText: "Si",
-                closeOnConfirm: false
+                closeOnConfirm: true
             }, function () {
                 Restangular.one('tipos_servicios', servicio.id).remove().then(function (response) {
                     cargarTiposServicios();
-                    swal("Eliminado!", "Has eliminado el servicio correctamente.", "success");
+                    toastr.success('Has eliminado el servicio correctamente.', 'Eliminado!');
                 });
             });
         };

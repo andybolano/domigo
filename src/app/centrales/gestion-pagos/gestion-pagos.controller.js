@@ -30,7 +30,8 @@
             var campos = 'fotografia,condicion,direccion,nombre,apellidos,telefonos,email,vehiculo,cedula,id';
             Restangular.service('mensajeros?fields=' + campos + '&populate=pagos', Restangular.one('empresas', authService.currentUser().empresa.id)).getList({cedula: vm.buscar}).then(function (response) {
                 if (response.length <= 0) {
-                    swal('No se encontro ningun mensajero con esta identificacion')
+                    toastr.info('No se encontro ningun mensajero con esta identificacion');
+                    // swal('No se encontro ningun mensajero con esta identificacion')
                 } else {
                     vm.mostrar = true;
                     vm.mensajero = response[0];
@@ -55,7 +56,7 @@
                 vm.pago.fecha = new Date();
                 cargarPagosMensajeros(vm.mensajero);
                 cargarUltimosPagos();
-                swal('Pago registrado correctamente')
+                toastr.success('Pago registrado correctamente')
             });
         }
 

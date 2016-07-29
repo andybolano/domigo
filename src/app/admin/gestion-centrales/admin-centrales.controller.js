@@ -84,14 +84,14 @@
                 cargarEmpresas();
                 $('#newEmpresa').modal('hide');
             }, function (error) {
-                var mensajeError = error.status == 401 ? error.data.mensajeError : 'A ocurrido un error inesperado';
+                toastr.error('Ocurrio un error inesperado!')
             })
         }
 
         function modificarEmpresa() {
             var empresa = Restangular.one('empresas', vm.empresa.id);
             empresa.put(vm.empresa).then(function (response) {
-                swal('Actualizada correctamente')
+                toastr.success('Actualizada correctamente');
                 $('#newEmpresa').modal('hide');
             })
         }
@@ -111,14 +111,14 @@
                 confirmButtonColor: "#DD6B55",
                 cancelButtonText: "No",
                 confirmButtonText: "Si",
-                closeOnConfirm: false
+                closeOnConfirm: true
             }, function () {
                 empresa.activa = true;
                 empresa.put().then(function (response) {
-                    swal('Activada correctamente');
+                    toastr.success('Empresa activada correctamente');
                     cargarEmpresas();
                 },function (error) {
-                    swal('Ocurrio un problema al intentar activar esta empresa')
+                    toastr.error('Ocurrio un problema al intentar activar esta empresa!', 'Error!')
                 })
             });
         }
@@ -133,14 +133,14 @@
                 confirmButtonColor: "#DD6B55",
                 cancelButtonText: "No",
                 confirmButtonText: "Si",
-                closeOnConfirm: false
+                closeOnConfirm: true
             }, function () {
                 empresa.activa = false;
                 empresa.put().then(function (response) {
-                    swal('Desactivada correctamente');
+                    toastr.success('Empresa desactivada correctamente');
                     cargarEmpresas();
                 },function (error) {
-                    swal('Ocurrio un problema al intentar desactivar esta empresa')
+                    toastr.error('Ocurrio un problema al intentar desactivar esta empresa.', 'Error!')
                 })
             });
 

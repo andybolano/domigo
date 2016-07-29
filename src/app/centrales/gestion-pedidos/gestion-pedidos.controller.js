@@ -98,7 +98,7 @@
 
         vm.selectedCantidadMensajeros = function (mensajero) {
             vm.mensajerosS.push(mensajero.id);
-            console.log(vm.mensajerosS)
+            // console.log(vm.mensajerosS)
         }
 
         function guardarPedido(index) {
@@ -119,21 +119,24 @@
                         }, function (response) {
                             vm.selectedMensajero = {};
                             vm.mensajerosS = [];
-                            swal('Se registro el pedido correctamente')
+                            toastr.success('Se registro el pedido correctamente');
+                            // swal('Se registro el pedido correctamente')
                             vm.clientes.splice(index, 1);
                             sessionStorage.setItem('pedidos', JSON.stringify(vm.clientes));
                             setTimeout(cargarMensajerosDisponibles(), 2000);
                             setTimeout(cargarMensajerosOcupados(), 2000);
-
                         });
                     } else {
-                        swal('No has seleccionado el tipo de cliente Empresa/Particular')
+                        toastr.warning('No has seleccionado el tipo de cliente Empresa/Particular', 'Espera!')
+                        // swal('No has seleccionado el tipo de cliente Empresa/Particular')
                     }
                 }else{
-                    swal('No ha seleccionado el tipo de servicio')
+                    toastr.warning('No ha seleccionado el tipo de servicio', 'Espera!');
+                    // swal('No ha seleccionado el tipo de servicio')
                 }
             } else {
-                swal('No ha seleccionado ninguna mensajero para registrar el pedido')
+                toastr.warning('No ha seleccionado ninguna mensajero para registrar el pedido', 'Espera!');
+                // swal('No ha seleccionado ninguna mensajero para registrar el pedido')
             }
         }
 
@@ -195,11 +198,16 @@
                 confirmButtonColor: "#DD6B55",
                 cancelButtonText: "No",
                 confirmButtonText: "Si",
-                closeOnConfirm: false
+                closeOnConfirm: true
             }, function () {
+                vm.selectedMensajero = {};
+                vm.mensajerosS = [];
                 vm.clientes.splice(index, 1);
                 sessionStorage.setItem('pedidos', JSON.stringify(vm.clientes));
-                swal("Eliminado!", "Has eliminado el pedido correctamente.", "success");
+                toastr.success('Has eliminado el pedido correctamente.', 'Eliminado!');
+                setTimeout(cargarMensajerosDisponibles(), 2000);
+                setTimeout(cargarMensajerosOcupados(), 2000);
+                // swal("Eliminado!", "Has eliminado el pedido correctamente.", "success");
             });
         };
 
@@ -241,7 +249,7 @@
                 title: "ESTAS SEGURO?",
                 text: "Estas intentando colocar disponible al mensajero " + mensajero.nombre + ' ' + mensajero.apellidos,
                 showCancelButton: true,
-                closeOnConfirm: false,
+                closeOnConfirm: true,
                 cancelButtonText: 'No',
                 confirmButtonText: 'Si',
                 animation: "slide-from-top",
@@ -251,7 +259,8 @@
                 mensjaero.put().then(function (response) {
                     cargarMensajerosDisponibles();
                     cargarMensajerosOcupados();
-                    swal('Se coloco disponible al mensajero')
+                    toastr.info('Se coloco disponible al mensajero');
+                    // swal('Se coloco disponible al mensajero')
                 });
             });
         }

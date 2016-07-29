@@ -139,7 +139,8 @@
                     // cargarDatosUnMensajero(response)
                     cargarMensajeros();
                     cargarMensajerosBloqueados();
-                    swal('Sancionado correctamente');
+                    toastr.success('Sancionado correctamente');
+                    // swal('Sancionado correctamente');
                 })
             });
         }
@@ -166,7 +167,8 @@
                 mensjaero.put().then(function (response) {
                     $('#verMensajero').modal('toggle');
                     // swal(response.nombre + ' ' + response.apellidos + ' sancionado correctamente');
-                    swal('Sancionado correctamente');
+                    // swal('Sancionado correctamente');
+                    toastr.success('Sancionado correctamente');
                     // cargarDatosUnMensajero(response)
                     cargarMensajeros();
                     cargarMensajerosBloqueados();
@@ -183,7 +185,7 @@
                 showCancelButton: true,
                 cancelButtonText: 'No',
                 confirmButtonText: 'Si',
-                closeOnConfirm: false,
+                closeOnConfirm: true,
                 showLoaderOnConfirm: true,
             }, function () {
                 setTimeout(function () {
@@ -192,7 +194,7 @@
                     mensjaero.put().then(function (response) {
                         // swal('Sancion quitada correctamente al mensajero ' +response.nombre + ' ' + response.apellidos + ' correctamente');
                         $('#verMensajero').modal('toggle');
-                        swal('Sancion quitada correctamente al mensajero ');
+                        toastr.success('Sancion quitada correctamente');
                         // cargarDatosUnMensajero(response)
                         cargarMensajeros();
                         cargarMensajerosActivos();
@@ -240,7 +242,7 @@
             mensajero.fecha_vencimiento_licencia = vm.mensajero.fecha_vencimiento_licencia;
             mensajero.put().then(function (response) {
                 guardarImagen(response);
-                swal('Actualizado correctamente')
+                toastr.success('Actualizado correctamente');
                 cargarMensajeros();
 
                 setTimeout(function () {
@@ -256,7 +258,7 @@
 
         function guardarMensajero() {
             gMensajero.post(vm.mensajero).then(function (response) {
-                swal('Se guardo correctamente al mensajero ' + response.nombre + ' ' + response.apellidos);
+                toastr.success('Se guardo correctamente al mensajero ' + response.nombre + ' ' + response.apellidos);
                 $('#newMensajero').modal('toggle');
                 guardarImagen(response);
                 cargarMensajeros();
@@ -270,7 +272,7 @@
             }, function (error) {
                 angular.forEach(error, function (e) {
                     if(e.code == 'E_VALIDATION'){
-                        swal('Ya existe un mensajero registrado con esta identificación')
+                        toastr.warning('Ya existe un mensajero registrado con esta identificación', 'Espera!')
                     }
                 })
             })
