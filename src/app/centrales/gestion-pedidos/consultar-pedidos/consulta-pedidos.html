@@ -51,11 +51,14 @@
                             <thead>
                             <tr>
                                 <td>#</td>
-                                <th></th>
-                                <th>Mensajero</th>
                                 <th>Cliente</th>
-                                <th>fecha</th>
+                                <th>Telefono</th>
+                                <th>Origen</th>
                                 <th>Destino</th>
+                                <th>fecha</th>
+                                <th>Mensajero</th>
+                                <th>Telefono</th>
+                                <th>Tipo</th>
                                 <th style="text-align: center;">Estado pedido</th>
                             </tr>
                             </thead>
@@ -63,24 +66,34 @@
                             <tr ng-repeat="domicilio in vm.domicilios | filter: filtro">
                                 <td>{{$index+1}}</td>
                                 <td>
-                                    <img ng-src="http://api.domigo.co/images/mensajeros/{{domicilio.mensajero.fotografia}}"
-                                         alt="">
-                                </td>
-                                <td>
-                                    {{domicilio.mensajero.nombre}} {{domicilio.mensajero.apellidos}}
-                                </td>
-                                <td>
                                     {{domicilio.cliente.nombre}}
+                                </td>
+                                <td>
+                                    {{domicilio.cliente.telefono}}
+                                </td>
+                                <td>
+                                    {{domicilio.direccion_origen}}
+                                </td>
+                                <td>
+                                    {{domicilio.direccion_destino}}
                                 </td>
                                 <td>
                                     {{domicilio.fecha | date}}
                                 </td>
                                 <td>
-                                    {{domicilio.direccion_destino}}
+                                    {{domicilio.mensajero.nombre}} {{domicilio.mensajero.apellidos}}
+                                </td>
+                                <td>
+                                    {{domicilio.mensajero.telefono}}
+                                </td>
+                                <td>
+                                    {{domicilio.tipo.nombre}}
                                 </td>
                                 <td style="text-align: center">
-                                    <span class="badge-primary" ng-if="domicilio.estado == 'asignado'" style="background-color:#64dd17;padding: 3px;border-radius:5px;font-size: 12px;">{{domicilio.estado}}</span>
-                                    <span class="badge-danger" ng-if="domicilio.estado == 'finalizado'" style="background-color:#DF1008;padding: 3px;border-radius:5px;font-size: 12px;">{{domicilio.estado}}</span>
+                                    <span class="badge-primary" ng-if="domicilio.estado == 'asignado'"
+                                          style="background-color:#64dd17;padding: 3px;border-radius:5px;font-size: 12px;">{{domicilio.estado}}</span>
+                                    <span class="badge-danger" ng-if="domicilio.estado == 'finalizado'"
+                                          style="background-color:#DF1008;padding: 3px;border-radius:5px;font-size: 12px;">{{domicilio.estado}}</span>
                                 </td>
                             </tr>
                             </tbody>
