@@ -76,7 +76,7 @@
 
         function cargarMensajerosDisponibles() {
             vm.mensajeros = [];
-            var campos = 'condicion,nombre,apellidos,telefonos,cedula,id';
+            var campos = 'condicion,nombre,apellidos,telefono,cedula,id';
             Restangular.service('mensajeros?fields=' + campos, Restangular.one('empresas', authService.currentUser().empresa.id)).getList({
                 condicion: 'activo',
                 estado: 1
@@ -87,7 +87,7 @@
 
         function cargarMensajerosOcupados() {
             vm.mensajerosOcupados = [];
-            var campos = 'condicion,nombre,apellidos,telefonos,cedula,id';
+            var campos = 'condicion,nombre,apellidos,telefono,cedula,id';
             Restangular.service('mensajeros?fields=' + campos, Restangular.one('empresas', authService.currentUser().empresa.id)).getList({
                 condicion: 'activo',
                 estado: 0
@@ -286,6 +286,10 @@
             Restangular.service('tipos_servicios', Restangular.one('empresas', authService.currentUser().empresa.id)).getList().then(function (response) {
                 vm.tiposServicios = response;
             });
+        }
+
+        function getCliente(telefono) {
+
         }
 
         vm.selectedTipoServicio = function ($index) {

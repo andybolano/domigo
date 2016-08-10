@@ -27,7 +27,7 @@
 
         function cargarMensajero() {
             vm.pago = {};
-            var campos = 'fotografia,condicion,direccion,nombre,apellidos,telefonos,email,vehiculo,cedula,id';
+            var campos = 'fotografia,condicion,direccion,nombre,apellidos,telefono,email,vehiculo,cedula,id';
             Restangular.service('mensajeros?fields=' + campos + '&populate=pagos', Restangular.one('empresas', authService.currentUser().empresa.id)).getList({cedula: vm.buscar}).then(function (response) {
                 if (response.length <= 0) {
                     toastr.info('No se encontro ningun mensajero con esta identificacion');

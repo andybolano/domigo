@@ -35,24 +35,6 @@
     </div>
 </script>
 
-
-<!--<div id="modalDescripcion" class="modal inmodal in face" role="dialog">-->
-<!--<div class="modal-dialog " style="min-width:25%;">-->
-
-<!--<div class="modal-content" style="border-radius:20px;">-->
-<!--<div class="modal-header" style="padding:15px;text-align:left">-->
-<!--<h3 style="font-weight:400;color:#B71C1C;">#pedido: Nombre, telefono</h3>-->
-<!--</div>-->
-<!--<div class="modal-body" style="border-radius:20px;">-->
-<!--<textarea-->
-<!--placeholder="Descripcion" class="input-sm form-control buscador-domigo"-->
-<!--style="margin-top:5px;" ng-model="cliente.descripcion" required>-->
-<!--</textarea>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-
 <div class="wrapper wrapper-content animated fadeIn">
     <div class="ibox float-e-margins">
         <div class="ibox-title radio-title">
@@ -233,7 +215,7 @@
                                                     </a>
 
                                                     <ul class="dropdown-menu pull-right">
-                                                        <li ng-class="{active : vm.active === $index}"
+                                                        <li class="Ltipo" ng-class="{active : vm.active === $index}"
                                                             ng-repeat="servicio in vm.tiposServicios track by $index"
                                                             ng-click="vm.selectedTipoServicio($index)">
                                                             <a href="javascript:;">{{servicio.nombre}}
@@ -369,4 +351,12 @@
     $('#ui').css("background-color", "#DF1008");
     $("#page-wrapper").css("background-color", "#DF1008");
 
-</script>                 
+</script>
+
+<style>
+    .Ltipo:hover{
+        background-color: rgb(213, 0, 0) !important;
+        color: rgb(213, 0, 0) !important;
+        box-shadow: 0 0 3px rgb(213, 0, 0) !important;
+    }
+</style>

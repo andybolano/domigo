@@ -58,7 +58,7 @@
         function cargarMensajerosActivos() {
             vm.texto = 'Mensajeros Activos';
             vm.mensajeros = [];
-            // var campos = 'enlista_negra,n_domicilios_exitosos,n_domicilios_rechazados,fotografia,condicion,direccion,nombre,apellidos,telefonos,email,vehiculo,cedula,id';
+            // var campos = 'enlista_negra,n_domicilios_exitosos,n_domicilios_rechazados,fotografia,condicion,direccion,nombre,apellidos,telefono,email,vehiculo,cedula,id';
             var campos = 'all';
             Restangular.service('mensajeros?fields=' + campos, Restangular.one('empresas', authService.currentUser().empresa.id)).getList({condicion: 'activo'}).then(function (response) {
                 vm.mensajeros = response;
@@ -69,7 +69,7 @@
             vm.texto = 'Mensajeros Sancionados';
             vm.mensajeros = [];
             var campos = 'all';
-            // var campos = 'enlista_negra,n_domicilios_exitosos,n_domicilios_rechazados,fotografia,condicion,direccion,nombre,apellidos,telefonos,email,vehiculo,cedula,id';
+            // var campos = 'enlista_negra,n_domicilios_exitosos,n_domicilios_rechazados,fotografia,condicion,direccion,nombre,apellidos,telefono,email,vehiculo,cedula,id';
             Restangular.service('mensajeros?fields=' + campos, Restangular.one('empresas', authService.currentUser().empresa.id)).getList({condicion: 'sancionado'}).then(function (response) {
                 vm.mensajeros = response;
             });
@@ -79,7 +79,7 @@
             vm.texto = 'Mensajeros Ausentes';
             vm.mensajeros = [];
             var campos = 'all';
-            // var campos = 'enlista_negra,n_domicilios_exitosos,n_domicilios_rechazados,fotografia,condicion,direccion,nombre,apellidos,telefonos,email,vehiculo,cedula,id';
+            // var campos = 'enlista_negra,n_domicilios_exitosos,n_domicilios_rechazados,fotografia,condicion,direccion,nombre,apellidos,telefono,email,vehiculo,cedula,id';
             Restangular.service('mensajeros?fields=' + campos, Restangular.one('empresas', authService.currentUser().empresa.id)).getList({condicion: 'ausente'}).then(function (response) {
                 vm.mensajeros = response;
             });
@@ -88,7 +88,7 @@
         function cargarDatosUnMensajero(responde) {
             vm.mensajero = responde;
             vm.mensajero.cedula = parseInt(vm.mensajero.cedula);
-            vm.mensajero.telefonos = parseInt(vm.mensajero.telefonos);
+            vm.mensajero.telefono = parseInt(vm.mensajero.telefono);
             vm.mensajero.licencia_conducion = parseInt(vm.mensajero.licencia_conducion);
             vm.mensajero.fecha_expedicion_licencia = new Date(vm.mensajero.fecha_expedicion_licencia);
             vm.mensajero.fecha_vencimiento_licencia = new Date(vm.mensajero.fecha_vencimiento_licencia);
@@ -102,7 +102,7 @@
         function verMensajero(mensajero) {
             vm.mensajero = mensajero;
             vm.mensajero.cedula = parseInt(vm.mensajero.cedula);
-            vm.mensajero.telefonos = parseInt(vm.mensajero.telefonos);
+            vm.mensajero.telefono = parseInt(vm.mensajero.telefono);
             vm.mensajero.licencia_conducion = parseInt(vm.mensajero.licencia_conducion);
             vm.mensajero.fecha_expedicion_licencia = new Date(vm.mensajero.fecha_expedicion_licencia);
             vm.mensajero.fecha_vencimiento_licencia = new Date(vm.mensajero.fecha_vencimiento_licencia);
@@ -213,7 +213,7 @@
         function verMmensajero(mensajero) {
             vm.mensajero = mensajero;
             vm.mensajero.cedula = parseInt(vm.mensajero.cedula);
-            vm.mensajero.telefonos = parseInt(vm.mensajero.telefonos);
+            vm.mensajero.telefono = parseInt(vm.mensajero.telefono);
             vm.mensajero.licencia_conducion = parseInt(vm.mensajero.licencia_conducion);
             vm.mensajero.fecha_expedicion_licencia = new Date(vm.mensajero.fecha_expedicion_licencia);
             vm.mensajero.fecha_vencimiento_licencia = new Date(vm.mensajero.fecha_vencimiento_licencia);
@@ -232,7 +232,7 @@
             mensajero.sexo = vm.mensajero.sexo;
             mensajero.direccion = vm.mensajero.direccion;
             mensajero.barrio = vm.mensajero.barrio;
-            mensajero.telefonos = vm.mensajero.telefonos;
+            mensajero.telefono = vm.mensajero.telefono;
             mensajero.ciudad = vm.mensajero.ciudad;
             mensajero.email = vm.mensajero.email;
             mensajero.vehiculo = vm.mensajero.vehiculo;

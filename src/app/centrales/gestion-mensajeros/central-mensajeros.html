@@ -94,7 +94,7 @@
                                 <td style="font-size:14px;vertical-align: middle" width="20%;">{{mensajero.nombre}} {{mensajero.apellidos}}
                                 </td>
                                 <td style="vertical-align:middle;" ><i class="material-icons pull-left" style="color:#DF1008;margin-right:5px">call</i>
-                                    {{mensajero.telefonos[0]}}
+                                    {{mensajero.telefono}}
                                 </td>
                                 <td style="vertical-align:middle;" ><i class="material-icons pull-left" style="color:#DF1008;margin-right:5px">email</i> {{mensajero.email}}</td>
                                 <td width="15%" style="vertical-align:middle;" ><i class="material-icons pull-left" style="color:#DF1008;margin-right:5px">motorcycle</i> <span
@@ -252,7 +252,7 @@
                             <label style="color:#DF1008;font-weight:700;font-size:14px">Telefono:</label>
                              <div class="input-group">
                                  <span class="input-group-addon icon-input"><i class="fa fa-mobile"></i></span>
-                                <input name="telefono" ng-model="vm.mensajero.telefonos" type="number"
+                                <input name="telefono" ng-model="vm.mensajero.telefono" type="number"
                                        class="form-control input-register"
                                         required
                                       >
@@ -569,7 +569,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <i class="material-icons" style="color:#DF1008;margin:0">call</i>
-                                    {{vm.mensajero.telefonos}}
+                                    {{vm.mensajero.telefono}}
                                 </div>
 
 
