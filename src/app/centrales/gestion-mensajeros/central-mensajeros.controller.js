@@ -17,6 +17,9 @@
         vm.variableBloqueados = false;
         vm.fotografia = '';
         vm.editMode = true;
+        toastr.options = {
+            "positionClass": "toast-top-center"
+        };
 
         // funciones publicas
         vm.cargarMensajeros = cargarMensajeros;

@@ -27,6 +27,9 @@
         vm.pedido = {};
         vm.mensajerosS = [];
         vm.clientes = JSON.parse(sessionStorage.getItem('pedidos')) || [];
+        toastr.options = {
+            "positionClass": "toast-top-center"
+        };
 
         io.socket.on('newCall', function (msg) {
             $scope.$apply(function () {
@@ -96,6 +99,14 @@
             });
         }
 
+        Array.prototype.unique = function (a) {
+            return function () {
+                return this.filter(a)
+            }
+        }(function (a, b, c) {
+            return c.indexOf(a, b + 1) < 0
+        });
+
         vm.selectedCantidadMensajeros = function (mensajero) {
             vm.mensajerosS.push(mensajero.id);
             // console.log(vm.mensajerosS)
@@ -103,9 +114,9 @@
 
         function guardarPedido(index) {
             if (vm.selectedMensajero && vm.selectedPedido && vm.mensajerosS.length > 0) {
-                if (vm.selectedServicio){
+                if (vm.selectedServicio) {
                     var pedido = vm.clientes[index];
-                    pedido.mensajeros = vm.mensajerosS;
+                    pedido.mensajeros = vm.mensajerosS.unique();
                     pedido.tipo = vm.selectedServicio.id;
                     pedido.empresa = authService.currentUser().empresa.id;
                     if (pedido.cliente.tipo == 'empresa' || pedido.cliente.tipo == 'particular') {
@@ -130,7 +141,7 @@
                         toastr.warning('No has seleccionado el tipo de cliente Empresa/Particular', 'Espera!')
                         // swal('No has seleccionado el tipo de cliente Empresa/Particular')
                     }
-                }else{
+                } else {
                     toastr.warning('No ha seleccionado el tipo de servicio', 'Espera!');
                     // swal('No ha seleccionado el tipo de servicio')
                 }

@@ -16,6 +16,10 @@
         vm.fechaInicio = new Date();
         vm.fechaFinal = new Date();
         vm.mostrar = false;
+        toastr.options = {
+            "positionClass": "toast-top-center"
+        };
+
         vm.cargarMensajero = cargarMensajero;
         vm.guardarPago = guardarPago;
 

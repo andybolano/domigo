@@ -16,6 +16,9 @@
         vm.pagos = [];
         vm.fechaInicio = new Date();
         vm.fechaFinal = new Date();
+        toastr.options = {
+            "positionClass": "toast-top-center"
+        };
 
         // funciones
         vm.cargarPagos = cargarPagos;

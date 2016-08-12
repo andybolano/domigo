@@ -14,6 +14,9 @@
         vm.conceptoCobro = {};
         vm.tipoServicio = {};
         vm.editMode = false;
+        toastr.options = {
+            "positionClass": "toast-top-center"
+        };
 
         vm.guardarConcepto = guardarConcepto;
         vm.guardarServicio = guardarServicio;
