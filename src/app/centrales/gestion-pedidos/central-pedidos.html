@@ -159,7 +159,7 @@
                                             <input ng-min="0" value="{{cliente.cliente.telefono }}" type="number"
                                                    placeholder="Telefono" id="exampleInputEmail2"
                                                    class="input-sm form-control buscador-domigo"
-                                                   style="margin-top:3px;" ng-model="cliente.cliente.telefono" required>
+                                                   style="margin-top:3px;" ng-model="cliente.cliente.telefono" ng-blur="vm.getCliente($index)" required>
 
 
                                         </td>

@@ -21,6 +21,9 @@
         vm.guardarPedido = guardarPedido;
         vm.removePedido = removePedido;
         vm.modalDescripcion = modalDescripcion;
+
+        vm.getCliente = getCliente;
+
         // variables publicas
         vm.dorigens = [];
         vm.ddestinos = [];
@@ -216,8 +219,8 @@
                 vm.clientes.splice(index, 1);
                 sessionStorage.setItem('pedidos', JSON.stringify(vm.clientes));
                 toastr.success('Has eliminado el pedido correctamente.', 'Eliminado!');
-                setTimeout(cargarMensajerosDisponibles(), 2000);
-                setTimeout(cargarMensajerosOcupados(), 2000);
+                cargarMensajerosDisponibles();
+                cargarMensajerosOcupados();
                 // swal("Eliminado!", "Has eliminado el pedido correctamente.", "success");
             });
         };
@@ -299,8 +302,16 @@
             });
         }
 
-        function getCliente(telefono) {
+        function getCliente($index) {
+            var datos = vm.clientes[$index];
+            Restangular.one('clientes?telefono=' + datos.cliente.telefono).get().then(function (response) {
+                console.log($index)
+                vm.clientes[$index].cliente.tipo = response.tipo;
+                vm.clientes[$index].cliente.nombre = response.nombre;
+                cargarDireccionesDestino(response.id, 'destino');
+                cargarDireccionesOrigen(response.id, 'origen')
 
+            });
         }
 
         vm.selectedTipoServicio = function ($index) {
