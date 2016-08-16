@@ -18,7 +18,6 @@
             vm.domicilios = [];
             Restangular.service('domicilios', Restangular.one('empresas', authService.currentUser().empresa.id)).getList().then(function (response) {
                 vm.domicilios = response;
-                console.log(response)
             });
         }
 

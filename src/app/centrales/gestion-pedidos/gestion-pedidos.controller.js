@@ -120,7 +120,7 @@
                 if (vm.selectedServicio) {
                     var pedido = vm.clientes[index];
                     pedido.mensajeros = vm.mensajerosS.unique();
-                    pedido.tipo = vm.selectedServicio.id;
+                    // pedido.tipo = vm.selectedServicio.id;
                     pedido.empresa = authService.currentUser().empresa.id;
                     if (pedido.cliente.tipo == 'empresa' || pedido.cliente.tipo == 'particular') {
                         io.socket.request({
@@ -305,7 +305,7 @@
         function getCliente($index) {
             var datos = vm.clientes[$index];
             Restangular.one('clientes?telefono=' + datos.cliente.telefono).get().then(function (response) {
-                console.log($index)
+                vm.clientes[$index].cliente.id = response.id;
                 vm.clientes[$index].cliente.tipo = response.tipo;
                 vm.clientes[$index].cliente.nombre = response.nombre;
                 cargarDireccionesDestino(response.id, 'destino');
@@ -314,8 +314,9 @@
             });
         }
 
-        vm.selectedTipoServicio = function ($index) {
-            vm.active = $index;
+        vm.selectedTipoServicio = function ($index, cliente) {
+            vm.active = vm.tiposServicios[$index];
+            cliente.tipo = vm.tiposServicios[$index].id;
             vm.selectedServicio = vm.tiposServicios[$index];
         };
 

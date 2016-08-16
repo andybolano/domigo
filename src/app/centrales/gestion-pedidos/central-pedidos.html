@@ -53,18 +53,9 @@
                         </a>
                     </div>
                 </div>
-                <!--<div class="col-lg-3" style="text-align: left">-->
-                <!---->
-                <!--</div>-->
+
                 <div class="col-lg-3">
                     <div class="input-group" style="margin-top:5px;">
-                        <!--<span class="input-group-btn">-->
-                        <!--<button type="button" class="btn btn-sm btn-buscador">-->
-                        <!--<i class="fa fa-search" style="color:#DF1008"></i>-->
-                        <!--</button>-->
-                        <!--</span>-->
-                        <!--<input type="text" placeholder="Buscador" class="input-sm form-control buscador-domigo"-->
-                        <!--ng-model="filtro">-->
 
                     </div>
                 </div>
@@ -120,7 +111,7 @@
                     <ul style="margin:0;padding: 0">
 
                         <li style="padding: 0;margin: 0;list-style:none;zoom:90%"
-                            ng-mouseover="vm.selectPedido(cliente.cliente)"
+                            ng-mouseover="vm.selectPedido(cliente)"
                             ng-repeat="cliente in vm.clientes track by $index">
                             <form name="pedidoForm" novalidate>
                                 <table width="100%" border="0">
@@ -159,7 +150,8 @@
                                             <input ng-min="0" value="{{cliente.cliente.telefono }}" type="number"
                                                    placeholder="Telefono" id="exampleInputEmail2"
                                                    class="input-sm form-control buscador-domigo"
-                                                   style="margin-top:3px;" ng-model="cliente.cliente.telefono" ng-blur="vm.getCliente($index)" required>
+                                                   style="margin-top:3px;" ng-model="cliente.cliente.telefono"
+                                                   ng-blur="vm.getCliente($index)" required>
 
 
                                         </td>
@@ -215,9 +207,9 @@
                                                     </a>
 
                                                     <ul class="dropdown-menu pull-right">
-                                                        <li class="Ltipo" ng-class="{active : vm.active === $index}"
+                                                        <li class="Ltipo" ng-class="{active : servicio.id === cliente.tipo}"
                                                             ng-repeat="servicio in vm.tiposServicios track by $index"
-                                                            ng-click="vm.selectedTipoServicio($index)">
+                                                            ng-click="vm.selectedTipoServicio($index, cliente)">
                                                             <a href="javascript:;">{{servicio.nombre}}
                                                                 <b> valor: {{servicio.valor | currency}}</b>
                                                             </a>
@@ -354,7 +346,7 @@
 </script>
 
 <style>
-    .Ltipo:hover{
+    .Ltipo:hover {
         background-color: rgb(213, 0, 0) !important;
         color: rgb(213, 0, 0) !important;
         box-shadow: 0 0 3px rgb(213, 0, 0) !important;
