@@ -35,11 +35,11 @@
             var dif = fFecha2 - fFecha1;
             var dias = Math.floor(dif / (1000 * 60 * 60 * 24));
             if(dias < 0){
-                swal('formato de fechas invalido, la fecha hasta debe ser mayor a la fecha desde')
+                toastr.warning('formato de fechas invalido, la fecha hasta debe ser mayor a la fecha desde', 'Espera!');
             }else{
                 Restangular.service('pagos?fecha_desde=' + desde + '&fecha_hasta=' + hasta, Restangular.one('empresas', authService.currentUser().empresa.id)).getList().then(function (response) {
                     if (response.length <= 0) {
-                        swal('No se registraron pagos en la fecha o fechas seleccionadas')
+                        toastr.warning('No se registraron pagos en la fecha o fechas seleccionadas', 'Espera!');
                     } else {
                         vm.pagos = response;
                     }

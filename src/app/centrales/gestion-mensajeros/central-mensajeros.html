@@ -1,11 +1,20 @@
 <style>
-    .icon-input{
-        color:#DF1008;
-        background:transparent;border:1px solid #DF1008;border-bottom-left-radius:10px;border-top-left-radius:10px;border-right:0;font-size: 14px;
+    .icon-input {
+        color: #DF1008;
+        background: transparent;
+        border: 1px solid #DF1008;
+        border-bottom-left-radius: 10px;
+        border-top-left-radius: 10px;
+        border-right: 0;
+        font-size: 14px;
     }
-    
-    .input-register{
-        border:1px solid #DF1008;border-bottom-right-radius:10px !important;border-top-right-radius:10px !important;background-color:transparent;border-left:0
+
+    .input-register {
+        border: 1px solid #DF1008;
+        border-bottom-right-radius: 10px !important;
+        border-top-right-radius: 10px !important;
+        background-color: transparent;
+        border-left: 0
     }
 </style>
 <div class="wrapper wrapper-content animated fadeIn">
@@ -81,7 +90,7 @@
                             sección</h2>
                     </div>
                     <div ng-if="vm.mensajeros.length > 0">
-                     <table border="0" id="mensajerosTable" class="table table-hover" dt-options="vm.dtOptions"
+                        <table border="0" id="mensajerosTable" class="table table-hover" dt-options="vm.dtOptions"
                                style="font-weight:900;zoom:95%;">
                             <tbody>
                             <tr ng-repeat="mensajero in vm.mensajeros | filter: filtro | orderBy : 'nombre' ">
@@ -90,15 +99,22 @@
                                          class="img-circle"
                                          width="50px;" height="50px">
                                 </td>
-                                <td width="10%;" style="vertical-align:middle;" >{{mensajero.cedula}}</td>
-                                <td style="font-size:14px;vertical-align: middle" width="20%;">{{mensajero.nombre}} {{mensajero.apellidos}}
+                                <td width="10%;" style="vertical-align:middle;">{{mensajero.cedula}}</td>
+                                <td style="font-size:14px;vertical-align: middle" width="20%;">{{mensajero.nombre}}
+                                    {{mensajero.apellidos}}
                                 </td>
-                                <td style="vertical-align:middle;" ><i class="material-icons pull-left" style="color:#DF1008;margin-right:5px">call</i>
+                                <td style="vertical-align:middle;"><i class="material-icons pull-left"
+                                                                      style="color:#DF1008;margin-right:5px">call</i>
                                     {{mensajero.telefono}}
                                 </td>
-                                <td style="vertical-align:middle;" ><i class="material-icons pull-left" style="color:#DF1008;margin-right:5px">email</i> {{mensajero.email}}</td>
-                                <td width="15%" style="vertical-align:middle;" ><i class="material-icons pull-left" style="color:#DF1008;margin-right:5px">motorcycle</i> <span
-                                        style="text-transform:uppercase"> {{mensajero.vehiculo}}</span></td>
+                                <td style="vertical-align:middle;"><i class="material-icons pull-left"
+                                                                      style="color:#DF1008;margin-right:5px">email</i>
+                                    {{mensajero.email}}
+                                </td>
+                                <td width="15%" style="vertical-align:middle;"><i class="material-icons pull-left"
+                                                                                  style="color:#DF1008;margin-right:5px">motorcycle</i>
+                                    <span
+                                            style="text-transform:uppercase"> {{mensajero.vehiculo}}</span></td>
                                 <td style="zoom:80%;text-align: right;vertical-align: middle;" width="15%">
                                     <button class="btn btn-circle btn-lg btn-green" type="button"
                                             ng-click="vm.verMensajero(mensajero)"
@@ -156,112 +172,119 @@
 
                         <div class="col-lg-3">
 
-                            <label class="control-label" style="color:#DF1008;font-weight:700;font-size:14px">Cedula:</label>
+                            <label class="control-label"
+                                   style="color:#DF1008;font-weight:700;font-size:14px">Cedula:</label>
                             <div class="input-group">
-                                
+
                                 <span class="input-group-addon icon-input"><i class="fa fa-credit-card"></i></span>
                                 <input ng-model="vm.mensajero.cedula" name="cedula" type="number" min="0"
                                        class="form-control input-register"
-                                        required
-                                   >
-                            
-                          
+                                       required
+                                >
+
+
                             </div>
-                                <div class="messages"
-                                     ng-show="mensajeroForm.$submitted || mensajeroForm.cedula.$touched">
-                                    <small ng-show="mensajeroForm.cedula.$error.required">El campo es obligatorio.</small>
-                                </div>
+                            <div class="messages"
+                                 ng-show="mensajeroForm.$submitted || mensajeroForm.cedula.$touched">
+                                <small ng-show="mensajeroForm.cedula.$error.required">El campo es obligatorio.</small>
+                            </div>
                             <br>
-                            <label  style="color:#DF1008;font-weight:700;font-size:14px">Nombres:</label>
+                            <label style="color:#DF1008;font-weight:700;font-size:14px">Nombres:</label>
                             <div class="input-group">
                                 <span class="input-group-addon icon-input"><i class="fa fa-user"></i></span>
-                                <input name="nombres" ng-model="vm.mensajero.nombre" type="text" class="form-control input-register"
-                                         required
-                                       >
-                               
+                                <input name="nombres" ng-model="vm.mensajero.nombre" type="text"
+                                       class="form-control input-register"
+                                       required
+                                >
+
                             </div>
-                             <div class="messages"
-                                     ng-show="mensajeroForm.$submitted || mensajeroForm.nombres.$touched">
-                                    <small ng-show="mensajeroForm.nombres.$error.required">El campo es obligatorio.</small>
-                                </div>
+                            <div class="messages"
+                                 ng-show="mensajeroForm.$submitted || mensajeroForm.nombres.$touched">
+                                <small ng-show="mensajeroForm.nombres.$error.required">El campo es obligatorio.</small>
+                            </div>
                             <br>
                             <label style="color:#DF1008;font-weight:700;font-size:14px">Telefono:</label>
-                             <div class="input-group">
-                                 <span class="input-group-addon icon-input"><i class="fa fa-mobile"></i></span>
+                            <div class="input-group">
+                                <span class="input-group-addon icon-input"><i class="fa fa-mobile"></i></span>
                                 <input name="telefono" ng-model="vm.mensajero.telefono" type="number"
                                        class="form-control input-register"
-                                        required
-                                      >
-                               
+                                       required
+                                >
+
                             </div>
-                             <div class="messages"
-                                     ng-show="mensajeroForm.$submitted || mensajeroForm.telefono.$touched">
-                                    <small ng-show="mensajeroForm.telefono.$error.required">El campo es obligatorio.</small>
-                                </div>
+                            <div class="messages"
+                                 ng-show="mensajeroForm.$submitted || mensajeroForm.telefono.$touched">
+                                <small ng-show="mensajeroForm.telefono.$error.required">El campo es obligatorio.</small>
+                            </div>
                             <br>
-                            <label  style="color:#DF1008;font-weight:700;font-size:14px">Correo:</label>
+                            <label style="color:#DF1008;font-weight:700;font-size:14px">Correo:</label>
                             <div class="input-group">
                                 <span class="input-group-addon icon-input"><i class="fa fa-envelope"></i></span>
-                                <input name="email" ng-model="vm.mensajero.email" type="email" class="form-control input-register"
-                                        required
-                                      >
-                               
+                                <input name="email" ng-model="vm.mensajero.email" type="email"
+                                       class="form-control input-register"
+                                       required
+                                >
+
                             </div>
-                             <div class="messages"
-                                     ng-show="mensajeroForm.$submitted || mensajeroForm.email.$touched">
-                                    <small ng-show="mensajeroForm.email.$error.required">El campo es obligatorio.</small>
-                                    <small ng-show="mensajeroForm.email.$error.email">Formato de email incorrecto.</small>
-                                </div>
+                            <div class="messages"
+                                 ng-show="mensajeroForm.$submitted || mensajeroForm.email.$touched">
+                                <small ng-show="mensajeroForm.email.$error.required">El campo es obligatorio.</small>
+                                <small ng-show="mensajeroForm.email.$error.email">Formato de email incorrecto.</small>
+                            </div>
 
                         </div>
 
                         <div class="col-lg-3">
-                            <label  style="color:#DF1008;font-weight:700;font-size:14px">Ciudad:</label>
+                            <label style="color:#DF1008;font-weight:700;font-size:14px">Ciudad:</label>
                             <div class="input-group">
                                 <span class="input-group-addon icon-input"><i class="fa fa-building"></i></span>
-                                <input name="ciudad" ng-model="vm.mensajero.ciudad" type="text" class="form-control input-register"
-                                         required
-                                     >
-                                
+                                <input name="ciudad" ng-model="vm.mensajero.ciudad" type="text"
+                                       class="form-control input-register"
+                                       required
+                                >
+
                             </div>
                             <div class="messages"
-                                     ng-show="mensajeroForm.$submitted || mensajeroForm.ciudad.$touched">
-                                    <small ng-show="mensajeroForm.ciudad.$error.required">El campo es obligatorio.</small>
-                                </div>
+                                 ng-show="mensajeroForm.$submitted || mensajeroForm.ciudad.$touched">
+                                <small ng-show="mensajeroForm.ciudad.$error.required">El campo es obligatorio.</small>
+                            </div>
                             <br>
                             <label style="color:#DF1008;font-weight:700;font-size:14px">Apellidos:</label>
-                             <div class="input-group">
+                            <div class="input-group">
                                 <span class="input-group-addon icon-input"><i class="fa fa-user"></i></span>
                                 <input name="apellidos" ng-model="vm.mensajero.apellidos" type="text"
                                        class="form-control input-register"
-                                        required
-                                     >
-                              
-                             </div>
-                              <div class="messages"
-                                     ng-show="mensajeroForm.$submitted || mensajeroForm.apellidos.$touched">
-                                    <small ng-show="mensajeroForm.apellidos.$error.required">El campo es obligatorio.</small>
-                                </div>
+                                       required
+                                >
+
+                            </div>
+                            <div class="messages"
+                                 ng-show="mensajeroForm.$submitted || mensajeroForm.apellidos.$touched">
+                                <small ng-show="mensajeroForm.apellidos.$error.required">El campo es obligatorio.
+                                </small>
+                            </div>
                             <br>
                             <div class="form-group col-lg-8">
                                 <label style="color:#DF1008;font-weight:700;font-size:14px">Fecha de nacimiento:</label>
                                 <br>
                                 <input name="fnacimiento" ng-model="vm.mensajero.fecha_nacimiento" type="date"
                                        class="form-control"
-                                        required
+                                       required
                                        style="border-radius:10px;border:1px solid #DF1008;background-color:transparent">
                                 <div class="messages"
                                      ng-show="mensajeroForm.$submitted || mensajeroForm.fnacimiento.$touched">
-                                    <small ng-show="mensajeroForm.fnacimiento.$error.required">El campo es obligatorio.</small>
+                                    <small ng-show="mensajeroForm.fnacimiento.$error.required">El campo es
+                                        obligatorio.
+                                    </small>
                                 </div>
                             </div>
 
 
-                           <div class="form-group col-lg-4">
+                            <div class="form-group col-lg-4">
                                 <label style="color:#DF1008;font-weight:700;font-size:14px">Sexo:</label>
                                 <br>
                                 <select name="sexo" ng-model="vm.mensajero.sexo" class="form-control"
-                                         required
+                                        required
                                         style="border-radius:10px;border:1px solid #DF1008;background-color:transparent">
                                     <option value="M">M</option>
                                     <option value="F">F</option>
@@ -271,34 +294,35 @@
                                 </div>
                             </div>
                             <label style="color:#DF1008;font-weight:700;font-size:14px">Direccion:</label>
-                             <div class="input-group">
-                                  <span class="input-group-addon icon-input"><i class="fa fa-location-arrow"></i></span>
+                            <div class="input-group">
+                                <span class="input-group-addon icon-input"><i class="fa fa-location-arrow"></i></span>
                                 <input name="direccion" ng-model="vm.mensajero.direccion" type="text"
                                        class="form-control input-register"
-                                        required
-                                 
-                                      >
-                               
+                                       required
+
+                                >
+
                             </div>
-                             <div class="messages"
-                                     ng-show="mensajeroForm.$submitted || mensajeroForm.direccion.$touched">
-                                    <small ng-show="mensajeroForm.direccion.$error.required">El campo es obligatorio.</small>
-                                </div>
+                            <div class="messages"
+                                 ng-show="mensajeroForm.$submitted || mensajeroForm.direccion.$touched">
+                                <small ng-show="mensajeroForm.direccion.$error.required">El campo es obligatorio.
+                                </small>
+                            </div>
                         </div>
                         <div class="col-lg-2">
-                             <div class="input-group">
-                                  <label style="color:#DF1008;font-weight:700;font-size:14px">Barrio:</label>
+                            <div class="input-group">
+                                <label style="color:#DF1008;font-weight:700;font-size:14px">Barrio:</label>
                                 <input name="barrio" ng-model="vm.mensajero.barrio" type="text" class="form-control"
-                                        required
+                                       required
                                        style="border-radius:10px;border:1px solid #DF1008;background-color:transparent"
-                                      >
+                                >
                                 <div class="messages"
                                      ng-show="mensajeroForm.$submitted || mensajeroForm.barrio.$touched">
                                     <span ng-show="mensajeroForm.barrio.$error.required">El campo es obligatorio.</span>
                                 </div>
                             </div>
                         </div>
-                      
+
                         <div class="col-lg-4">
                             <div class="ibox-content text-center">
                                 <div class="m-b-sm" id="image">
@@ -306,7 +330,7 @@
                                          class="img-circle"
                                          src="http://api.domigo.co/images/mensajeros/{{vm.mensajero.fotografia}}"
                                          style="width: 200px; height: 200px;background-color:#DF1008 !important;"
-                                         >
+                                    >
                                 </div>
                                 <div class="text-center">
                                     <div class="col-lg-12" style="border: none">
@@ -327,8 +351,8 @@
                                             <i class="fa fa-star" style="color:#DF1008"></i>
                                         </button>
                                     </td>
-                                    <td><h3 <h3 style="font-weight:400;color:#B71C1C;margin-top:15px;margin-left:10px;">
-                                       
+                                    <td><h3 style="font-weight:400;color:#B71C1C;margin-top:15px;margin-left:10px;">
+
                                         Licencia de Conducción</h3></td>
                                 </tr>
                             </table>
@@ -337,121 +361,187 @@
                             <h3 style="font-weight:400;color:#B71C1C;margin-top:15px;margin-left:10px;">* Todos los
                                 campos son obligatorios</h3>
                         </div>
-                        </div>
+                    </div>
 
-                        <div class="row">
-                            <div class="col-lg-3">
-                             
-                                <div class="form-group">
-                                   <label style="color:#DF1008;font-weight:700;font-size:14px">Fecha de exp. de la
-                                        lic. de
-                                        conduccion:
-                                    </label>
-                                    <br>
-                                    <input name="felicencia" ng-model="vm.mensajero.fecha_expedicion_licencia"
-                                           type="date"
-                                           class="form-control"  required
-                                           style="border-radius:10px;border:1px solid #DF1008;background-color:transparent">
-                                    <div class="messages"
-                                         ng-show="mensajeroForm.$submitted || mensajeroForm.felicencia.$touched">
-                                        <span ng-show="mensajeroForm.felicencia.$error.required">El campo es obligatorio.</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label style="color:#DF1008;font-weight:700;font-size:14px">Fecha de ven. de la
-                                        lic. de conduccion:
-                                    </label>
-                                    <br>
-                                    <input name="fvlicencia" ng-model="vm.mensajero.fecha_vencimiento_licencia"
-                                           type="date"
-                                           class="form-control"  required
-                                           style="border-radius:10px;border:1px solid #DF1008;background-color:transparent">
-                                    <div class="messages"
-                                         ng-show="mensajeroForm.$submitted || mensajeroForm.fvlicencia.$touched">
-                                        <span ng-show="mensajeroForm.fvlicencia.$error.required">El campo es obligatorio.</span>
-                                    </div>
+                    <div class="row">
+                        <div class="col-lg-3">
+
+                            <div class="form-group">
+                                <label style="color:#DF1008;font-weight:700;font-size:14px">Fecha de exp. de la
+                                    lic. de
+                                    conduccion:
+                                </label>
+                                <br>
+                                <input name="felicencia" ng-model="vm.mensajero.fecha_expedicion_licencia"
+                                       type="date"
+                                       class="form-control" required
+                                       style="border-radius:10px;border:1px solid #DF1008;background-color:transparent">
+                                <div class="messages"
+                                     ng-show="mensajeroForm.$submitted || mensajeroForm.felicencia.$touched">
+                                    <span ng-show="mensajeroForm.felicencia.$error.required">El campo es obligatorio.</span>
                                 </div>
                             </div>
-                            <div class="col-lg-3">
-                                
-                                <div class="form-group">
-                                   <label style="color:#DF1008;font-weight:700;font-size:14px">Número de Licencia:</label>
-                                    <input name="nlicencia" ng-model="vm.mensajero.licencia_conducion" type="number"
-                                           class="form-control" style="border-radius:10px;border:1px solid #DF1008;background-color:transparent"
-                                            required>
-                                    <div class="messages"
-                                         ng-show="mensajeroForm.$submitted || mensajeroForm.nlicencia.$touched">
-                                        <span ng-show="mensajeroForm.nlicencia.$error.required">El campo es obligatorio.</span>
-                                    </div>
-                                </div>
-                             
-                               
-                                <div class="form-group">
-                                   <label style="color:#DF1008;font-weight:700;font-size:14px">Placa del Vehiculo</label>
-                                    <input name="pvehiculo" ng-model="vm.mensajero.vehiculo" type="text"
-                                           class="form-control "
-                                            required style="border-radius:10px;border:1px solid #DF1008;background-color:transparent"
-                                          
-                                         >
-                                    <div class="messages"
-                                         ng-show="mensajeroForm.$submitted || mensajeroForm.pvehiculo.$touched">
-                                        <span ng-show="mensajeroForm.pvehiculo.$error.required">El campo es obligatorio.</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-                                
-                                <div class="form-group">
-                                    <label style="color:#DF1008;font-weight:700;font-size:14px">Categoria de licencia:</label>
-                                    <br>
-                                    <select ng-model="vm.mensajero.licencia_tipo" class="form-control" name="clicencia"
-                                            required
-                                            style="border-radius:10px;border:1px solid #DF1008;background-color:transparent">
-                                        <option value="A1" title="Motos con cilindrada hasta de 125 c.c.">A1</option>
-                                        <option value="A2"
-                                                title="Motos, motociclos y mototriciclos con cilindrada mayor a 125 c.c.">
-                                            A2
-                                        </option>
-                                        <option value="B1"
-                                                title="Automóviles, motocarros, cuatrimotos, camperos, camionetas y microbuses.">
-                                            B1
-                                        </option>
-                                        <option value="B2" title="Camiones rígidos, busetas y buses.">B2</option>
-                                        <option value="B3" title="Vehículos articulados.">B3</option>
-                                        <option value="C1"
-                                                title="Para la conducción de automóviles, camperos, camionetas y microbuses.">
-                                            C1
-                                        </option>
-                                        <option value="C2"
-                                                title="Para la conducción de camiones rígidos, busetas y buses.">
-                                            C2
-                                        </option>
-                                        <option value="C3" title="Para la conducción de vehículos articulados.">C3
-                                        </option>
-                                        <div class="messages"
-                                             ng-show="mensajeroForm.$submitted || mensajeroForm.clicencia.$touched">
-                                            <span ng-show="mensajeroForm.clicencia.$error.required">El campo es obligatorio.</span>
-                                        </div>
-                                    </select>
+
+                            <div class="form-group">
+                                <label style="color:#DF1008;font-weight:700;font-size:14px">Fecha de ven. de la
+                                    lic. de conduccion:
+                                </label>
+                                <br>
+                                <input name="fvlicencia" ng-model="vm.mensajero.fecha_vencimiento_licencia"
+                                       type="date"
+                                       class="form-control" required
+                                       style="border-radius:10px;border:1px solid #DF1008;background-color:transparent">
+                                <div class="messages"
+                                     ng-show="mensajeroForm.$submitted || mensajeroForm.fvlicencia.$touched">
+                                    <span ng-show="mensajeroForm.fvlicencia.$error.required">El campo es obligatorio.</span>
                                 </div>
                             </div>
                         </div>
+                        <div class="col-lg-3">
 
-                        <div class="row">
-                            <div class="col-lg-8" style="text-align:right;zoom:110%">
-                                <input ng-show="vm.editMode" type="submit" class="btn "
-                                       style="background-color:#64DD17;color:#FFF;font-weight:600;border-radius: 30px;"
-                                       value="Registrar Mensajero" ng-click="vm.guardarMensajero();"
-                                       ng-disabled="mensajeroForm.$invalid"/>
+                            <div class="form-group">
+                                <label style="color:#DF1008;font-weight:700;font-size:14px">Número de Licencia:</label>
+                                <input name="nlicencia" ng-model="vm.mensajero.licencia_conducion" type="number"
+                                       class="form-control"
+                                       style="border-radius:10px;border:1px solid #DF1008;background-color:transparent"
+                                       required>
+                                <div class="messages"
+                                     ng-show="mensajeroForm.$submitted || mensajeroForm.nlicencia.$touched">
+                                    <span ng-show="mensajeroForm.nlicencia.$error.required">El campo es obligatorio.</span>
+                                </div>
+                            </div>
 
-                                <input ng-hide="vm.editMode" type="submit" class="btn btn-primary "
-                                       style="background-color:#689f38;color:#FFF;font-weight:600"
-                                       value="Modificar Mensajero" ng-click="vm.modificarMensajero(vm.mensajero);"
-                                       ng-disabled="mensajeroForm.$invalid"/>
+
+                            <div class="form-group">
+                                <label style="color:#DF1008;font-weight:700;font-size:14px">Placa del Vehiculo</label>
+                                <input name="pvehiculo" ng-model="vm.mensajero.vehiculo" type="text"
+                                       class="form-control "
+                                       required
+                                       style="border-radius:10px;border:1px solid #DF1008;background-color:transparent"
+
+                                >
+                                <div class="messages"
+                                     ng-show="mensajeroForm.$submitted || mensajeroForm.pvehiculo.$touched">
+                                    <span ng-show="mensajeroForm.pvehiculo.$error.required">El campo es obligatorio.</span>
+                                </div>
                             </div>
                         </div>
+                        <div class="col-lg-2">
 
+                            <div class="form-group">
+                                <label style="color:#DF1008;font-weight:700;font-size:14px">Categoria de
+                                    licencia:</label>
+                                <br>
+                                <select ng-model="vm.mensajero.licencia_tipo" class="form-control" name="clicencia"
+                                        required
+                                        style="border-radius:10px;border:1px solid #DF1008;background-color:transparent">
+                                    <option value="A1" title="Motos con cilindrada hasta de 125 c.c.">A1</option>
+                                    <option value="A2"
+                                            title="Motos, motociclos y mototriciclos con cilindrada mayor a 125 c.c.">
+                                        A2
+                                    </option>
+                                    <option value="B1"
+                                            title="Automóviles, motocarros, cuatrimotos, camperos, camionetas y microbuses.">
+                                        B1
+                                    </option>
+                                    <option value="B2" title="Camiones rígidos, busetas y buses.">B2</option>
+                                    <option value="B3" title="Vehículos articulados.">B3</option>
+                                    <option value="C1"
+                                            title="Para la conducción de automóviles, camperos, camionetas y microbuses.">
+                                        C1
+                                    </option>
+                                    <option value="C2"
+                                            title="Para la conducción de camiones rígidos, busetas y buses.">
+                                        C2
+                                    </option>
+                                    <option value="C3" title="Para la conducción de vehículos articulados.">C3
+                                    </option>
+                                    <div class="messages"
+                                         ng-show="mensajeroForm.$submitted || mensajeroForm.clicencia.$touched">
+                                        <span ng-show="mensajeroForm.clicencia.$error.required">El campo es obligatorio.</span>
+                                    </div>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-bottom: 10px;margin-top: 10px;">
+                        <div class="col-lg-6">
+                            <table>
+                                <tr>
+                                    <td style="zoom:80%">
+                                        <button class="btn btn-circle btn-lg " type="button"
+                                                style="border:2px solid #B71C1C;background-color: transparent">
+                                            <i class="fa fa-star" style="color:#DF1008"></i>
+                                        </button>
+                                    </td>
+                                    <td><h3 style="font-weight:400;color:#B71C1C;margin-top:15px;margin-left:10px;">
+
+                                        Referencia personal</h3></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-lg-2" style="text-align:center;">
+                            <h3 style="font-weight:400;color:#B71C1C;margin-top:15px;margin-left:10px;">* Todos los
+                                campos son obligatorios</h3>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label style="color:#DF1008;font-weight:700;font-size:14px">Nombre de la persona:</label>
+                                <input name="nombre_referencia" ng-model="vm.mensajero.nombre_referencia" type="text"
+                                       class="form-control"
+                                       style="border-radius:10px;border:1px solid #DF1008;background-color:transparent"
+                                       required>
+                                <div class="messages"
+                                     ng-show="mensajeroForm.$submitted || mensajeroForm.nombre_referencia.$touched">
+                                    <span ng-show="mensajeroForm.nombre_referencia.$error.required">El campo es obligatorio.</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label style="color:#DF1008;font-weight:700;font-size:14px">Telefono</label>
+                                <input name="telefono_referencia" ng-model="vm.mensajero.telefono_referencia" type="number"
+                                       class="form-control "
+                                       required
+                                       style="border-radius:10px;border:1px solid #DF1008;background-color:transparent"
+
+                                >
+                                <div class="messages"
+                                     ng-show="mensajeroForm.$submitted || mensajeroForm.telefono_referencia.$touched">
+                                    <span ng-show="mensajeroForm.telefono_referencia.$error.required">El campo es obligatorio.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label style="color:#DF1008;font-weight:700;font-size:14px">Direccion:</label>
+                                <input name="direccion_referencia" ng-model="vm.mensajero.direccion_referencia" type="text"
+                                       class="form-control"
+                                       style="border-radius:10px;border:1px solid #DF1008;background-color:transparent"
+                                       required>
+                                <div class="messages"
+                                     ng-show="mensajeroForm.$submitted || mensajeroForm.direccion_referencia.$touched">
+                                    <span ng-show="mensajeroForm.direccion_referencia.$error.required">El campo es obligatorio.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-8" style="text-align:right;zoom:110%">
+                            <input ng-show="vm.editMode" type="submit" class="btn "
+                                   style="background-color:#64DD17;color:#FFF;font-weight:600;border-radius: 30px;"
+                                   value="Registrar Mensajero" ng-click="vm.guardarMensajero();"
+                                   ng-disabled="mensajeroForm.$invalid"/>
+
+                            <input ng-hide="vm.editMode" type="submit" class="btn btn-primary "
+                                   style="background-color:#689f38;color:#FFF;font-weight:600"
+                                   value="Modificar Mensajero" ng-click="vm.modificarMensajero(vm.mensajero);"
+                                   ng-disabled="mensajeroForm.$invalid"/>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -528,7 +618,7 @@
                             <div class="center" style="text-align:center">
 
                                 <button ng-if="vm.mensajero.condicion == 'sancionado'"
-                                    ng-click="vm.desbloquearMensajero(vm.mensajero)" title="Quitar sancion"
+                                        ng-click="vm.desbloquearMensajero(vm.mensajero)" title="Quitar sancion"
                                         class="btn"
                                         type="button"
                                         style="margin-top:5px;margin-left:5px; border-radius:50%;width:40px;height:40px;background-color:#afb42b;">
@@ -537,14 +627,15 @@
                                 </button>
 
                                 <!--<button ng-click="" title="Desactivar"-->
-                                        <!--class="btn"-->
-                                        <!--type="button"-->
-                                        <!--style="margin-top:5px;margin-left:5px; border-radius:50%;width:40px;height:40px;background-color:transparent;border:2px solid #b71c1c ">-->
-                                    <!--<i-->
-                                            <!--class="fa fa-exclamation" style="color:#b71c1c"></i>-->
+                                <!--class="btn"-->
+                                <!--type="button"-->
+                                <!--style="margin-top:5px;margin-left:5px; border-radius:50%;width:40px;height:40px;background-color:transparent;border:2px solid #b71c1c ">-->
+                                <!--<i-->
+                                <!--class="fa fa-exclamation" style="color:#b71c1c"></i>-->
                                 <!--</button>-->
 
-                                <button ng-if="vm.mensajero.condicion != 'sancionado'" ng-click="vm.bloquearMensajero(vm.mensajero)" title="Sancionar"
+                                <button ng-if="vm.mensajero.condicion != 'sancionado'"
+                                        ng-click="vm.bloquearMensajero(vm.mensajero)" title="Sancionar"
                                         class="btn"
                                         type="button"
                                         style="margin-top:5px;margin-left:5px; border-radius:50%;width:40px;height:40px;background-color:transparent;border:2px solid #e65100">
@@ -552,7 +643,8 @@
                                             class="fa fa-minus" style="color:#e65100"></i>
                                 </button>
 
-                                <button ng-if="vm.mensajero.enlista_negra != 1" ng-click="vm.addListaNegra(vm.mensajero)" title="Lista Negra"
+                                <button ng-if="vm.mensajero.enlista_negra != 1"
+                                        ng-click="vm.addListaNegra(vm.mensajero)" title="Lista Negra"
                                         class="btn"
                                         type="button"
                                         style="margin-top:5px;margin-left:5px; border-radius:50%;width:40px;height:40px;background-color:transparent;border:2px solid #000">

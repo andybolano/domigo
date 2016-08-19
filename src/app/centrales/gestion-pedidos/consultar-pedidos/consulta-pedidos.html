@@ -5,21 +5,51 @@
                 <div class="col-lg-1" style="text-align:right;margin-top:5px;">
                     <i class="fa fa-list-ol icon-title"></i>
                 </div>
-                <div class="col-lg-7">
+                <div class="col-lg-4">
                     <h1>Consulta de Pedidos</h1>
                 </div>
-                <div class="col-lg-4">
-                    <div class="input-group" style="margin-top:5px;">
+                <form name="formConsulta" novalidate>
+                    <div class="col-lg-3">
+                        Desde:
+                        <div class="input-group" style="margin-top:5px;">
                   <span class="input-group-btn">
                         <button type="button" class="btn btn-sm btn-buscador">
-                        <i class="fa fa-search" style="color:#DF1008"></i>
-                        </button> 
+                        <i class="fa fa-calendar" style="color:#DF1008"></i>
+                        </button>
                         </span>
-                        <input type="text" placeholder="Buscador" class="input-sm form-control buscador-domigo"
-                               ng-model="filtro">
-
+                            <input type="date" class="input-sm form-control buscador-domigo"
+                                   ng-model="vm.fechaInicio" required>
+                        </div>
                     </div>
-                </div>
+                    <div class="col-lg-3">
+                        Hasta:
+                        <div class="input-group" style="margin-top:5px;">
+                  <span class="input-group-btn">
+                        <button type="button" class="btn btn-sm btn-buscador">
+                        <i class="fa fa-calendar" style="color:#DF1008"></i>
+                        </button>
+                        </span>
+                            <input type="date" class="input-sm form-control buscador-domigo"
+                                   ng-model="vm.fechaFinal" required>
+                        </div>
+                    </div>
+                    <div class="col-lg-1">
+                        <button ng-disabled="formConsulta.$invalid" ng-click="vm.cargarRangoDePedidos()" class="btn btn-primary" style="margin-top:20px;"><i class="fa fa-search"></i></button>
+                    </div>
+                </form>
+                <!--<div class="col-lg-4">-->
+
+                    <!--<div class="input-group" style="margin-top:5px;">-->
+                  <!--<span class="input-group-btn">-->
+                        <!--<button type="button" class="btn btn-sm btn-buscador">-->
+                        <!--<i class="fa fa-search" style="color:#DF1008"></i>-->
+                        <!--</button> -->
+                        <!--</span>-->
+                        <!--<input type="text" placeholder="Buscador" class="input-sm form-control buscador-domigo"-->
+                               <!--ng-model="filtro">-->
+
+                    <!--</div>-->
+                <!--</div>-->
             </div>
         </div>
         <div class="ibox-content radio-body" style="border-top:0;" id="content">
