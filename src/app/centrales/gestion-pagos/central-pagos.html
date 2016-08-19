@@ -135,14 +135,17 @@
                                     <td>{{$index+1}}</td>
                                     <td>{{pago.fecha | date}}</td>
                                     <td> {{pago.valor | currency}} pesos</td>
-                                    <td ng-if="pago.concepto.nombre == 'planilla'"><span
-                                            class="badge badge-primary bg-domigo">{{pago.concepto.nombre}}</span>
+                                    <td ><span
+                                            class="badge">{{pago.concepto.nombre}}</span>
                                     </td>
-                                    <td ng-if="pago.concepto.nombre == 'ahorro'"><span class="badge badge-warning ">{{pago.concepto.nombre}}</span>
-                                    </td>
-                                    <td ng-if="pago.concepto.nombre == 'prestamo'"><span class="badge badge-success">{{pago.concepto.nombre}}</span>
-                                    </td>
-                                    <td style="zoom:80%" width="20%">
+                                    <!--<td ng-if="pago.concepto.nombre == 'planilla'"><span-->
+                                            <!--class="badge badge-primary bg-domigo">{{pago.concepto.nombre}}</span>-->
+                                    <!--</td>-->
+                                    <!--<td ng-if="pago.concepto.nombre == 'ahorro'"><span class="badge badge-warning ">{{pago.concepto.nombre}}</span>-->
+                                    <!--</td>-->
+                                    <!--<td ng-if="pago.concepto.nombre == 'prestamo'"><span class="badge badge-success">{{pago.concepto.nombre}}</span>-->
+                                    <!--</td>-->
+                                    <!--<td style="zoom:80%" width="20%">-->
                                         <!--<button class="btn btn-circle btn-lg btn-green" type="button" ng-click=""-->
                                         <!--style="padding:0;background-color:#fb8c00 "><i class="fa fa-pencil"></i>-->
                                         <!--</button>-->
@@ -150,7 +153,7 @@
                                         <!--style="padding:0;background-color:#f44336"><i class="fa fa-close"-->
                                         <!--style="color:#FFF"></i>-->
                                         <!--</button>-->
-                                    </td>
+                                    <!--</td>-->
                                 </tr>
                                 </tbody>
                             </table>
