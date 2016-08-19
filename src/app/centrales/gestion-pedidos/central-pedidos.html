@@ -151,13 +151,13 @@
                                                    placeholder="Telefono" id="exampleInputEmail2"
                                                    class="input-sm form-control buscador-domigo"
                                                    style="margin-top:3px;" ng-model="cliente.cliente.telefono"
-                                                   ng-blur="vm.getCliente($index)" required>
+                                                   ng-blur="vm.getCliente(cliente)" required>
 
 
                                         </td>
                                         <td width="10%">
                                             <input value="{{cliente.cliente.nombre}}" type="text" placeholder="Nombres"
-                                                   id="exampleInputEmail2"
+                                                   id="exampleInputEmail2" ng-blur="vm.storeDomicilios()"
                                                    class="input-sm form-control buscador-domigo"
                                                    ng-model="cliente.cliente.nombre" style="margin-top:3px;" required>
                                         </td>
@@ -170,12 +170,12 @@
                                                     </button>
                                                 </span>
                                                 <input type="text" placeholder="Origen"
-                                                       placeholder="Origen"
-                                                       uib-typeahead="direccion for direccion in vm.dorigens | filter:$viewValue"
+                                                       placeholder="Origen" ng-blur="vm.storeDomicilios()"
+                                                       uib-typeahead="direccion for direccion in cliente.cliente.dorigens | filter:$viewValue"
                                                        typeahead-template-url="customTemplate.html"
                                                        typeahead-show-hint="true" typeahead-min-length="0"
                                                        ng-model="cliente.direccion_origen"
-                                                       ng-init="vm.cargarDireccionesOrigen(cliente.cliente.id, 'origen')"
+                                                       ng-init="vm.cargarDireccionesOrigen(cliente.cliente, 'origen')"
                                                        class="input-sm form-control autocomplete-domigo" required>
                                             </div>
                                         </td>
@@ -188,12 +188,12 @@
                                                     </button>
                                                 </span>
                                                 <input type="text" ng-model="cliente.direccion_destino"
-                                                       placeholder="Destino"
-                                                       uib-typeahead="direccion for direccion in vm.ddestinos | filter:$viewValue"
+                                                       placeholder="Destino" ng-blur="vm.storeDomicilios()"
+                                                       uib-typeahead="direccion for direccion in cliente.cliente.ddestinos | filter:$viewValue"
                                                        typeahead-template-url="customTemplate.html"
                                                        class="input-sm form-control autocomplete-domigo"
                                                        typeahead-show-hint="true" typeahead-min-length="0"
-                                                       ng-init="vm.cargarDireccionesDestino(cliente.cliente.id, 'destino')"
+                                                       ng-init="vm.cargarDireccionesDestino(cliente.cliente, 'destino')"
                                                        required>
                                             </div>
                                         </td>

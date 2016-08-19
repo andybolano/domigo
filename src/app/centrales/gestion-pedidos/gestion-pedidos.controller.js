@@ -21,7 +21,7 @@
         vm.guardarPedido = guardarPedido;
         vm.removePedido = removePedido;
         vm.modalDescripcion = modalDescripcion;
-
+        vm.storeDomicilios = storeDomicilios;
         vm.getCliente = getCliente;
 
         // variables publicas
@@ -56,28 +56,34 @@
             vm.selectedCantidadMensajeros(vm.selectedMensajero)
         }
 
-        function cargarDireccionesOrigen(cliente_id, tipo) {
-            io.socket.request({
-                method: 'get',
-                url: '/clientes/' + cliente_id + '/direcciones_frecuentes?direccion=' + tipo,
-                headers: {
-                    'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
-                }
-            }, function (response) {
-                vm.dorigens = response.data;
-            });
+        function cargarDireccionesOrigen(cliente, tipo) {
+            if(cliente.id) {
+                io.socket.request({
+                    method: 'get',
+                    url: '/clientes/' + cliente.id + '/direcciones_frecuentes?direccion=' + tipo,
+                    headers: {
+                        'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
+                    }
+                }, function (response) {
+                    console.log(tipo, response);
+                    cliente.dorigens = response.data;
+                });
+            }
         }
 
-        function cargarDireccionesDestino(cliente_id, tipo) {
-            io.socket.request({
-                method: 'get',
-                url: '/clientes/' + cliente_id + '/direcciones_frecuentes?direccion=' + tipo,
-                headers: {
-                    'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
-                }
-            }, function (response) {
-                vm.ddestinos = response.data;
-            });
+        function cargarDireccionesDestino(cliente, tipo) {
+            if(cliente.id){
+                io.socket.request({
+                    method: 'get',
+                    url: '/clientes/' + cliente.id + '/direcciones_frecuentes?direccion=' + tipo,
+                    headers: {
+                        'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
+                    }
+                }, function (response) {
+                    console.log(tipo, response);
+                    cliente.ddestinos = response.data;
+                });
+            }
         }
 
         function cargarMensajerosDisponibles() {
@@ -250,11 +256,10 @@
         vm.changeTipoCliente = function (tipo, $index) {
             if (tipo == 'empresa') {
                 vm.clientes[$index].cliente.tipo = tipo;
-                sessionStorage.setItem('pedidos', JSON.stringify(vm.clientes));
             } else if (tipo == 'particular') {
                 vm.clientes[$index].cliente.tipo = tipo;
-                sessionStorage.setItem('pedidos', JSON.stringify(vm.clientes));
             }
+            storeDomicilios();
         };
 
         vm.colocarDisponible = function (mensajero) {
@@ -302,15 +307,14 @@
             });
         }
 
-        function getCliente($index) {
-            var datos = vm.clientes[$index];
-            Restangular.one('clientes?telefono=' + datos.cliente.telefono).get().then(function (response) {
-                vm.clientes[$index].cliente.id = response.id;
-                vm.clientes[$index].cliente.tipo = response.tipo;
-                vm.clientes[$index].cliente.nombre = response.nombre;
-                cargarDireccionesDestino(response.id, 'destino');
-                cargarDireccionesOrigen(response.id, 'origen')
-
+        function getCliente(cliente) {
+            Restangular.one('clientes?telefono=' + cliente.cliente.telefono).get().then(function (response) {
+                cliente.cliente.id = response.id;
+                cliente.cliente.tipo = response.tipo;
+                cliente.cliente.nombre = response.nombre;
+                storeDomicilios();
+                cargarDireccionesDestino(cliente.cliente, 'destino');
+                cargarDireccionesOrigen(cliente.cliente, 'origen');
             });
         }
 
@@ -318,7 +322,12 @@
             vm.active = vm.tiposServicios[$index];
             cliente.tipo = vm.tiposServicios[$index].id;
             vm.selectedServicio = vm.tiposServicios[$index];
+            storeDomicilios();
         };
+
+        function storeDomicilios() {
+            sessionStorage.setItem('pedidos', JSON.stringify(vm.clientes));
+        }
 
         cargarTiposServicios();
         cargarMensajerosDisponibles();
