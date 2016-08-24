@@ -92,7 +92,7 @@
                     <div ng-if="vm.mensajeros.length > 0">
                         <table border="0" id="mensajerosTable" class="table table-hover" dt-options="vm.dtOptions"
                                style="font-weight:900;zoom:95%;">
-                            <tbody>
+                            
                             <tr ng-repeat="mensajero in vm.mensajeros | filter: filtro | orderBy : 'nombre' ">
                                 <td>
                                     <img ng-src="http://api.domigo.co/images/mensajeros/{{mensajero.fotografia}}"
@@ -128,7 +128,7 @@
 
                                 </td>
                             </tr>
-                            </tbody>
+                            
                         </table>
                     </div>
                 </div>
@@ -136,7 +136,7 @@
         </div>
     </div>
 </div>
-</div>
+
 
 <div id="newMensajero" class="modal inmodal in face" role="dialog">
     <div class="modal-dialog modal-lg" style="min-width:95%; zoom:90%;border-radius:20px;">
@@ -328,7 +328,7 @@
                                 <div class="m-b-sm" id="image">
                                     <img id="imagenlogo" alt="image"
                                          class="img-circle"
-                                         src="http://api.domigo.co/images/mensajeros/{{vm.mensajero.fotografia}}"
+                                         ng-src="http://api.domigo.co/images/mensajeros/{{vm.mensajero.fotografia}}"
                                          style="width: 200px; height: 200px;background-color:#DF1008 !important;"
                                     >
                                 </div>
@@ -432,9 +432,7 @@
                                 <label style="color:#DF1008;font-weight:700;font-size:14px">Categoria de
                                     licencia:</label>
                                 <br>
-                                <select ng-model="vm.mensajero.licencia_tipo" class="form-control" name="clicencia"
-                                        required
-                                        style="border-radius:10px;border:1px solid #DF1008;background-color:transparent">
+                                
                                     <option value="A1" title="Motos con cilindrada hasta de 125 c.c.">A1</option>
                                     <option value="A2"
                                             title="Motos, motociclos y mototriciclos con cilindrada mayor a 125 c.c.">
@@ -460,7 +458,7 @@
                                          ng-show="mensajeroForm.$submitted || mensajeroForm.clicencia.$touched">
                                         <span ng-show="mensajeroForm.clicencia.$error.required">El campo es obligatorio.</span>
                                     </div>
-                                </select>
+                                
                             </div>
                         </div>
                     </div>
@@ -576,14 +574,14 @@
                             <div class="text-white">
                                 <!--<span>Calificacion</span>-->
                                 <!--<span>80%</span><br>-->
-                                <div ng-if="vm.mensajero.condicion == 'ausente'" class="badge badge-danger">INACTIVO
+                                <div ng-if="vm.mensajero.condicion === 'ausente'" class="badge badge-danger">INACTIVO
                                 </div>
-                                <div ng-if="vm.mensajero.condicion == 'activo'" class="badge badge-primary">ACTIVO</div>
-                                <div ng-if="vm.mensajero.condicion == 'sancionado'" class="badge badge-warning">
+                                <div ng-if="vm.mensajero.condicion === 'activo'" class="badge badge-primary">ACTIVO</div>
+                                <div ng-if="vm.mensajero.condicion === 'sancionado'" class="badge badge-warning">
                                     SANCIONADO
                                 </div>
                             </div>
-                            <div ng-if="vm.mensajero.enlista_negra == 1" class="badge badge-warning">
+                            <div ng-if="vm.mensajero.enlista_negra === 1" class="badge badge-warning">
                                 EN LISTA NEGRA
                             </div>
                         </div>
@@ -617,7 +615,7 @@
                             <br><br>
                             <div class="center" style="text-align:center">
 
-                                <button ng-if="vm.mensajero.condicion == 'sancionado'"
+                                <button ng-if="vm.mensajero.condicion === 'sancionado'"
                                         ng-click="vm.desbloquearMensajero(vm.mensajero)" title="Quitar sancion"
                                         class="btn"
                                         type="button"
@@ -634,7 +632,7 @@
                                 <!--class="fa fa-exclamation" style="color:#b71c1c"></i>-->
                                 <!--</button>-->
 
-                                <button ng-if="vm.mensajero.condicion != 'sancionado'"
+                                <button ng-if="vm.mensajero.condicion !== 'sancionado'"
                                         ng-click="vm.bloquearMensajero(vm.mensajero)" title="Sancionar"
                                         class="btn"
                                         type="button"
@@ -643,7 +641,7 @@
                                             class="fa fa-minus" style="color:#e65100"></i>
                                 </button>
 
-                                <button ng-if="vm.mensajero.enlista_negra != 1"
+                                <button ng-if="vm.mensajero.enlista_negra !== 1"
                                         ng-click="vm.addListaNegra(vm.mensajero)" title="Lista Negra"
                                         class="btn"
                                         type="button"
@@ -718,7 +716,7 @@
                                 <table width="100%">
                                     <tr>
                                         <td>
-                                            <div class="input-group style=" style="margin-top:25px;">
+                                            <div class="input-group" style="margin-top:25px;">
                                                 <span class="input-group-btn">
                                                     <button type="button" class="btn btn-sm btn-buscador">
                                                         <i class="fa fa-search" style="color:#DF1008"></i>

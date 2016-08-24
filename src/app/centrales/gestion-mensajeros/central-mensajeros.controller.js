@@ -6,13 +6,13 @@
     'use strict';
 
     angular
-        .module('app.central_mensajeros')
-        .controller('CentralMensajerosController', CentralMensajerosController);
+            .module('app.central_mensajeros')
+            .controller('CentralMensajerosController', CentralMensajerosController);
 
     function CentralMensajerosController(Restangular, authService, $http, API) {
         // variables privadas
         var vm = this;
-        var gMensajero = Restangular.all('/empresas/' + authService.currentUser().empresa.id + '/mensajeros')
+        var gMensajero = Restangular.all('/empresas/' + authService.currentUser().empresa.id + '/mensajeros');
         vm.variableActivos = true;
         vm.variableBloqueados = false;
         vm.fotografia = '';
@@ -36,7 +36,7 @@
         vm.guardarMensajero = guardarMensajero;
         vm.modificarMensajero = modificarMensajero;
 
-        if (vm.variableActivos == true) {
+        if (vm.variableActivos === true) {
             cargarMensajerosActivos();
         }
 
@@ -47,14 +47,14 @@
             var campos = 'condicion';
             Restangular.service('mensajeros?fields=' + campos, Restangular.one('empresas', authService.currentUser().empresa.id)).getList().then(function (response) {
                 angular.forEach(response, function (m) {
-                    if (m.condicion == 'activo') {
+                    if (m.condicion === 'activo') {
                         vm.mensajerosActivos++;
-                    } else if (m.condicion == 'sancionado') {
+                    } else if (m.condicion === 'sancionado') {
                         vm.mensajerosBloqueados++;
-                    } else if (m.condicion == 'ausente') {
+                    } else if (m.condicion === 'ausente') {
                         vm.mensajerosAusentes++;
                     }
-                })
+                });
             });
         }
 
@@ -127,16 +127,17 @@
                 animation: "slide-from-top",
                 inputPlaceholder: "Escribe aca la causa de sancion"
             }, function (inputValue) {
-                if (inputValue === false) return false;
+                if (inputValue === false)
+                    return false;
                 if (inputValue === "") {
                     swal.showInputError("No has escrito nada en el campo!");
-                    return false
+                    return false;
                 }
                 var listaNegra = Restangular.all('lista_negra');
                 var obj = {
                     id: vm.m.id,
                     razon: inputValue
-                }
+                };
                 listaNegra.post(obj).then(function (response) {
                     $('#verMensajero').modal('toggle');
                     // cargarDatosUnMensajero(response)
@@ -144,7 +145,7 @@
                     cargarMensajerosBloqueados();
                     toastr.success('Sancionado correctamente');
                     // swal('Sancionado correctamente');
-                })
+                });
             });
         }
 
@@ -159,10 +160,11 @@
                 animation: "slide-from-top",
                 inputPlaceholder: "Escribe aca la causa de sancion"
             }, function (inputValue) {
-                if (inputValue === false) return false;
+                if (inputValue === false)
+                    return false;
                 if (inputValue === "") {
                     swal.showInputError("No has escrito nada en el campo!");
-                    return false
+                    return false;
                 }
                 var mensjaero = Restangular.one('mensajeros/' + vm.m.id + '/condicion');
                 mensjaero.condicion = 'sancionado';
@@ -189,7 +191,7 @@
                 cancelButtonText: 'No',
                 confirmButtonText: 'Si',
                 closeOnConfirm: true,
-                showLoaderOnConfirm: true,
+                showLoaderOnConfirm: true
             }, function () {
                 setTimeout(function () {
                     var mensjaero = Restangular.one('mensajeros/' + vm.m.id + '/condicion');
@@ -203,14 +205,14 @@
                         cargarMensajerosActivos();
                     });
                 }, 200);
-            })
+            });
         }
 
         function newMensajero() {
             vm.editMode = true;
             vm.mensajero = '';
             $('#newMensajero').modal('show');
-            document.getElementById("image").innerHTML = ['<img class="center" id="imagenlogo" style="width:200px; height: 200px; border-radius: 50%;background-color:#DF1008"; ng-src="http://api.domigo.co/images/mensajeros/', vm.mensajero.fotografia, '"  />'].join('');
+            document.getElementById("image").innerHTML = ['<img class="center" id="imagenlogo" style="width:200px; height: 200px; border-radius: 50%;background-color:#DF1008"; ng-src="http://api.domigo.co/images/mensajeros/' + vm.mensajero.fotografia, '"  />'].join('');
         }
 
         function verMmensajero(mensajero) {
@@ -222,7 +224,7 @@
             vm.mensajero.fecha_vencimiento_licencia = new Date(vm.mensajero.fecha_vencimiento_licencia);
             vm.mensajero.fecha_nacimiento = new Date(vm.mensajero.fecha_nacimiento);
             vm.editMode = false;
-            document.getElementById("image").innerHTML = ['<img class="center" id="imagenlogo" style="width:200px; height: 200px; border-radius: 50%; ng-src="http://api.domigo.co/images/mensajeros/', vm.mensajero.fotografia, '"  />'].join('');
+            document.getElementById("image").innerHTML = ['<img class="center" id="imagenlogo" style="width:200px; height: 200px; border-radius: 50%; ng-src="http://api.domigo.co/images/mensajeros/' + vm.mensajero.fotografia, '"  />'].join('');
             $('#newMensajero').modal('show');
         }
 
@@ -249,14 +251,14 @@
                 cargarMensajeros();
 
                 setTimeout(function () {
-                    if (response.condicion == 'activo') {
+                    if (response.condicion === 'activo') {
                         cargarMensajerosActivos();
                     } else {
                         cargarMensajerosBloqueados();
                     }
                 }, 3000);
                 $('#newMensajero').modal('hide');
-            })
+            });
         }
 
         function guardarMensajero() {
@@ -266,7 +268,7 @@
                 guardarImagen(response);
                 cargarMensajeros();
                 setTimeout(function () {
-                    if (response.condicion == 'activo') {
+                    if (response.condicion === 'activo') {
                         cargarMensajerosActivos();
                     } else {
                         cargarMensajerosBloqueados();
@@ -274,11 +276,11 @@
                 }, 3000);
             }, function (error) {
                 angular.forEach(error, function (e) {
-                    if(e.code == 'E_VALIDATION'){
-                        toastr.warning('Ya existe un mensajero registrado con esta identificación', 'Espera!')
+                    if (e.code === 'E_VALIDATION') {
+                        toastr.warning('Ya existe un mensajero registrado con esta identificación', 'Espera!');
                     }
-                })
-            })
+                });
+            });
         }
 
         function guardarImagen(mensajero) {
@@ -287,10 +289,10 @@
                 data.append('fotografia', vm.fotografia);
 
                 return $http.post(
-                    API + '/mensajeros/' + mensajero.id + '/fotografia', data,
-                    {
-                        transformRequest: angular.identity, headers: {'Content-Type': undefined}
-                    }
+                        API + '/mensajeros/' + mensajero.id + '/fotografia', data,
+                        {
+                            transformRequest: angular.identity, headers: {'Content-Type': undefined}
+                        }
                 );
             }
         }
