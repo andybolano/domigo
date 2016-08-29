@@ -56,36 +56,6 @@
             vm.selectedCantidadMensajeros(vm.selectedMensajero)
         }
 
-        function cargarDireccionesOrigen(cliente, tipo) {
-            if(cliente.id) {
-                io.socket.request({
-                    method: 'get',
-                    url: '/clientes/' + cliente.id + '/direcciones_frecuentes?direccion=' + tipo,
-                    headers: {
-                        'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
-                    }
-                }, function (response) {
-                    console.log(tipo, response);
-                    cliente.dorigens = response.data;
-                });
-            }
-        }
-
-        function cargarDireccionesDestino(cliente, tipo) {
-            if(cliente.id){
-                io.socket.request({
-                    method: 'get',
-                    url: '/clientes/' + cliente.id + '/direcciones_frecuentes?direccion=' + tipo,
-                    headers: {
-                        'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
-                    }
-                }, function (response) {
-                    console.log(tipo, response);
-                    cliente.ddestinos = response.data;
-                });
-            }
-        }
-
         function cargarMensajerosDisponibles() {
             vm.mensajeros = [];
             var campos = 'condicion,nombre,apellidos,telefono,cedula,id';
@@ -313,10 +283,44 @@
                 cliente.cliente.tipo = response.tipo;
                 cliente.cliente.nombre = response.nombre;
                 storeDomicilios();
-                cargarDireccionesDestino(cliente.cliente, 'destino');
-                cargarDireccionesOrigen(cliente.cliente, 'origen');
+                cargarDireccionesDestino(cliente, 'destino');
+                cargarDireccionesOrigen(cliente, 'origen');
             });
         }
+
+      function cargarDireccionesOrigen(cliente, tipo) {
+        if(cliente.cliente && cliente.cliente.id) {
+          io.socket.request({
+            method: 'get',
+            url: '/clientes/' + cliente.cliente.id + '/direcciones_frecuentes?direccion=' + tipo,
+            headers: {
+              'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
+            }
+          }, function (response) {
+            cliente.cliente.dorigens = response.data;
+            if(cliente.cliente.tipo == 'empresa'){
+              cliente.direccion_origen = response.data[0];
+            }
+          });
+        }
+      }
+
+      function cargarDireccionesDestino(cliente, tipo) {
+        if(cliente.cliente && cliente.cliente.id){
+          io.socket.request({
+            method: 'get',
+            url: '/clientes/' + cliente.cliente.id + '/direcciones_frecuentes?direccion=' + tipo,
+            headers: {
+              'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
+            }
+          }, function (response) {
+            cliente.cliente.ddestinos = response.data;
+            if(cliente.cliente.tipo == 'empresa') {
+              cliente.direccion_destino = response.data[0];
+            }
+          });
+        }
+      }
 
         vm.selectedTipoServicio = function ($index, cliente) {
             vm.active = vm.tiposServicios[$index];

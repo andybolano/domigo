@@ -151,9 +151,7 @@
                                                    placeholder="Telefono" id="exampleInputEmail2"
                                                    class="input-sm form-control buscador-domigo"
                                                    style="margin-top:3px;" ng-model="cliente.cliente.telefono"
-                                                   ng-blur="vm.getCliente(cliente)" required>
-
-
+                                                   ng-blur="vm.getCliente(cliente)" ng-enter="vm.getCliente(cliente)" required>
                                         </td>
                                         <td width="10%">
                                             <input value="{{cliente.cliente.nombre}}" type="text" placeholder="Nombres"
