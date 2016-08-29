@@ -3,10 +3,10 @@
 
     angular
         .module('app.admin_centrales')
-        .controller('AdminCentralesController', AdminCentralesController)
+        .controller('AdminCentralesController', AdminCentralesController);
 
 
-    function AdminCentralesController(DTOptionsBuilder, Restangular) {
+    function AdminCentralesController(DTOptionsBuilder, Restangular, $http, API) {
         var vm = this;
         var empresas = Restangular.all('/empresas');
         vm.empresas = [];
@@ -23,6 +23,7 @@
         vm.modificarEmpresa = modificarEmpresa;
         vm.activarEmpresa = activarEmpresa;
         vm.desactivarEmpresa = desactivarEmpresa;
+        vm.guardarImagen = guardarImagen;
 
         vm.dtOptions = DTOptionsBuilder
             .fromSource()
@@ -54,46 +55,52 @@
         cargarEmpresas();
         function cargarEmpresas() {
             limpiar();
-            var campos = 'nit,nombre,telefonos,direccion,ciudad,n_mensajeros,barrio,horario,activa'
-            Restangular.all('/empresas?fields='+campos).getList().then(function (empresas) {
+            var campos = 'nit,nombre,telefonos,direccion,ciudad,n_mensajeros,barrio,horario,activa,logo';
+            Restangular.all('/empresas?fields=' + campos).getList().then(function (empresas) {
                 vm.empresas = empresas;
                 angular.forEach(empresas, function (e) {
-                    if(e.activa == true){
+                    if (e.activa === true) {
                         vm.empresasActivas++;
-                    }else{
+                    } else {
                         vm.empresasInactivas++;
                     }
                     vm.mensajeros += e.n_mensajeros;
-                })
-            })
+                });
+            });
         }
 
         function verEmpresa(empresa) {
             vm.empresa = empresa;
             vm.editMode = false;
             $('#newEmpresa').modal('show');
+            document.getElementById("image").innerHTML = ['<img class="center" id="imagenlogo" style="border: none !important; border-radius: 50%; width: 200px; height: 200px;background-color:grey !important;" ng-src="http://api.domigo.co/images/empresas/' + vm.empresa.logo, '"  />'].join('');
         }
+
         function nuevaEmpresa() {
             vm.editMode = true;
             vm.empresa = {};
             $('#newEmpresa').modal('show');
+            document.getElementById("image").innerHTML = ['<img class="center" id="imagenlogo" style="border: none !important; border-radius: 50%; width: 200px; height: 200px;background-color:grey !important;" ng-src="http://api.domigo.co/images/empresas/' + vm.empresa.logo, '"  />'].join('');
         }
 
         function registrarEmpresa() {
-            empresas.post(vm.empresa).then(function (d) {
+            empresas.post(vm.empresa).then(function (response) {
+                guardarImagen(response);
                 cargarEmpresas();
                 $('#newEmpresa').modal('hide');
             }, function (error) {
-                toastr.error('Ocurrio un error inesperado!')
-            })
+                toastr.error('Ocurrio un error inesperado!');
+            });
         }
 
         function modificarEmpresa() {
             var empresa = Restangular.one('empresas', vm.empresa.id);
             empresa.put(vm.empresa).then(function (response) {
+                guardarImagen(response);
+                cargarEmpresas();
                 toastr.success('Actualizada correctamente');
                 $('#newEmpresa').modal('hide');
-            })
+            });
         }
 
         function limpiar() {
@@ -117,9 +124,9 @@
                 empresa.put().then(function (response) {
                     toastr.success('Empresa activada correctamente');
                     cargarEmpresas();
-                },function (error) {
-                    toastr.error('Ocurrio un problema al intentar activar esta empresa!', 'Error!')
-                })
+                }, function (error) {
+                    toastr.error('Ocurrio un problema al intentar activar esta empresa!', 'Error!');
+                });
             });
         }
 
@@ -139,11 +146,28 @@
                 empresa.put().then(function (response) {
                     toastr.success('Empresa desactivada correctamente');
                     cargarEmpresas();
-                },function (error) {
-                    toastr.error('Ocurrio un problema al intentar desactivar esta empresa.', 'Error!')
-                })
+                }, function (error) {
+                    toastr.error('Ocurrio un problema al intentar desactivar esta empresa.', 'Error!');
+                });
             });
 
+        }
+        
+        function guardarImagen(empresa) {
+            console.log(empresa);
+            if (vm.logo) {
+                var data = new FormData();
+                data.append('logo', vm.logo);
+
+                return $http.post(
+                        API + '/empresas/' + empresa.id + '/logo', data,
+                        {
+                            transformRequest: angular.identity, headers: {'Content-Type': undefined}
+                        }
+                );
+            }else{
+                console.log('vm.logo no se creo');
+            }
         }
     }
 })();

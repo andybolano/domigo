@@ -1,63 +1,4 @@
 <div class="wrapper wrapper-content animated fadeIn">
-    <!--  <div class="col-lg-2">
-          <div class="row">
-              <div class="col-lg-12">
-                  <div class="ibox float-e-margins">
-                      <div class="ibox-title">
-                          <span class="label label-success pull-right">Activas</span>
-                          <h5>Empresas</h5>
-                      </div>
-                      <div class="ibox-content">
-                          <h1 class="no-margins">{{vm.empresasActivas}}</h1>
-                          <div class="stat-percent font-bold text-success">{{(vm.empresasActivas)/(vm.empresasActivas+vm.empresasInactivas)*100 | number: 0}}%</div>
-                          <small></small>
-                      </div>
-                  </div>
-              </div>
-              <div class="col-lg-12">
-                  <div class="ibox float-e-margins">
-                      <div class="ibox-title">
-                          <span class="label label-info pull-right">Inacti</span>
-                          <h5>Empresas</h5>
-                      </div>
-                      <div class="ibox-content">
-                          <h1 class="no-margins">{{vm.empresasInactivas}}</h1>
-                          <div class="stat-percent font-bold text-info">{{(vm.empresasInactivas)/(vm.empresasActivas+vm.empresasInactivas)*100 | number: 0}}%</div>
-                          <small></small>
-                      </div>
-                  </div>
-              </div>
-
-              <div class="col-lg-12">
-                  <div class="ibox float-e-margins">
-                      <div class="ibox-title">
-                          <span class="label label-success pull-right">Acti</span>
-                          <h5>Mensajeros</h5>
-                      </div>
-                      <div class="ibox-content">
-                          <h1 class="no-margins">{{vm.mensajerosActivos}}</h1>
-                          <div class="stat-percent font-bold text-success">{{(vm.mensajerosActivos)/(vm.mensajerosActivos+vm.mensajerosInactivos)*100 | number: 0}}%</div>
-                          <small></small>
-                      </div>
-                  </div>
-              </div>
-              <div class="col-lg-12">
-                  <div class="ibox float-e-margins">
-                      <div class="ibox-title">
-                          <span class="label label-info pull-right">Inacti</span>
-                          <h5>Mensajeros</h5>
-                      </div>
-                      <div class="ibox-content">
-                          <h1 class="no-margins">{{vm.mensajerosInactivos}}</h1>
-                          <div class="stat-percent font-bold text-info">{{(vm.mensajerosInactivos)/(vm.mensajerosActivos+vm.mensajerosInactivos)*100 | number: 0}}%</div>
-                          <small></small>
-                      </div>
-                  </div>
-              </div>
-
-       </div>
-      </div>-->
-
     <div class="col-lg-12">
         <div class="ibox float-e-margin">
             <div class="ibox-title radio-title">
@@ -69,7 +10,7 @@
                         <div class="input-group">
                             <input type="text" placeholder="Buscador" class="input-sm form-control buscador-domigo"
                                    ng-model="filtro">
-                        <span class="input-group-btn">
+                            <span class="input-group-btn">
                         <button type="button" class="btn btn-sm btn-primary">
                         <i class="fa fa-search"></i>
                         </button> 
@@ -89,6 +30,7 @@
                     <div class="col-lg-12">
                         <table class="table" dt-options="vm.dtOptions">
                             <thead>
+                            <th> </th>
                             <th>Nit</th>
                             <th>Nombre</th>
                             <th>Telefono</th>
@@ -99,6 +41,11 @@
                             </thead>
                             <tbody>
                             <tr ng-repeat="empresa in vm.empresas | filter : filtro">
+                                <td>
+                                    <img ng-src="http://api.domigo.co/images/empresas/{{empresa.logo}}"
+                                         class="img-circle"
+                                         width="50px;" height="50px">
+                                </td>
                                 <td>{{empresa.nit}}</td>
                                 <td>{{empresa.nombre}}</td>
                                 <td>{{empresa.telefonos[0]}}</td>
@@ -111,14 +58,11 @@
                                             class="btn btn-sm btn-success"
                                             title="Ver y Editar"><i
                                             class="fa fa-eye"></i></button>
-                                    <!--<a class="btn btn-sm btn-danger" title="Ver Mensajeros"-->
-                                       <!--ui-sref="app.admin-centrales-mensajeros({ id:empresa.id, nombre:empresa.nombre })"><i-->
-                                            <!--class="fa fa-group"></i></a>-->
-                                    <button ng-if="empresa.activa == false" type="button"
+                                    <button ng-if="empresa.activa === false" type="button"
                                             ng-click="vm.activarEmpresa(empresa.id)"
                                             class="btn btn-sm btn-primary" title="Activar">
                                         <i class="fa fa-thumbs-down"></i></button>
-                                    <button ng-if="empresa.activa == true" type="button"
+                                    <button ng-if="empresa.activa === true" type="button"
                                             ng-click="vm.desactivarEmpresa(empresa.id)"
                                             class="btn btn-sm btn-warning" title="Desactivar">
                                         <i class="fa fa-thumbs-up"></i></button>
@@ -138,11 +82,25 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <i class="fa fa-home modal-icon"></i>
                     <h4 class="modal-title">Registro de Empresas</h4>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" style="text-align: center">
                     <form name="empresaForm">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div id="image">
+                                    <img id="imagenlogo"
+                                         ng-src="http://api.domigo.co/images/empresas/{{vm.empresa.logo}}"
+                                         style="border: none !important; border-radius: 50%; width: 200px; height: 200px;background-color:grey !important;">
+                                </div>
+                                <div class="text-center">
+                                    <div style="border: none">
+                                        <input id="files" uploader-model="vm.logo" type="file" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="col-lg-4">
                                 <div class="input-group">
@@ -205,8 +163,15 @@
                                            required>
                                 </div>
                             </div>
+                            <div class="col-lg-4">
+                                <div class="input-group">
+                                    <label>Email:</label>
+                                    <input type="email" ng-model="vm.empresa.email" class="input-sm form-control"
+                                           required>
+                                </div>
+                            </div>
                         </div>
-                        <div class="row" ng-if="vm.editMode != false">
+                        <div class="row" ng-if="vm.editMode !== false">
                             <fieldset>
                                 <legend style="text-align: center">Datos de usuario</legend>
                                 <div class="col-lg-2">
@@ -249,4 +214,67 @@
         </div>
     </div>
 </div>
-<toaster-container></toaster-container>
+
+<script>
+    $(document).ready(function () {
+
+//        $('#ui').css("background-color", "#e0e0e0");
+//        $("#page-wrapper").css("background-color", "#e0e0e0");
+        function archivo(evt) {
+            var files = evt.target.files; // FileList object
+
+            //Obtenemos la imagen del campo "file".
+            for (var i = 0, f; f = files[i]; i++) {
+                //Solo admitimos imágenes.
+                if (!f.type.match('image.*')) {
+                    continue;
+                }
+
+                var reader = new FileReader();
+
+                reader.onload = (function (theFile) {
+                    return function (e) {
+                        // Creamos la imagen.
+                        //document.getElementById("image").innerHTML = ['<img class="thumb" style="width:100%" ng-src=""', e.target.result, '" title="', escape(theFile.name), '"/>'].join('');
+                        document.getElementById('imagenlogo').src = e.target.result;
+//                        document.getElementById("imagenlogo").innerHTML = ['<img class="center" style="width:300px; height: 300px; border-radius: 50%; position: absolute; left: 0; top: 0" ng-src=""', e.target.result, '" title="', escape(theFile.name), '"/>'].join('');
+                    };
+                })(f);
+                reader.readAsDataURL(f);
+            }
+        }
+
+        document.getElementById('files').addEventListener('change', archivo, false);
+
+        $(':file').change(function () {
+            //obtenemos un array con los datos del archivo
+            var file = $("#files")[0].files[0];
+            //obtenemos el nombre del archivo
+            var fileName = file.name;
+            //obtenemos la extensión del archivo
+            //document.getElementById("nombreImagen").value=fileName;
+            fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1);
+            //obtenemos el tamaño del archivo
+            var fileSize = file.size;
+            //obtenemos el tipo de archivo image/png ejemplo
+            var fileType = file.type;
+
+//            $("#cambiar").show();
+            //mensaje con la información del archivo
+            // alert("<span class='info'>Archivo para subir: "+fileName+", peso total: "+fileSize+" bytes.</span>");
+        });
+    });
+</script>
+
+<style >
+    .pickfile {
+        margin-top: 5px;
+        padding: 10px 20px;
+        background-color: rgb(223, 16, 8);
+        color: gainsboro;
+        border-radius: 6px;
+    }
+    #inputImgEmpresa {
+        text-align:center !important;
+    }
+</style>
