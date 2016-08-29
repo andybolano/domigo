@@ -12,7 +12,7 @@
     function CentralPagosController(Restangular, authService, $scope) {
         var vm = this;
         vm.buscar = '';
-        vm.total = 0;
+        vm.pagos_filtrados = [];
         vm.fechaInicio = new Date();
         vm.fechaFinal = new Date();
         vm.mostrar = false;
@@ -22,6 +22,7 @@
 
         vm.cargarMensajero = cargarMensajero;
         vm.guardarPago = guardarPago;
+        vm.total = total;
 
         function cargarConceptosEmpresa() {
             Restangular.service('conceptos_cobros', Restangular.one('empresas', authService.currentUser().empresa.id)).getList().then(function (response) {
@@ -66,12 +67,8 @@
 
         function cargarPagosMensajeros(mensajero) {
             vm.pagos = [];
-            vm.total = 0;
             Restangular.service('pagos?populate=concepto', Restangular.one('mensajeros', mensajero.id)).getList().then(function (response) {
                 vm.pagos = response;
-                angular.forEach(vm.pagos, function (pago) {
-                    vm.total += pago.valor;
-                })
             });
 
         }
@@ -86,6 +83,14 @@
             // Restangular.service('total_ultimos_pagos', Restangular.one('empresas', authService.currentUser().empresa.id)).get().then(function (response) {
             //     vm.ultimosPagos = response;
             // });
+        }
+
+        function total() {
+          var total = 0;
+          angular.forEach(vm.pagos_filtrados, function (pago) {
+            total += pago.valor;
+          })
+          return total;
         }
 
         cargarUltimosPagos();

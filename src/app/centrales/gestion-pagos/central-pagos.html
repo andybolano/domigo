@@ -15,7 +15,7 @@
                   <span class="input-group-btn">
                         <button type="button" class="btn btn-sm btn-buscador" ng-click="vm.cargarMensajero()">
                         <i class="fa fa-search" style="color:#DF1008"></i>
-                        </button> 
+                        </button>
                         </span>
                         <input type="text" placeholder="Escriba el codigo del mensajero"
                                class="input-sm form-control buscador-domigo"
@@ -104,7 +104,7 @@
                             </div>
                         </div>
                         <div class="col-lg-3" style="text-align:right">
-                            <h2>TOTAL: <span style="color:#000">{{vm.total | currency}}</span></h2>
+                            <h2>TOTAL: <span style="color:#000">{{vm.total() | currency}}</span></h2>
                         </div>
 
                         <div ng-if="vm.pagos <= 0" style="text-align: center;margin-top:20px;">
@@ -131,7 +131,7 @@
                                     <th></th>
                                 </tr>
                                 <tbody>
-                                <tr ng-repeat="pago in vm.pagos | filter:filtro">
+                                <tr ng-repeat="pago in vm.pagos_filtrados = (vm.pagos | filter:filtro)">
                                     <td>{{$index+1}}</td>
                                     <td>{{pago.fecha | date}}</td>
                                     <td> {{pago.valor | currency}} pesos</td>
