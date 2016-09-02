@@ -92,7 +92,7 @@
                     <div ng-if="vm.mensajeros.length > 0">
                         <table border="0" id="mensajerosTable" class="table table-hover" dt-options="vm.dtOptions"
                                style="font-weight:900;zoom:95%;">
-                            
+
                             <tr ng-repeat="mensajero in vm.mensajeros | filter: filtro | orderBy : 'nombre' ">
                                 <td>
                                     <img ng-src="http://api.domigo.co/images/mensajeros/{{mensajero.fotografia}}"
@@ -128,7 +128,7 @@
 
                                 </td>
                             </tr>
-                            
+
                         </table>
                     </div>
                 </div>
@@ -432,7 +432,9 @@
                                 <label style="color:#DF1008;font-weight:700;font-size:14px">Categoria de
                                     licencia:</label>
                                 <br>
-                                
+                                <select ng-model="vm.mensajero.licencia_tipo" class="form-control" name="clicencia"
+                                        required
+                                        style="border-radius: 10px; border:1px solid #DF1008;background-color:transparent">
                                     <option value="A1" title="Motos con cilindrada hasta de 125 c.c.">A1</option>
                                     <option value="A2"
                                             title="Motos, motociclos y mototriciclos con cilindrada mayor a 125 c.c.">
@@ -454,11 +456,12 @@
                                     </option>
                                     <option value="C3" title="Para la conducción de vehículos articulados.">C3
                                     </option>
-                                    <div class="messages"
-                                         ng-show="mensajeroForm.$submitted || mensajeroForm.clicencia.$touched">
-                                        <span ng-show="mensajeroForm.clicencia.$error.required">El campo es obligatorio.</span>
-                                    </div>
-                                
+                                </select>
+                                <div class="messages"
+                                     ng-show="mensajeroForm.$submitted || mensajeroForm.clicencia.$touched">
+                                    <span ng-show="mensajeroForm.clicencia.$error.required">El campo es obligatorio.</span>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -488,7 +491,8 @@
                     <div class="row">
                         <div class="col-lg-3">
                             <div class="form-group">
-                                <label style="color:#DF1008;font-weight:700;font-size:14px">Nombre de la persona:</label>
+                                <label style="color:#DF1008;font-weight:700;font-size:14px">Nombre de la
+                                    persona:</label>
                                 <input name="nombre_referencia" ng-model="vm.mensajero.nombre_referencia" type="text"
                                        class="form-control"
                                        style="border-radius:10px;border:1px solid #DF1008;background-color:transparent"
@@ -501,7 +505,8 @@
 
                             <div class="form-group">
                                 <label style="color:#DF1008;font-weight:700;font-size:14px">Telefono</label>
-                                <input name="telefono_referencia" ng-model="vm.mensajero.telefono_referencia" type="number"
+                                <input name="telefono_referencia" ng-model="vm.mensajero.telefono_referencia"
+                                       type="number"
                                        class="form-control "
                                        required
                                        style="border-radius:10px;border:1px solid #DF1008;background-color:transparent"
@@ -516,7 +521,8 @@
                         <div class="col-lg-3">
                             <div class="form-group">
                                 <label style="color:#DF1008;font-weight:700;font-size:14px">Direccion:</label>
-                                <input name="direccion_referencia" ng-model="vm.mensajero.direccion_referencia" type="text"
+                                <input name="direccion_referencia" ng-model="vm.mensajero.direccion_referencia"
+                                       type="text"
                                        class="form-control"
                                        style="border-radius:10px;border:1px solid #DF1008;background-color:transparent"
                                        required>
@@ -576,7 +582,8 @@
                                 <!--<span>80%</span><br>-->
                                 <div ng-if="vm.mensajero.condicion === 'ausente'" class="badge badge-danger">INACTIVO
                                 </div>
-                                <div ng-if="vm.mensajero.condicion === 'activo'" class="badge badge-primary">ACTIVO</div>
+                                <div ng-if="vm.mensajero.condicion === 'activo'" class="badge badge-primary">ACTIVO
+                                </div>
                                 <div ng-if="vm.mensajero.condicion === 'sancionado'" class="badge badge-warning">
                                     SANCIONADO
                                 </div>
