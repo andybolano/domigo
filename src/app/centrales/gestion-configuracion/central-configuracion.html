@@ -34,9 +34,9 @@
                             </td>
                             <td>
                                 <button ng-disabled="conceptoForm.$invalid" class="btn btn-green"
-                                        ng-click="vm.guardarConcepto()"
+                                        ng-click="vm.guardarConcepto($event); " 
                                         style="margin-top:0px;margin-left:5px; border-radius:50%;width:40px;height:40px;"
-                                        type="submit">
+                                        type="submit" stop-propagation>
                                     <i class="fa fa-check" title='Guardar concepto'></i>
                                 </button>
                             </td>
@@ -89,13 +89,13 @@
                             </td>
                             <td>
                                 <button ng-hide="vm.editMode" ng-disabled="servicioForm.$invalid" class="btn btn-green"
-                                        ng-click="vm.guardarServicio()"
+                                        ng-click="vm.guardarServicio(); $event.stopPropagation();"
                                         style="margin-top:0px;margin-left:5px; border-radius:50%;width:40px;height:40px;"
                                         type="submit">
                                     <i class="fa fa-check" title='Guardar servicio'></i>
                                 </button>
                                 <button ng-show="vm.editMode" ng-disabled="servicioForm.$invalid" class="btn btn-green"
-                                        ng-click="vm.modificarServicio()"
+                                        ng-click="vm.modificarServicio(); $event.stopPropagation();"
                                         style="margin-top:0px;margin-left:5px; border-radius:50%;width:40px;height:40px;"
                                         type="submit">
                                     <i class="fa fa-check" title='Modificar servicio'></i>

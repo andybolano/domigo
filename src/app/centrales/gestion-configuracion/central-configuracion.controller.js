@@ -44,7 +44,9 @@
             });
         }
 
-        function guardarConcepto() {
+        function guardarConcepto($event) {
+            $event.stopPropagation();
+	        $event.preventDefault();
             io.socket.request({
                 method: 'post',
                 url: '/empresas/' + authService.currentUser().empresa.id + '/conceptos_cobros',
