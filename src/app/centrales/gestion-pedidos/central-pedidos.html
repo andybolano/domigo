@@ -302,7 +302,7 @@
                             <table class="table" ng-if="vm.mensajerosOcupados.length > 0"
                                    style='margin-left:-5px;width:95%' border='0'>
                                 <tr ng-repeat="mensajero in vm.mensajerosOcupados | orderBy : 'nombre'"
-                                    style='border:0'>
+                                    style='border:0' ng-style="mensajero.style">
                                     <td width='70%'>{{mensajero.nombre}}</td>
                                     <td style='padding: 0;vertical-align: middle' width='30%'>
                                         <a href="javascript:;" style="color: #DF1008"

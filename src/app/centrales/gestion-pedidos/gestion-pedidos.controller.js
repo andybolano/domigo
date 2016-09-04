@@ -62,8 +62,6 @@
                 mensajero.style = {}
                 delete mensajeros_seleccionados[mensajero.id];
             }
-
-            // vm.selectedCantidadMensajeros(vm.selectedMensajero)
         }
 
         function cargarMensajerosDisponibles() {
@@ -88,25 +86,12 @@
             });
         }
 
-        Array.prototype.unique = function (a) {
-            return function () {
-                return this.filter(a)
-            }
-        }(function (a, b, c) {
-            return c.indexOf(a, b + 1) < 0
-        });
-
-        // vm.selectedCantidadMensajeros = function (mensajero) {
-        //     mensajeros_seleccionados.push(mensajero.id);
-        //     console.log(mensajeros_seleccionados)
-        // }
-
         function guardarPedido(index, event) {
             if (!vm.selectedPedido || !Object.keys(mensajeros_seleccionados).length) {
                 toastr.warning('No ha seleccionado ninguna mensajero para registrar el pedido', 'Espera!');
                 return;
             }
-            if (vm.selectedServicio) {
+            if (!vm.selectedServicio) {
                 toastr.warning('No ha seleccionado el tipo de servicio', 'Espera!');
                 return;
             }
