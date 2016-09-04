@@ -210,7 +210,7 @@
 
         function newMensajero() {
             vm.editMode = true;
-            vm.mensajero = '';
+            vm.mensajero = {};
             $('#newMensajero').modal('show');
             document.getElementById("image").innerHTML = ['<img class="center" id="imagenlogo" style="width:200px; height: 200px; border-radius: 50%;background-color:#DF1008"; ng-src="http://api.domigo.co/images/mensajeros/' + vm.mensajero.fotografia, '"  />'].join('');
         }
@@ -223,6 +223,7 @@
             vm.mensajero.fecha_expedicion_licencia = new Date(vm.mensajero.fecha_expedicion_licencia);
             vm.mensajero.fecha_vencimiento_licencia = new Date(vm.mensajero.fecha_vencimiento_licencia);
             vm.mensajero.fecha_nacimiento = new Date(vm.mensajero.fecha_nacimiento);
+            vm.mensajero.telefono_referencia = parseInt(vm.mensajero.telefono_referencia);
             vm.editMode = false;
             document.getElementById("image").innerHTML = ['<img class="center" id="imagenlogo" style="width:200px; height: 200px; border-radius: 50%; ng-src="http://api.domigo.co/images/mensajeros/' + vm.mensajero.fotografia, '"  />'].join('');
             $('#newMensajero').modal('show');
@@ -245,6 +246,9 @@
             mensajero.licencia_tipo = vm.mensajero.licencia_tipo;
             mensajero.fecha_expedicion_licencia = vm.mensajero.fecha_expedicion_licencia;
             mensajero.fecha_vencimiento_licencia = vm.mensajero.fecha_vencimiento_licencia;
+            mensajero.nombre_referencia = vm.mensajero.nombre_referencia;
+            mensajero.telefono_referencia = vm.mensajero.telefono_referencia;
+            mensajero.direccion_referencia = vm.mensajero.direccion_referencia;
             mensajero.put().then(function (response) {
                 guardarImagen(response);
                 toastr.success('Actualizado correctamente');

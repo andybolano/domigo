@@ -206,7 +206,7 @@
                             <label style="color:#DF1008;font-weight:700;font-size:14px">Telefono:</label>
                             <div class="input-group">
                                 <span class="input-group-addon icon-input"><i class="fa fa-mobile"></i></span>
-                                <input name="telefono" ng-model="vm.mensajero.telefono" type="number"
+                                <input name="telefono" ng-model="vm.mensajero.telefono" type="text"
                                        class="form-control input-register"
                                        required
                                 >
@@ -222,14 +222,14 @@
                                 <span class="input-group-addon icon-input"><i class="fa fa-envelope"></i></span>
                                 <input name="email" ng-model="vm.mensajero.email" type="email"
                                        class="form-control input-register"
-                                       required
+                                       required ng-pattern="/^.+@.+\..+$/"
                                 >
 
                             </div>
                             <div class="messages"
                                  ng-show="mensajeroForm.$submitted || mensajeroForm.email.$touched">
                                 <small ng-show="mensajeroForm.email.$error.required">El campo es obligatorio.</small>
-                                <small ng-show="mensajeroForm.email.$error.email">Formato de email incorrecto.</small>
+                                <small ng-show="mensajeroForm.email.$error.pattern">Formato de email incorrecto.</small>
                             </div>
 
                         </div>
@@ -374,12 +374,12 @@
                                 <br>
                                 <input name="felicencia" ng-model="vm.mensajero.fecha_expedicion_licencia"
                                        type="date"
-                                       class="form-control" required
+                                       class="form-control" 
                                        style="border-radius:10px;border:1px solid #DF1008;background-color:transparent">
-                                <div class="messages"
+                                <!--<div class="messages"
                                      ng-show="mensajeroForm.$submitted || mensajeroForm.felicencia.$touched">
                                     <span ng-show="mensajeroForm.felicencia.$error.required">El campo es obligatorio.</span>
-                                </div>
+                                </div>-->
                             </div>
 
                             <div class="form-group">
@@ -389,12 +389,12 @@
                                 <br>
                                 <input name="fvlicencia" ng-model="vm.mensajero.fecha_vencimiento_licencia"
                                        type="date"
-                                       class="form-control" required
+                                       class="form-control"
                                        style="border-radius:10px;border:1px solid #DF1008;background-color:transparent">
-                                <div class="messages"
+                                <!--<div class="messages"
                                      ng-show="mensajeroForm.$submitted || mensajeroForm.fvlicencia.$touched">
                                     <span ng-show="mensajeroForm.fvlicencia.$error.required">El campo es obligatorio.</span>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
                         <div class="col-lg-3">
@@ -404,11 +404,11 @@
                                 <input name="nlicencia" ng-model="vm.mensajero.licencia_conducion" type="number"
                                        class="form-control"
                                        style="border-radius:10px;border:1px solid #DF1008;background-color:transparent"
-                                       required>
-                                <div class="messages"
+                                      >
+                                <!--<div class="messages"
                                      ng-show="mensajeroForm.$submitted || mensajeroForm.nlicencia.$touched">
                                     <span ng-show="mensajeroForm.nlicencia.$error.required">El campo es obligatorio.</span>
-                                </div>
+                                </div>-->
                             </div>
 
 
@@ -506,7 +506,7 @@
                             <div class="form-group">
                                 <label style="color:#DF1008;font-weight:700;font-size:14px">Telefono</label>
                                 <input name="telefono_referencia" ng-model="vm.mensajero.telefono_referencia"
-                                       type="number"
+                                       type="text"
                                        class="form-control "
                                        required
                                        style="border-radius:10px;border:1px solid #DF1008;background-color:transparent"
