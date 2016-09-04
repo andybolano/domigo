@@ -91,43 +91,45 @@
             // console.log(vm.mensajerosS)
         }
 
-        function guardarPedido(index) {
-            if (vm.selectedMensajero && vm.selectedPedido && vm.mensajerosS.length > 0) {
-                if (vm.selectedServicio) {
-                    var pedido = vm.clientes[index];
-                    pedido.mensajeros = vm.mensajerosS.unique();
-                    // pedido.tipo = vm.selectedServicio.id;
-                    pedido.empresa = authService.currentUser().empresa.id;
-                    if (pedido.cliente.tipo == 'empresa' || pedido.cliente.tipo == 'particular') {
-                        io.socket.request({
-                            method: 'post',
-                            url: '/domicilios',
-                            data: pedido,
-                            headers: {
-                                'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
-                            }
-                        }, function (response) {
-                            vm.selectedMensajero = {};
-                            vm.mensajerosS = [];
-                            toastr.success('Se registro el pedido correctamente');
-                            // swal('Se registro el pedido correctamente')
-                            vm.clientes.splice(index, 1);
-                            sessionStorage.setItem('pedidos', JSON.stringify(vm.clientes));
-                            setTimeout(cargarMensajerosDisponibles(), 2000);
-                            setTimeout(cargarMensajerosOcupados(), 2000);
-                        });
-                    } else {
-                        toastr.warning('No has seleccionado el tipo de cliente Empresa/Particular', 'Espera!')
-                        // swal('No has seleccionado el tipo de cliente Empresa/Particular')
-                    }
-                } else {
-                    toastr.warning('No ha seleccionado el tipo de servicio', 'Espera!');
-                    // swal('No ha seleccionado el tipo de servicio')
-                }
-            } else {
+        function guardarPedido(index, event) {
+            if (!vm.selectedPedido || vm.mensajerosS.length <= 0) {
                 toastr.warning('No ha seleccionado ninguna mensajero para registrar el pedido', 'Espera!');
-                // swal('No ha seleccionado ninguna mensajero para registrar el pedido')
+                return;
             }
+            if (vm.selectedServicio) {
+                toastr.warning('No ha seleccionado el tipo de servicio', 'Espera!');
+                return;
+            }
+
+            var pedido = vm.clientes[index];
+
+            if(pedido.cliente.tipo === ''){
+                toastr.warning('No has seleccionado el tipo de cliente Empresa/Particular', 'Espera!');
+                return;
+            }
+
+            pedido.mensajeros = vm.mensajerosS.unique();
+            event.currentTarget.disabled = true;
+            // pedido.tipo = vm.selectedServicio.id;
+            pedido.empresa = authService.currentUser().empresa.id;
+            io.socket.request({
+                method: 'post',
+                url: '/domicilios',
+                data: pedido,
+                headers: {
+                    'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
+                }
+            }, function (response) {
+                event.currentTarget.disabled = false;
+                vm.selectedMensajero = {};
+                vm.mensajerosS = [];
+                toastr.success('Se registro el pedido correctamente');
+                // swal('Se registro el pedido correctamente')
+                vm.clientes.splice(index, 1);
+                sessionStorage.setItem('pedidos', JSON.stringify(vm.clientes));
+                setTimeout(cargarMensajerosDisponibles(), 2000);
+                setTimeout(cargarMensajerosOcupados(), 2000);
+            });
         }
 
         vm.selectedColorTipoIconoParticular = function ($index) {

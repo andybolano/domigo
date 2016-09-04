@@ -107,9 +107,9 @@
         <div class="ibox-content radio-body" style="border-top:0;" id="content">
             <!---->
             <div class="row">
+                <!--lista de pedidos-->
                 <div class="col-lg-9" style="padding:0">
                     <ul style="margin:0;padding: 0">
-
                         <li style="padding: 0;margin: 0;list-style:none;zoom:90%"
                             ng-mouseover="vm.selectPedido(cliente)"
                             ng-repeat="cliente in vm.clientes track by $index">
@@ -233,7 +233,7 @@
                                                 <i class="fa fa-close"></i>
                                             </button>
                                             <button ng-disabled="pedidoForm.$invalid"
-                                                    ng-click="vm.guardarPedido($index); $event.stopPropagation();"
+                                                    ng-click="vm.guardarPedido($index, $event)"
                                                     class="btn btn-green  "
                                                     style="margin-top:5px;margin-left:5px; border-radius:50%;width:40px;height:40px;"
                                                     type="submit"><i
@@ -268,6 +268,8 @@
                         </li>
                     </ul>
                 </div>
+
+                <!--lista de mensajeros-->
                 <div class="col-lg-3" style="border:2px solid #DF1008;border-radius:10px;padding:0;font-weight:100;">
                     <div class='row'>
                         <div class='col-lg-6'
