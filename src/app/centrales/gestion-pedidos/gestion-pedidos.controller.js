@@ -13,9 +13,10 @@
         SocketcSailsService.suscribe(authService.currentUser().empresa.id);
         // variables privadas
         var vm = this;
+        var mensajeros_seleccionados = {};
         vm.newPedidoManual = newPedidoManual;
         vm.selectPedido = selectPedido;
-        vm.selectMensajero = selectMensajero;
+        vm.selectMensajero = toggleMensajero;
         vm.cargarDireccionesOrigen = cargarDireccionesOrigen;
         vm.cargarDireccionesDestino = cargarDireccionesDestino;
         vm.guardarPedido = guardarPedido;
@@ -28,7 +29,7 @@
         vm.dorigens = [];
         vm.ddestinos = [];
         vm.pedido = {};
-        vm.mensajerosS = [];
+        mensajeros_seleccionados = [];
         vm.clientes = JSON.parse(sessionStorage.getItem('pedidos')) || [];
         toastr.options = {
             "positionClass": "toast-top-center"
@@ -51,9 +52,18 @@
             $('#modalDescripcion').modal('show');
         }
 
-        function selectMensajero(mensajero) {
+        function toggleMensajero(mensajero) {
             vm.selectedMensajero = mensajero;
-            vm.selectedCantidadMensajeros(vm.selectedMensajero)
+            mensajero.selected = !mensajero.selected;
+            if(mensajero.selected){
+                mensajero.style = {'color': '#d50000', 'font-weight': 'bold'}
+                mensajeros_seleccionados[mensajero.id] = mensajero.id;
+            } else {
+                mensajero.style = {}
+                delete mensajeros_seleccionados[mensajero.id];
+            }
+
+            // vm.selectedCantidadMensajeros(vm.selectedMensajero)
         }
 
         function cargarMensajerosDisponibles() {
@@ -86,13 +96,13 @@
             return c.indexOf(a, b + 1) < 0
         });
 
-        vm.selectedCantidadMensajeros = function (mensajero) {
-            vm.mensajerosS.push(mensajero.id);
-            // console.log(vm.mensajerosS)
-        }
+        // vm.selectedCantidadMensajeros = function (mensajero) {
+        //     mensajeros_seleccionados.push(mensajero.id);
+        //     console.log(mensajeros_seleccionados)
+        // }
 
         function guardarPedido(index, event) {
-            if (!vm.selectedPedido || vm.mensajerosS.length <= 0) {
+            if (!vm.selectedPedido || !Object.keys(mensajeros_seleccionados).length) {
                 toastr.warning('No ha seleccionado ninguna mensajero para registrar el pedido', 'Espera!');
                 return;
             }
@@ -108,7 +118,7 @@
                 return;
             }
 
-            pedido.mensajeros = vm.mensajerosS.unique();
+            pedido.mensajeros = Object.keys(mensajeros_seleccionados);
             event.currentTarget.disabled = true;
             // pedido.tipo = vm.selectedServicio.id;
             pedido.empresa = authService.currentUser().empresa.id;
@@ -122,7 +132,7 @@
             }, function (response) {
                 event.currentTarget.disabled = false;
                 vm.selectedMensajero = {};
-                vm.mensajerosS = [];
+                mensajeros_seleccionados = [];
                 toastr.success('Se registro el pedido correctamente');
                 // swal('Se registro el pedido correctamente')
                 vm.clientes.splice(index, 1);
@@ -193,7 +203,7 @@
                 closeOnConfirm: true
             }, function () {
                 vm.selectedMensajero = {};
-                vm.mensajerosS = [];
+                mensajeros_seleccionados = [];
                 vm.clientes.splice(index, 1);
                 sessionStorage.setItem('pedidos', JSON.stringify(vm.clientes));
                 toastr.success('Has eliminado el pedido correctamente.', 'Eliminado!');

@@ -277,7 +277,8 @@
 
                             <table class="table" ng-if="vm.mensajeros.length > 0">
                                 <tr ng-click="vm.selectMensajero(mensajero)"
-                                    ng-repeat="mensajero in vm.mensajeros | orderBy : 'nombre'" style='border:0'>
+                                    ng-repeat="mensajero in vm.mensajeros | orderBy : 'nombre'" style='border:0'
+                                    ng-style="mensajero.style">
                                     <td>{{mensajero.nombre}}</td>
                                     <td style='padding: 0;vertical-align: middle'>
                                         <a href="javascript:;" style="color: #DF1008"
