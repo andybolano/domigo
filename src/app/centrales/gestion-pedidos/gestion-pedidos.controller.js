@@ -24,9 +24,7 @@
         vm.modalDescripcion = modalDescripcion;
         vm.storeDomicilios = storeDomicilios;
         vm.getCliente = getCliente;
-
-        // variables publicas
-        vm.dorigens = [];
+ [];
         vm.ddestinos = [];
         vm.pedido = {};
         mensajeros_seleccionados = [];
@@ -98,7 +96,7 @@
 
             var pedido = vm.clientes[index];
 
-            if(pedido.cliente.tipo === ''){
+            if(pedido.cliente.tipo != 'particular' && pedido.cliente.tipo != 'empresa'){
                 toastr.warning('No has seleccionado el tipo de cliente Empresa/Particular', 'Espera!');
                 return;
             }
