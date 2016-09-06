@@ -15,6 +15,8 @@
         vm.fechaInicio = new Date();
         vm.fechaFinal = new Date();
 
+        vm.removeDomicilio = removeDomicilio;
+
         toastr.options = {
             "positionClass": "toast-top-center"
         };
@@ -50,6 +52,26 @@
                     }
                 });
             }
+        }
+
+        function removeDomicilio($index, domicilio) {
+            var dr = vm.domicilios[$index];
+            swal({
+                title: "Estas seguro?",
+                text: "Estas intentando eliminar este domicilio!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                cancelButtonText: "No",
+                confirmButtonText: "Si",
+                closeOnConfirm: true
+            }, function () {
+                Restangular.one('domicilios/'+ domicilio.id).remove().then(function (response) {
+                    toastr.success('Has eliminado el domicilio correctamente.', 'Eliminado!');
+                    vm.domicilios.splice($index, 1);
+                });
+                // swal("Eliminado!", "Has eliminado el pedido correctamente.", "success");
+            });
         }
 
         cargarPedidos();
