@@ -1,6 +1,6 @@
 {
   "name": "domigo",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "dependencies": {},
   "scripts": {
     "test": "gulp test"
@@ -46,7 +46,7 @@
   "engines": {
     "node": ">=0.10.0"
   },
-  "description": "Backend domigo para gestion de domicilios",
+  "description": "FrondEnd domigo para gestion de domicilios",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jomisoac/domigo-client.git"
