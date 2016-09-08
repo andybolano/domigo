@@ -117,7 +117,7 @@
                                 <table width="100%" border="0">
                                     <tr>
                                         <td width="3%">{{$index+1}}</td>
-
+                                        <!--tipo-->
                                         <td style="width:10%">
                                             <div class="row">
                                                 <div class="col-lg-12" style="padding:0">
@@ -146,6 +146,7 @@
 
                                             </div>
                                         </td>
+                                        <!--telefono-->
                                         <td width="15%">
                                             <input ng-min="0" value="{{cliente.cliente.telefono }}" type="number"
                                                    placeholder="Telefono" id="exampleInputEmail2"
@@ -153,12 +154,14 @@
                                                    style="margin-top:3px;" ng-model="cliente.cliente.telefono"
                                                    ng-blur="vm.getCliente(cliente)" ng-enter="vm.getCliente(cliente)" required>
                                         </td>
+                                        <!--nombre-->
                                         <td width="10%">
                                             <input value="{{cliente.cliente.nombre}}" type="text" placeholder="Nombres"
                                                    id="exampleInputEmail2" ng-blur="vm.storeDomicilios()"
                                                    class="input-sm form-control buscador-domigo"
                                                    ng-model="cliente.cliente.nombre" style="margin-top:3px;" required>
                                         </td>
+                                        <!--origen-->
                                         <td width="20%">
                                             <div class="input-group" style="margin-top:5px;">
                                                 <span class="input-group-btn">
@@ -167,16 +170,18 @@
                                                            style="color:#DF1008;font-size:14px;border-right:2px solid #DF1008;">location_on</i>
                                                     </button>
                                                 </span>
-                                                <input type="text" placeholder="Origen"
+                                                <input type="text" placeholder="Origen" focus-me="cliente.focus_origen"
                                                        placeholder="Origen" ng-blur="vm.storeDomicilios()"
                                                        uib-typeahead="direccion for direccion in cliente.cliente.dorigens | filter:$viewValue"
                                                        typeahead-template-url="customTemplate.html"
                                                        typeahead-show-hint="true" typeahead-min-length="0"
+                                                       typeahead-on-select="cliente.focus_destino = true"
                                                        ng-model="cliente.direccion_origen"
                                                        ng-init="vm.cargarDireccionesOrigen(cliente.cliente, 'origen')"
                                                        class="input-sm form-control autocomplete-domigo" required>
                                             </div>
                                         </td>
+                                        <!--destino-->
                                         <td width="20%">
                                             <div class="input-group" style="margin-top:5px;">
                                                 <span class="input-group-btn">
@@ -185,8 +190,8 @@
                                                            style="color:#DF1008;font-size:14px;border-right:2px solid #DF1008;">location_on</i>
                                                     </button>
                                                 </span>
-                                                <input type="text" ng-model="cliente.direccion_destino"
-                                                       placeholder="Destino" ng-blur="vm.storeDomicilios()"
+                                                <input type="text" ng-model="cliente.direccion_destino" typeahead-on-select="cliente.focus_tipo_s = true"
+                                                       placeholder="Destino" ng-blur="vm.storeDomicilios()" focus-me="cliente.focus_destino"
                                                        uib-typeahead="direccion for direccion in cliente.cliente.ddestinos | filter:$viewValue"
                                                        typeahead-template-url="customTemplate.html"
                                                        class="input-sm form-control autocomplete-domigo"
@@ -195,10 +200,12 @@
                                                        required>
                                             </div>
                                         </td>
+                                        <!--servicio-->
                                         <td width="5%" style="text-align:center">
                                             <div class="input-group">
                                                 <div class="input-group-btn">
                                                     <a href="javascript:;" title="Tipo de servicio"
+                                                       focus-me="cliente.focus_tipo_s"
                                                        data-toggle="dropdown" aria-expanded="true">
                                                         <i class="fa fa-envelope"
                                                            style="font-size:28px;color:#b71c1c"></i>
@@ -218,6 +225,7 @@
 
 
                                         </td>
+                                        <!--descripcion-->
                                         <td width="5%" style="text-align:center">
                                             <a href="javascript:;" title="descripcion"
                                                ng-click="vm.agregarDescripcion($index)"><i
@@ -225,6 +233,7 @@
 
                                             <input type="text" ng-model="cliente.descripcion" ng-show="false">
                                         </td>
+                                        <!--botones-->
                                         <td width="5">
                                             <button ng-click="vm.removePedido($index)"
                                                     class="btn btn-danger"

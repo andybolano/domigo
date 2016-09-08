@@ -274,9 +274,13 @@
 
         function getCliente(cliente) {
             Restangular.one('clientes?telefono=' + cliente.cliente.telefono).get().then(function (response) {
-                cliente.cliente.id = response.id;
-                cliente.cliente.tipo = response.tipo;
-                cliente.cliente.nombre = response.nombre;
+                response.id && (cliente.cliente.id = response.id);
+                response.tipo && (cliente.cliente.tipo = response.tipo);
+                if(response.nombre) {
+                    cliente.cliente.nombre = response.nombre;
+                    cliente.focus_origen = true;
+                }
+
                 storeDomicilios();
                 cargarDireccionesDestino(cliente, 'destino');
                 cargarDireccionesOrigen(cliente, 'origen');
