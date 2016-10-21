@@ -35,6 +35,7 @@
         vm.newMensajero = newMensajero;
         vm.guardarMensajero = guardarMensajero;
         vm.modificarMensajero = modificarMensajero;
+        vm.eliminarMensajero = eliminarMensajero;
 
         if (vm.variableActivos === true) {
             cargarMensajerosActivos();
@@ -86,20 +87,6 @@
             Restangular.service('mensajeros?fields=' + campos, Restangular.one('empresas', authService.currentUser().empresa.id)).getList({condicion: 'ausente'}).then(function (response) {
                 vm.mensajeros = response;
             });
-        }
-
-        function cargarDatosUnMensajero(responde) {
-            vm.mensajero = responde;
-            vm.mensajero.cedula = parseInt(vm.mensajero.cedula);
-            vm.mensajero.telefono = parseInt(vm.mensajero.telefono);
-            vm.mensajero.licencia_conducion = parseInt(vm.mensajero.licencia_conducion);
-            vm.mensajero.fecha_expedicion_licencia = new Date(vm.mensajero.fecha_expedicion_licencia);
-            vm.mensajero.fecha_vencimiento_licencia = new Date(vm.mensajero.fecha_vencimiento_licencia);
-            vm.mensajero.fecha_nacimiento = new Date(vm.mensajero.fecha_nacimiento);
-            Restangular.service('domicilios', Restangular.one('mensajeros', responde.id)).getList().then(function (response) {
-                vm.domicilios = response;
-            });
-
         }
 
         function verMensajero(mensajero) {
@@ -299,6 +286,25 @@
                         }
                 );
             }
+        }
+
+        function eliminarMensajero(mensajero) {
+            swal({
+                title: "Estas seguro?",
+                text: "Estas intentando eliminar este mensajeri!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                cancelButtonText: "No",
+                confirmButtonText: "Si",
+                closeOnConfirm: true
+            }, function () {
+                Restangular.one('mensajeros', mensajero.id).remove().then(function (response) {
+                    cargarMensajeros();
+                    cargarMensajerosActivos();
+                    toastr.success('Has eliminado el mensajero correctamente.', 'Eliminado!');
+                });
+            });
         }
 
         cargarMensajeros();
