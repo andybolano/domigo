@@ -13,6 +13,7 @@
             'ui.router',
             'ui.bootstrap',
             'localytics.directives',
+            // 'ngInputDate',
 
             'commons',
             'angular-jwt',

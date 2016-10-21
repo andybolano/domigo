@@ -19,7 +19,7 @@
                         </button> 
                         </span>
                             <input type="date" class="input-sm form-control buscador-domigo"
-                                   ng-model="vm.fechaInicio" required>
+                                   ng-model="vm.fechaInicio" ng-value="vm.fechaInicio" required>
                         </div>
                     </div>
                     <div class="col-lg-3">
@@ -31,11 +31,12 @@
                         </button> 
                         </span>
                             <input type="date" class="input-sm form-control buscador-domigo"
-                                   ng-model="vm.fechaFinal" required>
+                                   ng-model="vm.fechaFinal" ng-value="vm.fechaFinal" required>
                         </div>
                     </div>
                     <div class="col-lg-1">
-                        <button ng-disabled="formConsulta.$invalid" ng-click="vm.cargarPagos()" class="btn btn-primary" style="margin-top:20px;"><i class="fa fa-search"></i></button>
+                        <button ng-disabled="formConsulta.$invalid" ng-click="vm.cargarPagos()" class="btn btn-primary"
+                                style="margin-top:20px;"><i class="fa fa-search"></i></button>
                     </div>
                 </form>
             </div>
@@ -51,7 +52,7 @@
                                         <i class="fa fa-money " style="font-size:120px;color:#e0e0e0"></i>
                                     </td>
                                     <td style="font-size:24px;color:#e0e0e0;font-weight:600">
-                                        Aun no a realizado una consulta  <span
+                                        Aun no a realizado una consulta <span
                                             style="color:#DF1008">:(</span>
                                     </td>
                                 </tr>
@@ -71,7 +72,7 @@
                                 </thead>
                                 <tbody>
                                 <tr ng-repeat="pagoMensajero in vm.pagos track by $index">
-                                    <td>1</td>
+                                    <td>{{$index+1}}</td>
                                     <td>{{pagoMensajero.mensajero.nombre}} {{pagoMensajero.mensajero.apellidos}}</td>
                                     <td>
                                         {{pagoMensajero.fecha | date}}
@@ -79,12 +80,8 @@
                                     <td>
                                         {{pagoMensajero.valor | currency}}
                                     </td>
-                                    <td ng-if="pagoMensajero.concepto.nombre == 'planilla'"><span
-                                            class="badge badge-primary bg-domigo">{{pagoMensajero.concepto.nombre}}</span>
-                                    </td>
-                                    <td ng-if="pagoMensajero.concepto.nombre == 'ahorro'"><span class="badge badge-warning " style="background-color:#DF1008;padding: 3px;border-radius:5px;font-size: 12px;">{{pagoMensajero.concepto.nombre}}</span>
-                                    </td>
-                                    <td ng-if="pagoMensajero.concepto.nombre == 'prestamo'"><span class="badge badge-success" style="background-color:#64dd17;padding: 3px;border-radius:5px;font-size: 12px;">{{pagoMensajero.concepto.nombre}}</span>
+                                    <td ><span
+                                            class="badge">{{pagoMensajero.concepto.nombre}}</span>
                                     </td>
                                 </tr>
                                 </tbody>

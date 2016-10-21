@@ -49,20 +49,24 @@
         function guardarPago() {
             vm.pago.mensajero = vm.mensajero.id;
             // vm.pago.empresa = authService.currentUser().empresa.id;
-            io.socket.request({
-                method: 'post',
-                url: '/mensajeros/' + vm.mensajero.id + '/pagos',
-                data: vm.pago,
-                headers: {
-                    'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
-                }
-            }, function (response) {
+            Restangular.one('/mensajeros', vm.mensajero.id).post('pagos', vm.pago).then(function (response) {
                 vm.pago = {}
                 vm.pago.fecha = new Date();
                 cargarPagosMensajeros(vm.mensajero);
                 cargarUltimosPagos();
                 toastr.success('Pago registrado correctamente')
-            });
+            })
+
+            // io.socket.request({
+            //     method: 'post',
+            //     url: '/mensajeros/' + vm.mensajero.id + '/pagos',
+            //     data: vm.pago,
+            //     headers: {
+            //         'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
+            //     }
+            // }, function (response) {
+            //
+            // });
         }
 
         function cargarPagosMensajeros(mensajero) {

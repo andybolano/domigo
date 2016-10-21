@@ -11,45 +11,50 @@
             </div>
         </div>
         <div class="ibox-content radio-body" style="border-top:0;" id="content">
-            <div class='col-lg-4'>
+            <div class='col-lg-4' >
                 <h3>Gestión: Conceptos de pagos</h3>
-                <form name="conceptoForm" novalidate>
-                    <table class='table table-hover'>
-                        <thead>
-                        <th>Nombre</th>
-                        <th width='10%'>Opción</th>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>
-                                <div class="input-group" style="margin-top:5px;">
+                    <form name="conceptoForm" novalidate>
+                        <table class='table table-hover'>
+                            <thead>
+                            <th>Nombre</th>
+                            <th width='10%'>Opción</th>
+                            </thead>
+                            <tbody >
+                            <tr>
+                                <td>
+                                    <div class="input-group" style="margin-top:5px;">
                                 <span class="input-group-btn">
                                     <button type="button" class="btn btn-sm btn-buscador">
                                         <i class="fa fa-dollar" style="color:#DF1008;font-size:14px;"></i>
                                     </button>
                                 </span>
-                                    <input ng-model="vm.conceptoCobro.nombre" type="text" placeholder="Nombre del concepto"
-                                           class="input-sm form-control autocomplete-domigo" required>
-                                </div>
-                            </td>
-                            <td>
-                                <button ng-disabled="conceptoForm.$invalid" class="btn btn-green"
-                                        ng-click="vm.guardarConcepto($event); " 
-                                        style="margin-top:0px;margin-left:5px; border-radius:50%;width:40px;height:40px;"
-                                        type="submit" stop-propagation>
-                                    <i class="fa fa-check" title='Guardar concepto'></i>
-                                </button>
-                            </td>
-                        </tr>
-
-                        <tr style='border:0' ng-repeat="concepto in vm.conceptosCobros">
-                            <td>{{concepto.nombre}}</td>
-                            <td style='text-align: center;'><a ng-click="vm.eliminarConcepto(concepto)"><i
-                                    class='fa fa-trash' style='font-size:20px;color:#DF1008'></i></a></td>
-                        </tr>
+                                        <input ng-model="vm.conceptoCobro.nombre" type="text" placeholder="Nombre del concepto"
+                                               class="input-sm form-control autocomplete-domigo" required>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button ng-disabled="conceptoForm.$invalid" class="btn btn-green"
+                                            ng-click="vm.guardarConcepto($event); "
+                                            style="margin-top:0px;margin-left:5px; border-radius:50%;width:40px;height:40px;"
+                                            type="submit" stop-propagation>
+                                        <i class="fa fa-check" title='Guardar concepto'></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                <div style="overflow-y: scroll !important;height:280px !important;">
+                    <table class='table table-hover'>
+                        <tbody>
+                            <tr style='border:0' ng-repeat="concepto in vm.conceptosCobros">
+                                <td>{{concepto.nombre}}</td>
+                                <td style='text-align: center;'><a ng-click="vm.eliminarConcepto(concepto)"><i
+                                        class='fa fa-trash' style='font-size:20px;color:#DF1008'></i></a></td>
+                            </tr>
                         </tbody>
                     </table>
-                </form>
+                </div>
             </div>
             <div class='col-lg-1'>
 
@@ -89,7 +94,7 @@
                             </td>
                             <td>
                                 <button ng-hide="vm.editMode" ng-disabled="servicioForm.$invalid" class="btn btn-green"
-                                        ng-click="vm.guardarServicio(); $event.stopPropagation();"
+                                        ng-click="vm.guardarServicio($event); $event.stopPropagation();"
                                         style="margin-top:0px;margin-left:5px; border-radius:50%;width:40px;height:40px;"
                                         type="submit">
                                     <i class="fa fa-check" title='Guardar servicio'></i>
@@ -103,19 +108,24 @@
                             </td>
                         </tr>
                         </tbody>
-
+                    </table>
+                </form>
+                <div style="overflow-y: scroll !important;height:280px !important;">
+                    <table class='table table-hover'>
+                        <tbody>
                         <tr style='border:0' ng-repeat="servicio in vm.tiposServicios">
                             <td>{{servicio.nombre}}</td>
                             <td>{{servicio.valor | currency}}</td>
                             <td style='text-align: center;'>
                                 <a ng-click="vm.editarServicio(servicio)"><i class='fa fa-edit'
-                                                                                 style='font-size:20px;color:#008000'></i></a>
+                                                                             style='font-size:20px;color:#008000'></i></a>
                                 <a ng-click="vm.eliminarTipoServicio(servicio)"><i class='fa fa-trash'
-                                                                                      style='font-size:20px;color:#DF1008'></i></a>
+                                                                                   style='font-size:20px;color:#DF1008'></i></a>
                             </td>
                         </tr>
+                        </tbody>
                     </table>
-                </form>
+                </div>
             </div>
         </div>
     </div>

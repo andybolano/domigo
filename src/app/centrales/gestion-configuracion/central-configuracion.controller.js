@@ -47,14 +47,7 @@
         function guardarConcepto($event) {
             $event.stopPropagation();
 	        $event.preventDefault();
-            io.socket.request({
-                method: 'post',
-                url: '/empresas/' + authService.currentUser().empresa.id + '/conceptos_cobros',
-                data: vm.conceptoCobro,
-                headers: {
-                    'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
-                }
-            }, function (response) {
+            Restangular.one('/empresas', authService.currentUser().empresa.id).post('conceptos_cobros', vm.conceptoCobro).then(function (response) {
                 vm.conceptoCobro = {};
                 vm.editMode = false;
                 cargarConceptosCobros();
@@ -62,18 +55,13 @@
             });
         }
 
-        function guardarServicio() {
-            io.socket.request({
-                method: 'post',
-                url: '/empresas/' + authService.currentUser().empresa.id + '/tipos_servicios',
-                data: vm.tipoServicio,
-                headers: {
-                    'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
-                }
-            }, function (response) {
-                vm.tipoServicio = {};
-                cargarTiposServicios();
-                toastr.success('Tipo de servicio registrado correctamente');
+        function guardarServicio($event) {
+            $event.stopPropagation();
+            $event.preventDefault();
+            Restangular.one('/empresas', authService.currentUser().empresa.id).post('tipos_servicios', vm.tipoServicio).then(function (response) {
+                    vm.tipoServicio = {};
+                    cargarTiposServicios();
+                    toastr.success('Tipo de servicio registrado correctamente');
             });
         }
 

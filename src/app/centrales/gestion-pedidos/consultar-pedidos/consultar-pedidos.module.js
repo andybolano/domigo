@@ -25,7 +25,7 @@
 
     function run(appMenu) {
         appMenu.addTo([
-            {nombre: 'Consulta Pedidos', link: 'app.consulta-pedidos', icon: 'fa fa-list-ol'},
+            {nombre: 'Consulta Pedidos', link: 'app.consulta-pedidos', icon: 'fa fa-list-ol'}
         ], 'EMPRESA');
     }
 
