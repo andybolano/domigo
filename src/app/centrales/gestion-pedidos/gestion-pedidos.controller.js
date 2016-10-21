@@ -105,14 +105,7 @@
             event.currentTarget.disabled = true;
             // pedido.tipo = vm.selectedServicio.id;
             pedido.empresa = authService.currentUser().empresa.id;
-            io.socket.request({
-                method: 'post',
-                url: '/domicilios',
-                data: pedido,
-                headers: {
-                    'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
-                }
-            }, function (response) {
+            Restangular.all('/domicilios').post(pedido).then(function (response) {
                 event.currentTarget.disabled = false;
                 vm.selectedMensajero = {};
                 mensajeros_seleccionados = [];
@@ -122,7 +115,19 @@
                 sessionStorage.setItem('pedidos', JSON.stringify(vm.clientes));
                 setTimeout(cargarMensajerosDisponibles(), 2000);
                 setTimeout(cargarMensajerosOcupados(), 2000);
-            });
+            })
+
+
+            // io.socket.request({
+            //     method: 'post',
+            //     url: '/domicilios',
+            //     data: pedido,
+            //     headers: {
+            //         'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
+            //     }
+            // }, function (response) {
+            //
+            // });
         }
 
         vm.selectedColorTipoIconoParticular = function ($index) {
