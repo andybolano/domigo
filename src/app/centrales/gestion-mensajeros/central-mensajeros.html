@@ -758,7 +758,7 @@
                                                 </button>
                                             </span>
                                         <input type="date" class="input-sm form-control buscador-domigo"
-                                               ng-model="vm.fechaInicio" required>
+                                               ng-model="vm.fechaInicio" required ng-change="vm.getHistorialRango()">
                                     </div>
                                 </div>
                                 <div class="col-lg-3" style="margin-left: 45px">
@@ -770,7 +770,7 @@
                                                 </button>
                                             </span>
                                         <input type="date" class="input-sm form-control buscador-domigo"
-                                               ng-model="vm.fechaFinal" required>
+                                               ng-model="vm.fechaFinal" required ng-change="vm.getHistorialRango()">
                                     </div>
                                 </div>
                                 <div class="col-lg-1" style="margin-left: 50px">

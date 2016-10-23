@@ -18,7 +18,7 @@
                         </button>
                         </span>
                             <input type="date" class="input-sm form-control buscador-domigo"
-                                   ng-model="vm.fechaInicio" required>
+                                   ng-model="vm.fechaInicio" required ng-change="vm.cargarRangoDePedidos()">
                         </div>
                     </div>
                     <div class="col-lg-3">
@@ -30,7 +30,7 @@
                         </button>
                         </span>
                             <input type="date" class="input-sm form-control buscador-domigo"
-                                   ng-model="vm.fechaFinal" required>
+                                   ng-model="vm.fechaFinal" required ng-change="vm.cargarRangoDePedidos()">
                         </div>
                     </div>
                     <div class="col-lg-1">
