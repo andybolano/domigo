@@ -9,12 +9,14 @@
             .module('app.central_mensajeros')
             .controller('CentralMensajerosController', CentralMensajerosController);
 
-    function CentralMensajerosController(Restangular, authService, $http, API) {
+    function CentralMensajerosController(Restangular, authService, $http, API, $filter) {
         // variables privadas
         var vm = this;
         var gMensajero = Restangular.all('/empresas/' + authService.currentUser().empresa.id + '/mensajeros');
         vm.variableActivos = true;
         vm.variableBloqueados = false;
+        vm.fechaInicio = new Date();
+        vm.fechaFinal = new Date();
         vm.fotografia = '';
         vm.editMode = true;
         toastr.options = {
@@ -36,6 +38,7 @@
         vm.guardarMensajero = guardarMensajero;
         vm.modificarMensajero = modificarMensajero;
         vm.eliminarMensajero = eliminarMensajero;
+        vm.getHistorialRango = getHistorialRango;
 
         if (vm.variableActivos === true) {
             cargarMensajerosActivos();
@@ -90,6 +93,10 @@
         }
 
         function verMensajero(mensajero) {
+            vm.domicilios = [];
+            vm.selected = mensajero;
+            var desde = $filter('date')(vm.fechaInicio, 'yyyy-MM-dd');
+            var hasta = $filter('date')(vm.fechaFinal, 'yyyy-MM-dd');
             vm.mensajero = mensajero;
             vm.mensajero.cedula = parseInt(vm.mensajero.cedula);
             vm.mensajero.telefono = parseInt(vm.mensajero.telefono);
@@ -97,10 +104,33 @@
             vm.mensajero.fecha_expedicion_licencia = new Date(vm.mensajero.fecha_expedicion_licencia);
             vm.mensajero.fecha_vencimiento_licencia = new Date(vm.mensajero.fecha_vencimiento_licencia);
             vm.mensajero.fecha_nacimiento = new Date(vm.mensajero.fecha_nacimiento);
-            Restangular.service('domicilios', Restangular.one('mensajeros', mensajero.id)).getList().then(function (response) {
+            Restangular.service('domicilios?fecha_desde=' + desde + '&fecha_hasta=' + hasta, Restangular.one('mensajeros', mensajero.id)).getList().then(function (response) {
                 vm.domicilios = response;
             });
             $('#verMensajero').modal('show');
+        }
+
+        function getHistorialRango() {
+            vm.domicilios = [];
+            var desde = $filter('date')(vm.fechaInicio, 'yyyy-MM-dd');
+            var hasta = $filter('date')(vm.fechaFinal, 'yyyy-MM-dd');
+            var aFecha1 = desde.split('-');
+            var aFecha2 = hasta.split('-');
+            var fFecha1 = Date.UTC(aFecha1[2],aFecha1[1]-1,aFecha1[0]);
+            var fFecha2 = Date.UTC(aFecha2[2],aFecha2[1]-1,aFecha2[0]);
+            var dif = fFecha2 - fFecha1;
+            var dias = Math.floor(dif / (1000 * 60 * 60 * 24));
+            if(dias < 0){
+                toastr.warning('formato de fechas invalido, la fecha hasta debe ser mayor a la fecha desde', 'Espera!');
+            }else{
+                Restangular.service('domicilios?fecha_desde=' + desde + '&fecha_hasta=' + hasta, Restangular.one('mensajeros', vm.selected.id)).getList().then(function (response) {
+                    if (response.length <= 0) {
+                        toastr.warning('No se registraron domicilios en la fecha o fechas seleccionadas', 'Espera!');
+                    } else {
+                        vm.domicilios = response;
+                    }
+                });
+            }
         }
 
         function addListaNegra(mensajero) {

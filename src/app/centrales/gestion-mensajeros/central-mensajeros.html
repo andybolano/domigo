@@ -376,7 +376,7 @@
                                 <br>
                                 <input name="felicencia" ng-model="vm.mensajero.fecha_expedicion_licencia"
                                        type="date"
-                                       class="form-control" 
+                                       class="form-control"
                                        style="border-radius:10px;border:1px solid #DF1008;background-color:transparent">
                                 <!--<div class="messages"
                                      ng-show="mensajeroForm.$submitted || mensajeroForm.felicencia.$touched">
@@ -406,7 +406,7 @@
                                 <input name="nlicencia" ng-model="vm.mensajero.licencia_conducion" type="number"
                                        class="form-control"
                                        style="border-radius:10px;border:1px solid #DF1008;background-color:transparent"
-                                      >
+                                >
                                 <!--<div class="messages"
                                      ng-show="mensajeroForm.$submitted || mensajeroForm.nlicencia.$touched">
                                     <span ng-show="mensajeroForm.nlicencia.$error.required">El campo es obligatorio.</span>
@@ -747,6 +747,38 @@
                                 </table>
                             </div>
                         </div>
+                        <div class="row col-lg-12 center">
+                            <form name="formConsulta" novalidate>
+                                <div class="col-lg-3">
+                                    Desde:
+                                    <div class="input-group" style="margin-top:5px;">
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-sm btn-buscador">
+                                                    <i class="fa fa-calendar" style="color:#DF1008"></i>
+                                                </button>
+                                            </span>
+                                        <input type="date" class="input-sm form-control buscador-domigo"
+                                               ng-model="vm.fechaInicio" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3" style="margin-left: 45px">
+                                    Hasta:
+                                    <div class="input-group" style="margin-top:5px; ">
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-sm btn-buscador">
+                                                    <i class="fa fa-calendar" style="color:#DF1008"></i>
+                                                </button>
+                                            </span>
+                                        <input type="date" class="input-sm form-control buscador-domigo"
+                                               ng-model="vm.fechaFinal" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-1" style="margin-left: 50px">
+                                    <button ng-disabled="formConsulta.$invalid" ng-click="vm.getHistorialRango()"
+                                            class="btn btn-primary" style="margin-top:20px;"><i class="fa fa-search"></i></button>
+                                </div>
+                            </form>
+                        </div>
                         <div ng-if="vm.domicilios.length > 0">
                             <table class="table table-striped">
                                 <thead>
@@ -779,7 +811,7 @@
                                            style="font-size:120px;color:#E0E0E0;margin-left:40%">chat-bubble</i>
 
                                         <div style="font-size:24px;color:#e0e0e0;font-weight:600">
-                                            Aùn no tiene servicios registrados <span
+                                            Aun no se registran servicios en <br> las fechas seleccionadas <span
                                                 style="color:#DF1008">:(</span>
                                         </div>
                                     </td>
