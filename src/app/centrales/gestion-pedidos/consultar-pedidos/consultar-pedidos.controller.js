@@ -40,8 +40,8 @@
             var fFecha1 = Date.UTC(aFecha1[2],aFecha1[1]-1,aFecha1[0]);
             var fFecha2 = Date.UTC(aFecha2[2],aFecha2[1]-1,aFecha2[0]);
             var dif = fFecha2 - fFecha1;
-            var dias = Math.floor(dif / (1000 * 60 * 60 * 24));
-            if(dias < 0){
+            // var dias = Math.floor(dif / (1000 * 60 * 60 * 24));
+            if(dif < 0){
                 toastr.warning('formato de fechas invalido, la fecha hasta debe ser mayor a la fecha desde', 'Espera!');
             }else{
                 Restangular.service('domicilios?fecha_desde=' + desde + '&fecha_hasta=' + hasta, Restangular.one('empresas', authService.currentUser().empresa.id)).getList().then(function (response) {
